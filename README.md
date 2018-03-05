@@ -1,29 +1,24 @@
-# README #
+# README
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### What is this repository for? ###
+Things you may want to cover:
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Ruby version
 
-### How do I get set up? ###
+* System dependencies
 
-* Summary of set up
 * Configuration
-* Dependencies
-* Database configuration
-* How to run tests
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
 * Deployment instructions
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* ...
