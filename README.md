@@ -6,7 +6,7 @@ Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku
 
 `heroku login`
 
-`heroku git:remote -a wagl`
+`heroku git:remote -a lion-uat`
 
 Deploy your application
 
