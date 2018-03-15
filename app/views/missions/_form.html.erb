@@ -31,16 +31,6 @@
     <%= select("mission", "solver_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
   </div>
 
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, id: :longitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, id: :latitude %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
