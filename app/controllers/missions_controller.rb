@@ -42,7 +42,6 @@ class MissionsController < ApplicationController
   def update
     respond_to do |format|
       if @mission.update(mission_params)
-
         format.html { redirect_to @mission, notice: 'Mission was successfully updated.' }
         format.json { render :show, status: :ok, location: @mission }
       else
@@ -70,6 +69,6 @@ class MissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
-      params.require(:mission).permit(:verb_id, :noun_id, :requestor_id, :solver_id)
+      params.require(:mission).permit(:verb_id, :noun_id, :requestor_id, :solver_id, :longitude, :latitude)
     end
 end

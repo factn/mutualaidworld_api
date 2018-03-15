@@ -6,6 +6,7 @@ class CreateMissions < ActiveRecord::Migration[5.1]
 
       t.references :requestor, index: true, foreign_key: { to_table: :users }
       t.references :solver, index: true, foreign_key: { to_table: :users }
+      t.point :location
 
       t.timestamps
     end

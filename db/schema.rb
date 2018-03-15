@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180315010614) do
     t.bigint "noun_id"
     t.bigint "requestor_id"
     t.bigint "solver_id"
+    t.point "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["noun_id"], name: "index_missions_on_noun_id"
