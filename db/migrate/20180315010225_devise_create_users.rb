@@ -32,6 +32,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.float :longitude
+      t.float :latitude
 
       t.timestamps null: false
     end
@@ -40,5 +42,23 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
+
+     reversible do |mig|
+      mig.up do
+        # add a CHECK constraint
+        execute <<-SQL
+           ALTER TABLE users
+             ADD CONSTRAINT ensure_both_locations
+               CHECK ((latitude is null and longitude is null) or (latitude is not null and longitude is not null));
+         SQL
+      end
+      mig.down do
+        execute <<-SQL
+           ALTER TABLE users
+             DROP CONSTRAINT ensure_both_locations;
+         SQL
+      end
+    end
+
   end
 end

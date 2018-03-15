@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20180315010614) do
     t.bigint "noun_id"
     t.bigint "requestor_id"
     t.bigint "solver_id"
-    t.point "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["noun_id"], name: "index_missions_on_noun_id"
@@ -46,6 +45,8 @@ ActiveRecord::Schema.define(version: 20180315010614) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.float "longitude"
+    t.float "latitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
