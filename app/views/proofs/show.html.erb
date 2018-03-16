@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mission:</strong>
+  <%= @proof.mission.id %>
+
+  <%= image_tag @proof.image.url %>
+</p>
+
+<%= link_to 'Edit', edit_proof_path(@proof) %> |
+<%= link_to 'Back', proofs_path %>

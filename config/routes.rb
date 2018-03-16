@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :proofs
   resources :missions
   devise_for :users
+  resources :users
+
   root to: "missions#index"
 
   resources :nouns
