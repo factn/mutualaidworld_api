@@ -14,6 +14,8 @@ Run:
 
 Connect to localhost:3000
 
+Note there are no logins etc.... at the moment
+
 * Heroku deployment instructions
 
 Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
