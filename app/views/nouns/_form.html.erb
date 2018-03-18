@@ -1,0 +1,22 @@
+<%= form_with(model: noun, local: true) do |form| %>
+  <% if noun.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(noun.errors.count, "error") %> prohibited this noun from being saved:</h2>
+
+      <ul>
+      <% noun.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :noun_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
