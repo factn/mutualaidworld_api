@@ -4,12 +4,15 @@
 
 Pull this repos
 Install the gems:
+
 `bundle install`
 
 Create, and seed, the database:
+
 `rake db:drop db:create db:migrate db:seed`
 
 Run:
+
 `rails s`
 
 Connect to localhost:3000
