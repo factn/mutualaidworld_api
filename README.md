@@ -1,6 +1,20 @@
 # README
 
-* Deployment instructions
+* Development first-time deployment instructions
+
+Pull this repos
+Install the gems:
+`bundle install`
+
+Create, and seed, the database:
+`rake db:drop db:create db:migrate db:seed`
+
+Run:
+`rails s`
+
+Connect to localhost:3000
+
+* Heroku deployment instructions
 
 Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
 
@@ -12,7 +26,23 @@ Deploy your application
 
 `git push heroku master`
 
+This stuff should be automated, but isn't at the moment:
+Migrate and seed:
 
+```
+heroku rake db:migrate
+heroku rake db:seed
+```
+
+Now create some test users for testing
+
+`heroku run rails console`
+
+```
+User.create([{ email: 'test@example.com', password: 'password', password_confirmation: 'password' },
+               { email: 'test2@example.com', password: 'password', password_confirmation: 'password' },
+               { email: 'test3@example.com', password: 'password', password_confirmation: 'password' }])
+```
 
 
 
