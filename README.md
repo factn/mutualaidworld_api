@@ -1,6 +1,6 @@
 # README
 
-* Development first-time deployment instructions
+## Development first-time deployment instructions
 
 Pull this repos
 Install the gems:
@@ -16,7 +16,7 @@ Connect to localhost:3000
 
 Note there are no logins etc.... at the moment
 
-* Heroku deployment instructions
+## Heroku deployment instructions
 
 Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
 
