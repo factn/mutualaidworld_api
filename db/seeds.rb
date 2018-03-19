@@ -32,6 +32,8 @@ if Rails.env.development? || Rails.env.test?
                    { verb_id: 3, noun_id: 3, requestor_id: 1, doer_id: 2, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
                    { verb_id: 4, noun_id: 4, requestor_id: 2, doer_id: 3, image: File.open(Rails.root.join('vendor', 'child.jpg')) }])
 
+  Proof.create([{ scenario_id: 4, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
+                { scenario_id: 6, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])
 end
 
 

@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :scenario_id %>
-    <%= select("proof", "scenario_id", Scenario.all.collect {|m| [ m.id, m.id ] }, {}) %>
+    <%= select("proof", "scenario_id", Scenario.all.collect {|s| [ s.verb.description + ' ' + s.noun.description + ' for ' + s.requestor.email, s.id ] }, {}) %>
   </div>
 
   <div class="field">

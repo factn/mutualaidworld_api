@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Scenario</th>
-      <th colspan="3"></th>
+      <th colspan="4">Scenario</th>
+      <th>Image</th>
     </tr>
   </thead>
 
@@ -14,6 +14,10 @@
     <% @proofs.each do |proof| %>
       <tr>
         <td><%= proof.scenario.id %></td>
+        <td><%= proof.scenario.verb.description %></td>
+        <td><%= proof.scenario.noun.description %></td>
+        <td><%= proof.scenario.requestor.email %></td>
+
         <td><%= image_tag proof.image.url(:thumb) %></td>
 
         <td><%= link_to 'Show', proof %></td>

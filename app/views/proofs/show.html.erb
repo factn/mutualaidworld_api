@@ -3,7 +3,13 @@
 <p>
   <strong>Scenario:</strong>
   <%= @proof.scenario.id %>
+  <%= @proof.scenario.verb.description %>
+  <%= @proof.scenario.noun.description %>
+  for
+  <%= @proof.scenario.requestor.email %>
+</p>
 
+<p>
   <%= image_tag @proof.image.url %>
 </p>
 
