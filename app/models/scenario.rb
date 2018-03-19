@@ -6,6 +6,7 @@ class Scenario < ApplicationRecord
   belongs_to :doer, class_name: 'User', inverse_of: :solved
 
   has_many :proofs, dependent: :destroy
+  has_many :ads
 
   has_attached_file :image, styles: {
     thumb: '100x100>',

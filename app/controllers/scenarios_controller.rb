@@ -12,6 +12,13 @@ class ScenariosController < ApplicationController
   def show
   end
 
+  def ad
+    @scenario = Scenario.find(params[:id])
+
+    respond_to do |format|
+      format.html { render "donator" }
+    end
+  end
   # GET /scenarios/new
   def new
     @scenario = Scenario.new

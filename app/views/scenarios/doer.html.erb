@@ -1,0 +1,30 @@
+<!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
+
+<p id="notice"><%= notice %></p>
+
+<h1>Doer Ad</h1>
+
+<%= image_tag @scenario.image.url %>
+
+<p>
+  <strong>Verb:</strong>
+  <%= @scenario.verb.description %>
+</p>
+
+<p>
+  <strong>Noun:</strong>
+  <%= @scenario.noun.description %>
+</p>
+
+<p>
+  <strong>Requestor:</strong>
+  <%= @scenario.requestor.email %>
+</p>
+
+<p>
+  <strong>Doer:</strong>
+  <%= @scenario.doer.email %>
+</p>
+
+<%= link_to 'Edit', edit_scenario_path(@scenario) %> |
+<%= link_to 'Back', scenarios_path %>

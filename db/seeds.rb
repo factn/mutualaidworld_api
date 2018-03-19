@@ -17,7 +17,8 @@ if Rails.env.development? || Rails.env.test?
                { description: 'gold' },
                { description: 'child' }])
 
-  User.create([{ email: 'test@example.com', password: 'password', password_confirmation: 'password' },
+  User.create([{ email: 'admin@example.com', password: 'password', password_confirmation: 'password', admin: true },
+               { email: 'test@example.com', password: 'password', password_confirmation: 'password' },
                { email: 'test2@example.com', password: 'password', password_confirmation: 'password' },
                { email: 'test3@example.com', password: 'password', password_confirmation: 'password' }])
 

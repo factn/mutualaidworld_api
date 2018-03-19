@@ -4,7 +4,7 @@
     <title>Lion</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -12,7 +12,21 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <p><%= link_to 'Scenarios', scenarios_path %> <%= link_to 'Proofs', proofs_path %> <%= link_to 'Verbs', verbs_path %>  <%= link_to 'Nouns', nouns_path %> </p>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to('Login', new_user_session_path) %>
+      </li>
+    <% end %>
+
+    <p><%= link_to 'Scenarios', scenarios_path %>
+      <%= link_to 'Proofs', proofs_path %>
+      <%= link_to 'Verbs', verbs_path %>
+      <%= link_to 'Nouns', nouns_path %>
+    </p>
     <%= yield %>
   </body>
 </html>
