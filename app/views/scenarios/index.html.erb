@@ -18,6 +18,8 @@
     <% @scenarios.each do |scenario| %>
       <tr>
         <td><%= scenario.id %></td>
+        <td><%= image_tag scenario.image.url(:thumb) %></td>
+
         <td><%= scenario.verb.description %></td>
         <td><%= scenario.noun.description %></td>
         <td><%= scenario.requestor.email %></td>

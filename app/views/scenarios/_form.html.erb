@@ -1,37 +1,43 @@
 <%= form_with(model: scenario, local: true) do |form| %>
-  <% if scenario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(scenario.errors.count, "error") %> prohibited this scenario from being saved:</h2>
+<% if scenario.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(scenario.errors.count, "error") %>
+      prohibited this scenario from being saved:</h2>
 
-      <ul>
+    <ul>
       <% scenario.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :verb_id %>
-    <%= select("scenario", "verb_id", Verb.all.collect {|v| [ v.description, v.id ] }, {}) %>
+    </ul>
   </div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :noun_id %>
-    <%= select("scenario", "noun_id", Noun.all.collect {|n| [ n.description, n.id ] }, {}) %>
-  </div>
+<div class="field">
+  <%= form.label :verb_id %>
+  <%= select("scenario", "verb_id", Verb.all.collect {|v| [ v.description, v.id ] }, {}) %>
+</div>
 
-  <div class="field">
-    <%= form.label :requestor_id %>
-    <%= select("scenario", "requestor_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
-  </div>
+<div class="field">
+  <%= form.label :noun_id %>
+  <%= select("scenario", "noun_id", Noun.all.collect {|n| [ n.description, n.id ] }, {}) %>
+</div>
 
-  <div class="field">
-    <%= form.label :doer_id %>
-    <%= select("scenario", "doer_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
-  </div>
+<div class="field">
+  <%= form.label :requestor_id %>
+  <%= select("scenario", "requestor_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="field">
+  <%= form.label :doer_id %>
+  <%= select("scenario", "doer_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
+</div>
+
+<div class="field">
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
 <% end %>
