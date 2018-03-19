@@ -1,5 +1,5 @@
 class Proof < ApplicationRecord
-  belongs_to :mission
+  belongs_to :scenario
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {
