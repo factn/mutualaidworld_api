@@ -1,6 +1,6 @@
-class CreateMissions < ActiveRecord::Migration[5.1]
+class CreateScenarios < ActiveRecord::Migration[5.1]
   def change
-    create_table :missions do |t|
+    create_table :scenarios do |t|
       t.references :verb, foreign_key: true
       t.references :noun, foreign_key: true
 

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :proofs
-  resources :missions
+  resources :scenarios
   devise_for :users
   resources :users
 
-  root to: "missions#index"
+  root to: "scenarios#index"
 
   resources :nouns
   resources :verbs

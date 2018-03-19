@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :mission_id %>
-    <%= select("proof", "mission_id", Mission.all.collect {|m| [ m.id, m.id ] }, {}) %>
+    <%= form.label :scenario_id %>
+    <%= select("proof", "scenario_id", Scenario.all.collect {|m| [ m.id, m.id ] }, {}) %>
   </div>
 
   <div class="field">

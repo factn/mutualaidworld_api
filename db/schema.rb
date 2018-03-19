@@ -15,19 +15,6 @@ ActiveRecord::Schema.define(version: 20180316010935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "missions", force: :cascade do |t|
-    t.bigint "verb_id"
-    t.bigint "noun_id"
-    t.bigint "requestor_id"
-    t.bigint "solver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["noun_id"], name: "index_missions_on_noun_id"
-    t.index ["requestor_id"], name: "index_missions_on_requestor_id"
-    t.index ["solver_id"], name: "index_missions_on_solver_id"
-    t.index ["verb_id"], name: "index_missions_on_verb_id"
-  end
-
   create_table "nouns", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -35,14 +22,27 @@ ActiveRecord::Schema.define(version: 20180316010935) do
   end
 
   create_table "proofs", force: :cascade do |t|
-    t.bigint "mission_id"
+    t.bigint "scenario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["mission_id"], name: "index_proofs_on_mission_id"
+    t.index ["scenario_id"], name: "index_proofs_on_scenario_id"
+  end
+
+  create_table "scenarios", force: :cascade do |t|
+    t.bigint "verb_id"
+    t.bigint "noun_id"
+    t.bigint "requestor_id"
+    t.bigint "solver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["noun_id"], name: "index_scenarios_on_noun_id"
+    t.index ["requestor_id"], name: "index_scenarios_on_requestor_id"
+    t.index ["solver_id"], name: "index_scenarios_on_solver_id"
+    t.index ["verb_id"], name: "index_scenarios_on_verb_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 20180316010935) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "missions", "nouns"
-  add_foreign_key "missions", "users", column: "requestor_id"
-  add_foreign_key "missions", "users", column: "solver_id"
-  add_foreign_key "missions", "verbs"
-  add_foreign_key "proofs", "missions"
+  add_foreign_key "proofs", "scenarios"
+  add_foreign_key "scenarios", "nouns"
+  add_foreign_key "scenarios", "users", column: "requestor_id"
+  add_foreign_key "scenarios", "users", column: "solver_id"
+  add_foreign_key "scenarios", "verbs"
 end

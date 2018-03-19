@@ -1,4 +1,4 @@
-class Mission < ApplicationRecord
+class Scenario < ApplicationRecord
   belongs_to :verb
   belongs_to :noun
 

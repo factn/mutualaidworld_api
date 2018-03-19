@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Mission</th>
+      <th>Scenario</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @proofs.each do |proof| %>
       <tr>
-        <td><%= proof.mission.id %></td>
+        <td><%= proof.scenario.id %></td>
         <td><%= image_tag proof.image.url(:thumb) %></td>
 
         <td><%= link_to 'Show', proof %></td>

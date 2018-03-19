@@ -69,6 +69,6 @@ class ProofsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proof_params
-      params.require(:proof).permit(:mission_id, :image)
+      params.require(:proof).permit(:scenario_id, :image)
     end
 end
