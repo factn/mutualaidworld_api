@@ -17,9 +17,17 @@ if Rails.env.development? || Rails.env.test?
                { description: 'gold' },
                { description: 'child' }])
 
-
   User.create([{ email: 'test@example.com', password: 'password', password_confirmation: 'password' },
                { email: 'test2@example.com', password: 'password', password_confirmation: 'password' },
                { email: 'test3@example.com', password: 'password', password_confirmation: 'password' }])
+
+  Scenario.create([{verb_id: 1, noun_id: 4, requestor_id: 1, doer_id: 2},
+                   {verb_id: 2, noun_id: 3, requestor_id: 2, doer_id: 3},
+                   {verb_id: 3, noun_id: 2, requestor_id: 3, doer_id: 1},
+                   {verb_id: 4, noun_id: 1, requestor_id: 1, doer_id: 2},
+                   {verb_id: 4, noun_id: 1, requestor_id: 2, doer_id: 3},
+                   {verb_id: 3, noun_id: 2, requestor_id: 3, doer_id: 1},
+                   {verb_id: 2, noun_id: 3, requestor_id: 1, doer_id: 2},
+                   {verb_id: 1, noun_id: 4, requestor_id: 2, doer_id: 3}])
 
 end
