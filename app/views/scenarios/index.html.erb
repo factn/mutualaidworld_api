@@ -9,7 +9,7 @@
       <th>Verb</th>
       <th>Noun</th>
       <th>Requestor</th>
-      <th>Solver</th>
+      <th>Doer</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td><%= scenario.verb.description %></td>
         <td><%= scenario.noun.description %></td>
         <td><%= scenario.requestor.email %></td>
-        <td><%= scenario.solver.email %></td>
+        <td><%= scenario.doer.email %></td>
         <td><%= link_to 'Show', scenario %></td>
         <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
         <td><%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>

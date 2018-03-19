@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20180316010935) do
     t.bigint "verb_id"
     t.bigint "noun_id"
     t.bigint "requestor_id"
-    t.bigint "solver_id"
+    t.bigint "doer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["doer_id"], name: "index_scenarios_on_doer_id"
     t.index ["noun_id"], name: "index_scenarios_on_noun_id"
     t.index ["requestor_id"], name: "index_scenarios_on_requestor_id"
-    t.index ["solver_id"], name: "index_scenarios_on_solver_id"
     t.index ["verb_id"], name: "index_scenarios_on_verb_id"
   end
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20180316010935) do
 
   add_foreign_key "proofs", "scenarios"
   add_foreign_key "scenarios", "nouns"
+  add_foreign_key "scenarios", "users", column: "doer_id"
   add_foreign_key "scenarios", "users", column: "requestor_id"
-  add_foreign_key "scenarios", "users", column: "solver_id"
   add_foreign_key "scenarios", "verbs"
 end

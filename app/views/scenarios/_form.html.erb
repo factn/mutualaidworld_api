@@ -27,8 +27,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :solver_id %>
-    <%= select("scenario", "solver_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
+    <%= form.label :doer_id %>
+    <%= select("scenario", "doer_id", User.all.collect {|u| [ u.email, u.id ] }, {}) %>
   </div>
 
   <div class="actions">

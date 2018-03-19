@@ -5,7 +5,7 @@ class CreateScenarios < ActiveRecord::Migration[5.1]
       t.references :noun, foreign_key: true
 
       t.references :requestor, index: true, foreign_key: { to_table: :users }
-      t.references :solver, index: true, foreign_key: { to_table: :users }
+      t.references :doer, index: true, foreign_key: { to_table: :users }
 
       t.timestamps
     end
