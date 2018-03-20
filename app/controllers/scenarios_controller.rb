@@ -13,12 +13,17 @@ class ScenariosController < ApplicationController
   end
 
   def ad
-    @scenario = Scenario.find(params[:id])
+    authorize :admin_ad, :show?
+
+    @example_scenarios = Scenario.first 4
+# binding.pry
+ # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
 
     respond_to do |format|
-      format.html { render "donator" }
+      format.html { render "ad" }
     end
   end
+
   # GET /scenarios/new
   def new
     @scenario = Scenario.new

@@ -1,0 +1,16 @@
+<!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
+<div class="ad">
+
+  <h1>Requestor Ad</h1>
+
+  <%= image_tag scenario.image.url(:medium) %>
+
+  <p>Do you need help with something?
+    <%= scenario.requestor.email %>
+    got help with
+    <%= scenario.verb.description %>
+    <%= scenario.noun.description %>.
+  </p>
+
+  <%= link_to 'Yes I Can', scenarios_path %>
+</div>

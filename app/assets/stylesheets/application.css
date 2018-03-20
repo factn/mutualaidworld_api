@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+div.ad {
+  border-style: solid;
+  border-width: 5px;
+  width: 300px;
+}
