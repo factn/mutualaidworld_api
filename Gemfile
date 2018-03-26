@@ -7,7 +7,6 @@ end
 
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
-gem 'jbuilder', '~> 2.5'
 gem 'jsonapi-resources'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'

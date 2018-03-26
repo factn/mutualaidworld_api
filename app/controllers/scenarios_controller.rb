@@ -1,23 +1,27 @@
 class ScenariosController < ApplicationController
-  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
+  before_action :set_scenario, only: %i[show edit update destroy]
 
   # GET /scenarios
   # GET /scenarios.json
   def index
+    # if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    #   super
+    # else
+    #   @scenarios = Scenario.all
+    # end
     @scenarios = Scenario.all
   end
 
   # GET /scenarios/1
   # GET /scenarios/1.json
-  def show
-  end
+  def show; end
 
   def ad
     authorize :admin_ad, :show?
 
     @example_scenarios = Scenario.first 4
-# binding.pry
- # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
+    # binding.pry
+    # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
 
     respond_to do |format|
       format.html { render "ad" }
@@ -30,8 +34,7 @@ class ScenariosController < ApplicationController
   end
 
   # GET /scenarios/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /scenarios
   # POST /scenarios.json
@@ -74,13 +77,14 @@ class ScenariosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scenario
-      @scenario = Scenario.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def scenario_params
-      params.require(:scenario).permit(:verb_id, :noun_id, :requestor_id, :doer_id, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scenario
+    @scenario = Scenario.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def scenario_params
+    params.require(:scenario).permit(:verb_id, :noun_id, :requestor_id, :doer_id, :image)
+  end
 end
