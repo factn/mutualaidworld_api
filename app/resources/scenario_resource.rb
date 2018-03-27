@@ -1,16 +1,16 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :image, :verbdesc, :noundesc, :imagethumb, :lat, :lon
+  attributes :image, :verb, :noun, :imagethumb, :requestorlat, :requestorlon, :doerlat, :doerlon, :donated
 
-  belongs_to :verb
-  belongs_to :noun
-  belongs_to :requestor
-  belongs_to :doer
+  has_one :verb
+  has_one :noun
+  has_one :requestor
+  has_one :doer
 
-  def noundesc
+  def noun
     @model.noun.description
   end
 
-  def verbdesc
+  def verb
     @model.verb.description
   end
 
@@ -18,11 +18,24 @@ class ScenarioResource < JSONAPI::Resource
     @model.image.url(:thumb)
   end
 
-  def lat
+  def requestorlat
     @model.requestor.latitude
   end
 
-    def lon
-      @model.requestor.longitude
-    end
+  def requestorlon
+    @model.requestor.longitude
+  end
+
+  def doerlat
+    @model.doer.latitude
+  end
+
+  def doerlon
+    @model.doer.longitude
+  end
+
+  def donated
+    # TODO: store donations somehow
+    "$57.34"
+  end
 end

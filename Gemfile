@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'rubocop'
+  gem 'jsonapi-rspec'
 end
 
 group :development do

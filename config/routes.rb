@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   jsonapi_resources :proofs
   jsonapi_resources :scenarios
-  #jsonapi_resources :users
+  jsonapi_resources :users
   jsonapi_resources :nouns
   jsonapi_resources :verbs
 
