@@ -1,38 +1,46 @@
 class NounsController < ApplicationController
-  before_action :set_noun, only: [:show, :edit, :update, :destroy]
+  before_action :set_noun, only: %i[show edit update destroy]
 
   # GET /nouns
   # GET /nouns.json
   def index
-    @nouns = Noun.all
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @nouns = Noun.all
+    end
   end
 
   # GET /nouns/1
   # GET /nouns/1.json
   def show
+    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
   end
 
   # GET /nouns/new
   def new
-    @noun = Noun.new
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @noun = Noun.new
+    end
   end
 
   # GET /nouns/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /nouns
   # POST /nouns.json
   def create
-    @noun = Noun.new(noun_params)
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @noun = Noun.new(noun_params)
 
-    respond_to do |format|
       if @noun.save
-        format.html { redirect_to @noun, notice: 'Noun was successfully created.' }
-        format.json { render :show, status: :created, location: @noun }
+        redirect_to @noun, notice: 'Noun was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @noun.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -40,13 +48,13 @@ class NounsController < ApplicationController
   # PATCH/PUT /nouns/1
   # PATCH/PUT /nouns/1.json
   def update
-    respond_to do |format|
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
       if @noun.update(noun_params)
-        format.html { redirect_to @noun, notice: 'Noun was successfully updated.' }
-        format.json { render :show, status: :ok, location: @noun }
+        redirect_to @noun, notice: 'Noun was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @noun.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -54,21 +62,23 @@ class NounsController < ApplicationController
   # DELETE /nouns/1
   # DELETE /nouns/1.json
   def destroy
-    @noun.destroy
-    respond_to do |format|
-      format.html { redirect_to nouns_url, notice: 'Noun was successfully destroyed.' }
-      format.json { head :no_content }
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @noun.destroy
+      redirect_to nouns_url, notice: 'Noun was successfully destroyed.'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_noun
-      @noun = Noun.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def noun_params
-      params.require(:noun).permit(:description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_noun
+    @noun = Noun.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def noun_params
+    params.require(:noun).permit(:description)
+  end
 end

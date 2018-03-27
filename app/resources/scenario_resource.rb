@@ -1,20 +1,28 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :noun, :verb
+  attributes :image, :verbdesc, :noundesc, :imagethumb, :lat, :lon
 
   belongs_to :verb
   belongs_to :noun
+  belongs_to :requestor
+  belongs_to :doer
 
+  def noundesc
+    @model.noun.description
+  end
 
-  # belongs_to :requestor, class_name: 'User', inverse_of: :requested
-  # belongs_to :doer, class_name: 'User', inverse_of: :solved
-  #
-  # has_many :proofs
+  def verbdesc
+    @model.verb.description
+  end
 
-  # has_many :ads
-  #
-  # has_attached_file :image, styles: {
-  #   thumb: '100x100>',
-  #   square: '200x200#',
-  #   medium: '300x300>'
-  # }
+  def imagethumb
+    @model.image.url(:thumb)
+  end
+
+  def lat
+    @model.requestor.latitude
+  end
+
+    def lon
+      @model.requestor.longitude
+    end
 end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :proofs
+  resources :scenarios
+  #jsonapi_resources :users
+  resources :nouns
+  resources :verbs
+
   jsonapi_resources :proofs
   jsonapi_resources :scenarios
   #jsonapi_resources :users
@@ -12,11 +18,7 @@ Rails.application.routes.draw do
   get "/ad" => "scenarios#ad", as: "ad"
 
 
-  resources :proofs
-  resources :scenarios
-  #jsonapi_resources :users
-  resources :nouns
-  resources :verbs
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

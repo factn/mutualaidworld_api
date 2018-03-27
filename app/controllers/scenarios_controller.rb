@@ -4,20 +4,21 @@ class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
   def index
-    # if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
-    #   super
-    # else
-    #   @scenarios = Scenario.all
-    # end
-    @scenarios = Scenario.all
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenarios = Scenario.all
+    end
   end
 
   # GET /scenarios/1
   # GET /scenarios/1.json
-  def show; end
+  def show
+    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+  end
 
   def ad
-    authorize :admin_ad, :show?
+    # authorize :admin_ad, :show?
 
     @example_scenarios = Scenario.first 4
     # binding.pry
@@ -30,7 +31,11 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/new
   def new
-    @scenario = Scenario.new
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario = Scenario.new
+    end
   end
 
   # GET /scenarios/1/edit
@@ -39,15 +44,15 @@ class ScenariosController < ApplicationController
   # POST /scenarios
   # POST /scenarios.json
   def create
-    @scenario = Scenario.new(scenario_params)
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario = Scenario.new(scenario_params)
 
-    respond_to do |format|
       if @scenario.save
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully created.' }
-        format.json { render :show, status: :created, location: @scenario }
+        redirect_to @scenario, notice: 'Scenario was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -55,13 +60,13 @@ class ScenariosController < ApplicationController
   # PATCH/PUT /scenarios/1
   # PATCH/PUT /scenarios/1.json
   def update
-    respond_to do |format|
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
       if @scenario.update(scenario_params)
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @scenario }
+        redirect_to @scenario, notice: 'Scenario was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -69,10 +74,11 @@ class ScenariosController < ApplicationController
   # DELETE /scenarios/1
   # DELETE /scenarios/1.json
   def destroy
-    @scenario.destroy
-    respond_to do |format|
-      format.html { redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.' }
-      format.json { head :no_content }
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario.destroy
+      redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.'
     end
   end
 

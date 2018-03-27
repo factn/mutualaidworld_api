@@ -1,38 +1,46 @@
 class ProofsController < ApplicationController
-  before_action :set_proof, only: [:show, :edit, :update, :destroy]
+  before_action :set_proof, only: %i[show edit update destroy]
 
   # GET /proofs
   # GET /proofs.json
   def index
-    @proofs = Proof.all
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @proofs = Proof.all
+    end
   end
 
   # GET /proofs/1
   # GET /proofs/1.json
   def show
+    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
   end
 
   # GET /proofs/new
   def new
-    @proof = Proof.new
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @proof = Proof.new
+    end
   end
 
   # GET /proofs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /proofs
   # POST /proofs.json
   def create
-    @proof = Proof.new(proof_params)
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @proof = Proof.new(proof_params)
 
-    respond_to do |format|
       if @proof.save
-        format.html { redirect_to @proof, notice: 'Proof was successfully created.' }
-        format.json { render :show, status: :created, location: @proof }
+        redirect_to @proof, notice: 'Proof was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @proof.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -40,13 +48,13 @@ class ProofsController < ApplicationController
   # PATCH/PUT /proofs/1
   # PATCH/PUT /proofs/1.json
   def update
-    respond_to do |format|
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
       if @proof.update(proof_params)
-        format.html { redirect_to @proof, notice: 'Proof was successfully updated.' }
-        format.json { render :show, status: :ok, location: @proof }
+        redirect_to @proof, notice: 'Proof was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @proof.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -54,10 +62,11 @@ class ProofsController < ApplicationController
   # DELETE /proofs/1
   # DELETE /proofs/1.json
   def destroy
-    @proof.destroy
-    respond_to do |format|
-      format.html { redirect_to proofs_url, notice: 'Proof was successfully destroyed.' }
-      format.json { head :no_content }
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @proof.destroy
+      redirect_to proofs_url, notice: 'Proof was successfully destroyed.'
     end
   end
 
