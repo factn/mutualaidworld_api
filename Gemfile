@@ -21,6 +21,7 @@ gem 'verbs'
 # gem 'aws-sdk', '~> 2.3'
 gem 'aws-sdk-s3'
 gem 'paperclip'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'dotenv-rails'
