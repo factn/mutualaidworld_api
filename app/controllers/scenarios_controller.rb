@@ -1,23 +1,28 @@
 class ScenariosController < ApplicationController
-  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
+  before_action :set_scenario, only: %i[show edit update destroy]
 
   # GET /scenarios
   # GET /scenarios.json
   def index
-    @scenarios = Scenario.all
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenarios = Scenario.all
+    end
   end
 
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
+    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
   end
 
   def ad
-    authorize :admin_ad, :show?
+    # authorize :admin_ad, :show?
 
     @example_scenarios = Scenario.first 4
-# binding.pry
- # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
+    # binding.pry
+    # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
 
     respond_to do |format|
       format.html { render "ad" }
@@ -26,25 +31,28 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/new
   def new
-    @scenario = Scenario.new
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario = Scenario.new
+    end
   end
 
   # GET /scenarios/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /scenarios
   # POST /scenarios.json
   def create
-    @scenario = Scenario.new(scenario_params)
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario = Scenario.new(scenario_params)
 
-    respond_to do |format|
       if @scenario.save
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully created.' }
-        format.json { render :show, status: :created, location: @scenario }
+        redirect_to @scenario, notice: 'Scenario was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -52,13 +60,13 @@ class ScenariosController < ApplicationController
   # PATCH/PUT /scenarios/1
   # PATCH/PUT /scenarios/1.json
   def update
-    respond_to do |format|
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
       if @scenario.update(scenario_params)
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @scenario }
+        redirect_to @scenario, notice: 'Scenario was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -66,21 +74,23 @@ class ScenariosController < ApplicationController
   # DELETE /scenarios/1
   # DELETE /scenarios/1.json
   def destroy
-    @scenario.destroy
-    respond_to do |format|
-      format.html { redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.' }
-      format.json { head :no_content }
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @scenario.destroy
+      redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scenario
-      @scenario = Scenario.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def scenario_params
-      params.require(:scenario).permit(:verb_id, :noun_id, :requestor_id, :doer_id, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scenario
+    @scenario = Scenario.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def scenario_params
+    params.require(:scenario).permit(:verb_id, :noun_id, :requestor_id, :doer_id, :image)
+  end
 end

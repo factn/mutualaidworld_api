@@ -1,84 +1,84 @@
-class NounsController < ApplicationController
-  before_action :set_noun, only: %i[show edit update destroy]
+class UsersController < ApplicationController
+  before_action :set_user, only: %i[show edit update destroy]
 
-  # GET /nouns
-  # GET /nouns.json
+  # GET /users
+  # GET /users.json
   def index
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
       super
     else
-      @nouns = Noun.all
+      @users = User.all
     end
   end
 
-  # GET /nouns/1
-  # GET /nouns/1.json
+  # GET /users/1
+  # GET /users/1.json
   def show
     super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
   end
 
-  # GET /nouns/new
+  # GET /users/new
   def new
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
       super
     else
-      @noun = Noun.new
+      @user = User.new
     end
   end
 
-  # GET /nouns/1/edit
+  # GET /users/1/edit
   def edit; end
 
-  # POST /nouns
-  # POST /nouns.json
+  # POST /users
+  # POST /users.json
   def create
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
       super
     else
-      @noun = Noun.new(noun_params)
+      @user = User.new(user_params)
 
-      if @noun.save
-        redirect_to @noun, notice: 'Noun was successfully created.'
+      if @user.save
+        redirect_to @user, notice: 'User was successfully created.'
       else
         render :new
       end
     end
   end
 
-  # PATCH/PUT /nouns/1
-  # PATCH/PUT /nouns/1.json
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
   def update
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
       super
     else
-      if @noun.update(noun_params)
-        redirect_to @noun, notice: 'Noun was successfully updated.'
+      if @user.update(user_params)
+        redirect_to @user, notice: 'User was successfully updated.'
       else
         render :edit
       end
     end
   end
 
-  # DELETE /nouns/1
-  # DELETE /nouns/1.json
+  # DELETE /users/1
+  # DELETE /users/1.json
   def destroy
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
       super
     else
-      @noun.destroy
-      redirect_to nouns_url, notice: 'Noun was successfully destroyed.'
+      @user.destroy
+      redirect_to users_url, notice: 'User was successfully destroyed.'
     end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_noun
-    @noun = Noun.find(params[:id])
+  def set_user
+    @user = User.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def noun_params
-    params.require(:noun).permit(:description)
+  def user_params
+    params.require(:user).permit(:description)
   end
 end

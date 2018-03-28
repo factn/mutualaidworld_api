@@ -17,10 +17,10 @@ if Rails.env.development? || Rails.env.test?
                { description: 'gold' },
                { description: 'child' }])
 
-  User.create([{ email: 'admin@example.com', password: 'password', password_confirmation: 'password', admin: true },
-               { email: 'test@example.com', password: 'password', password_confirmation: 'password' },
-               { email: 'test2@example.com', password: 'password', password_confirmation: 'password' },
-               { email: 'test3@example.com', password: 'password', password_confirmation: 'password' }])
+  User.create([{ email: 'admin@example.com', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password', admin: true },
+               { email: 'test@example.com',  latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
+               { email: 'test2@example.com', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
+               { email: 'test3@example.com', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' }])
 
 #    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
 

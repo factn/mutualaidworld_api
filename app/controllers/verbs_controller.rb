@@ -1,38 +1,46 @@
 class VerbsController < ApplicationController
-  before_action :set_verb, only: [:show, :edit, :update, :destroy]
+  before_action :set_verb, only: %i[show edit update destroy]
 
   # GET /verbs
   # GET /verbs.json
   def index
-    @verbs = Verb.all
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @verbs = Verb.all
+    end
   end
 
   # GET /verbs/1
   # GET /verbs/1.json
   def show
+    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
   end
 
   # GET /verbs/new
   def new
-    @verb = Verb.new
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @verb = Verb.new
+    end
   end
 
   # GET /verbs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /verbs
   # POST /verbs.json
   def create
-    @verb = Verb.new(verb_params)
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @verb = Verb.new(verb_params)
 
-    respond_to do |format|
       if @verb.save
-        format.html { redirect_to @verb, notice: 'Verb was successfully created.' }
-        format.json { render :show, status: :created, location: @verb }
+        redirect_to @verb, notice: 'Verb was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @verb.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -40,13 +48,13 @@ class VerbsController < ApplicationController
   # PATCH/PUT /verbs/1
   # PATCH/PUT /verbs/1.json
   def update
-    respond_to do |format|
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
       if @verb.update(verb_params)
-        format.html { redirect_to @verb, notice: 'Verb was successfully updated.' }
-        format.json { render :show, status: :ok, location: @verb }
+        redirect_to @verb, notice: 'Verb was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @verb.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -54,21 +62,23 @@ class VerbsController < ApplicationController
   # DELETE /verbs/1
   # DELETE /verbs/1.json
   def destroy
-    @verb.destroy
-    respond_to do |format|
-      format.html { redirect_to verbs_url, notice: 'Verb was successfully destroyed.' }
-      format.json { head :no_content }
+    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+      super
+    else
+      @verb.destroy
+      redirect_to verbs_url, notice: 'Verb was successfully destroyed.'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_verb
-      @verb = Verb.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def verb_params
-      params.require(:verb).permit(:description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_verb
+    @verb = Verb.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def verb_params
+    params.require(:verb).permit(:description)
+  end
 end
