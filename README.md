@@ -40,8 +40,8 @@ This will output:
       "verb": "find",
       "noun": "food",
       "imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/003/thumb/food.jpg?1522183655",
-      "requestorlat": 1.234,
-      "requestorlon": 1.456,
+      "requesterlat": 1.234,
+      "requesterlon": 1.456,
       "doerlat": 2.543,
       "doerlon": 2.987,
       "donated": "$57.34"
@@ -59,10 +59,10 @@ This will output:
           "related": "http://localhost:3000/scenarios/3/noun"
         }
       },
-      "requestor": {
+      "requester": {
         "links": {
-          "self": "http://localhost:3000/scenarios/3/relationships/requestor",
-          "related": "http://localhost:3000/scenarios/3/requestor"
+          "self": "http://localhost:3000/scenarios/3/relationships/requester",
+          "related": "http://localhost:3000/scenarios/3/requester"
         }
       },
       "doer": {

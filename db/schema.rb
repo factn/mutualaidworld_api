@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180328223830) do
   create_table "scenarios", force: :cascade do |t|
     t.bigint "verb_id"
     t.bigint "noun_id"
-    t.bigint "requestor_id"
+    t.bigint "requester_id"
     t.bigint "doer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180328223830) do
     t.index ["doer_id"], name: "index_scenarios_on_doer_id"
     t.index ["event_id"], name: "index_scenarios_on_event_id"
     t.index ["noun_id"], name: "index_scenarios_on_noun_id"
-    t.index ["requestor_id"], name: "index_scenarios_on_requestor_id"
+    t.index ["requester_id"], name: "index_scenarios_on_requester_id"
     t.index ["verb_id"], name: "index_scenarios_on_verb_id"
   end
 
@@ -90,6 +90,6 @@ ActiveRecord::Schema.define(version: 20180328223830) do
   add_foreign_key "scenarios", "events"
   add_foreign_key "scenarios", "nouns"
   add_foreign_key "scenarios", "users", column: "doer_id"
-  add_foreign_key "scenarios", "users", column: "requestor_id"
+  add_foreign_key "scenarios", "users", column: "requester_id"
   add_foreign_key "scenarios", "verbs"
 end

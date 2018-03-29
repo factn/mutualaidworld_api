@@ -1,12 +1,12 @@
 <!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
 <div class="ad">
 
-  <h1>Requestor Ad</h1>
+  <h1>requester Ad</h1>
 
   <%= image_tag scenario.image.url(:medium) %>
 
   <p>Do you need help with something?
-    <%= scenario.requestor.name %>
+    <%= scenario.requester.name %>
     got help with
     <%= scenario.verb.description.verb.conjugate tense: :past, person: :third, plurality: :singular, aspect: :perfective %>
     <%= scenario.noun.description %>

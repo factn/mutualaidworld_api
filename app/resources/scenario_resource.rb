@@ -4,7 +4,7 @@ class ScenarioResource < JSONAPI::Resource
 
   has_one :verb
   has_one :noun
-  has_one :requestor
+  has_one :requester
   has_one :doer
   has_one :event
 
@@ -25,7 +25,7 @@ class ScenarioResource < JSONAPI::Resource
   end
 
   def requester_firstname
-    @model.requestor.firstname
+    @model.requester.firstname
   end
 
   def doer_firstname
@@ -33,7 +33,7 @@ class ScenarioResource < JSONAPI::Resource
   end
 
   def requester_lastname
-    @model.requestor.lastname
+    @model.requester.lastname
   end
 
   def doer_lastname
@@ -41,11 +41,11 @@ class ScenarioResource < JSONAPI::Resource
   end
 
   def requesterlat
-    @model.requestor.latitude
+    @model.requester.latitude
   end
 
   def requesterlon
-    @model.requestor.longitude
+    @model.requester.longitude
   end
 
   def doerlat
