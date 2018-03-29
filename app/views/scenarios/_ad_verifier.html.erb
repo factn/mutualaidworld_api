@@ -4,6 +4,7 @@
   <h1>Verifier Ad</h1>
 
   <%= image_tag scenario.image.url(:medium) %>
+  <p><h2><%= scenario.event.description  if scenario.event %></h2></p>
 
   <p>Are you able to verify that
     <%= scenario.doer.email %>

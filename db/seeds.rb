@@ -17,6 +17,9 @@ if Rails.env.development? || Rails.env.test?
                { description: 'gold' },
                { description: 'child' }])
 
+  Event.create([{ description: 'Kaikora Earthquake' },
+                { description: 'Hurricane Katrina' }])
+
   User.create([{ email: 'admin@example.com', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password', admin: true },
                { email: 'test@example.com',  latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
                { email: 'test2@example.com', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
@@ -24,14 +27,14 @@ if Rails.env.development? || Rails.env.test?
 
 #    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
 
-  Scenario.create([{ verb_id: 1, noun_id: 4, requestor_id: 1, doer_id: 2, image: File.open(Rails.root.join('vendor', 'child.jpg')) },
-                   { verb_id: 2, noun_id: 3, requestor_id: 2, doer_id: 3, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
-                   { verb_id: 3, noun_id: 2, requestor_id: 3, doer_id: 1, image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
-                   { verb_id: 4, noun_id: 1, requestor_id: 1, doer_id: 2, image: File.open(Rails.root.join('vendor', 'water.jpg')) },
-                   { verb_id: 1, noun_id: 1, requestor_id: 2, doer_id: 3, image: File.open(Rails.root.join('vendor', 'water.jpg')) },
-                   { verb_id: 2, noun_id: 2, requestor_id: 3, doer_id: 1, image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
-                   { verb_id: 3, noun_id: 3, requestor_id: 1, doer_id: 2, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
-                   { verb_id: 4, noun_id: 4, requestor_id: 2, doer_id: 3, image: File.open(Rails.root.join('vendor', 'child.jpg')) }])
+  Scenario.create([{ verb_id: 1, noun_id: 4, requestor_id: 1, doer_id: 2, event_id: 1, image: File.open(Rails.root.join('vendor', 'child.jpg')) },
+                   { verb_id: 2, noun_id: 3, requestor_id: 2, doer_id: 3, event_id: 1, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
+                   { verb_id: 3, noun_id: 2, requestor_id: 3, doer_id: 1, event_id: 1, image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
+                   { verb_id: 4, noun_id: 1, requestor_id: 1, doer_id: 2, event_id: 1, image: File.open(Rails.root.join('vendor', 'water.jpg')) },
+                   { verb_id: 1, noun_id: 1, requestor_id: 2, doer_id: 3, event_id: 2, image: File.open(Rails.root.join('vendor', 'water.jpg')) },
+                   { verb_id: 2, noun_id: 2, requestor_id: 3, doer_id: 1, event_id: 2, image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
+                   { verb_id: 3, noun_id: 3, requestor_id: 1, doer_id: 2, event_id: 2, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
+                   { verb_id: 4, noun_id: 4, requestor_id: 2, doer_id: 3, event_id: 2, image: File.open(Rails.root.join('vendor', 'child.jpg')) }])
 
   Proof.create([{ scenario_id: 4, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
                 { scenario_id: 6, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])

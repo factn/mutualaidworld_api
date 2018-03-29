@@ -5,6 +5,7 @@
   <h1>Donator Ad</h1>
 
   <%= image_tag scenario.image.url(:medium) %>
+  <p><h2><%= scenario.event.description  if scenario.event %></h2></p>
 
   <p>Can you donate money to help
     <%= scenario.doer.email %>

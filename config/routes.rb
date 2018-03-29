@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :proofs
   resources :scenarios
   #jsonapi_resources :users

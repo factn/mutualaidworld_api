@@ -33,6 +33,11 @@
 </div>
 
 <div class="field">
+  <%= form.label :event_id %>
+  <%= select("scenario", "event_id", Event.all.collect {|e| [ e.description, e.id ] }, {}) %>
+</div>
+
+<div class="field">
   <%= form.label :image %>
   <%= form.file_field :image %>
 </div>

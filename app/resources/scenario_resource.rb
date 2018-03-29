@@ -1,10 +1,11 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :image, :verb, :noun, :imagethumb, :requestorlat, :requestorlon, :doerlat, :doerlon, :donated
+  attributes :image, :verb, :noun, :event, :imagethumb, :requestorlat, :requestorlon, :doerlat, :doerlon, :donated
 
   has_one :verb
   has_one :noun
   has_one :requestor
   has_one :doer
+  has_one :event
 
   def noun
     @model.noun.description
@@ -12,6 +13,10 @@ class ScenarioResource < JSONAPI::Resource
 
   def verb
     @model.verb.description
+  end
+
+  def event
+    @model.event.description
   end
 
   def imagethumb

@@ -11,6 +11,8 @@
       <th>Noun</th>
       <th>Requestor</th>
       <th>Doer</th>
+      <th>Event</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,6 +27,8 @@
         <td><%= scenario.noun.description %></td>
         <td><%= scenario.requestor.email %></td>
         <td><%= scenario.doer.email %></td>
+        <td><%= scenario.event.description %></td>
+
         <td><%= link_to 'Show', scenario %></td>
         <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
         <td><%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>

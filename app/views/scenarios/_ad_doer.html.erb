@@ -3,7 +3,7 @@
   <h1>Doer Ad</h1>
 
   <%= image_tag scenario.image.url(:medium) %>
-
+  <p><h2><%= scenario.event.description if scenario.event %></h2></p>
   <p>Can you
     <%= scenario.verb.description %>
     a
