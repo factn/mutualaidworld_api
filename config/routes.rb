@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :donations
   resources :events
   resources :proofs
   resources :scenarios

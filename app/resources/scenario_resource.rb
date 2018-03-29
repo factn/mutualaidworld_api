@@ -7,6 +7,8 @@ class ScenarioResource < JSONAPI::Resource
   has_one :requester
   has_one :doer
   has_one :event
+  belongs_to :proof
+  belongs_to :donation
 
   def noun
     @model.noun.description
