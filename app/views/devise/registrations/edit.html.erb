@@ -40,6 +40,16 @@
     <%= f.number_field :latitude, step: :any %>
   </div>
 
+  <div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.field :lastname %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

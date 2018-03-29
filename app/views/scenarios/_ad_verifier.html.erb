@@ -7,11 +7,11 @@
   <p><h2><%= scenario.event.description  if scenario.event %></h2></p>
 
   <p>Are you able to verify that
-    <%= scenario.doer.email %>
+    <%= scenario.doer.name %>
     <%= scenario.verb.description.verb.conjugate tense: :past, person: :third, plurality: :singular, aspect: :perfective %>
     <%= scenario.noun.description %>
     for
-    <%= scenario.requestor.email %>?
+    <%= scenario.requestor.name %>?
   </p>
 
   <%= link_to 'Yes I Can', scenarios_path %>

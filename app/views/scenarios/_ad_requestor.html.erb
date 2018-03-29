@@ -6,9 +6,9 @@
   <%= image_tag scenario.image.url(:medium) %>
 
   <p>Do you need help with something?
-    <%= scenario.requestor.email %>
+    <%= scenario.requestor.name %>
     got help with
-    <%= scenario.verb.description %>
+    <%= scenario.verb.description.verb.conjugate tense: :past, person: :third, plurality: :singular, aspect: :perfective %>
     <%= scenario.noun.description %>
     during
     <%= scenario.event.description if scenario.event %>.

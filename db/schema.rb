@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20180328223830) do
     t.inet "last_sign_in_ip"
     t.float "longitude"
     t.float "latitude"
+    t.string "firstname"
+    t.string "lastname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false

@@ -8,11 +8,11 @@
   <p><h2><%= scenario.event.description  if scenario.event %></h2></p>
 
   <p>Can you donate money to help
-    <%= scenario.doer.email %>
-    <%= scenario.verb.description %>
+    <%= scenario.doer.name %>
+    <%= scenario.verb.description.verb.conjugate tense: :present, person: :third, plurality: :singular, aspect: :perfective %>
     <%= scenario.noun.description %>
     for
-    <%= scenario.requestor.email %>?
+    <%= scenario.requestor.name %>?
   </p>
 
   <%= link_to 'Yes I Can', scenarios_path %>
