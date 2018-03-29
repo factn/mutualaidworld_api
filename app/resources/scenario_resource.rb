@@ -1,6 +1,6 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :image, :verb, :noun, :event, :imagethumb, :requestorlat, :requestorlon, :doerlat, :doerlon, :donated, :funding_goal
-  attributes :requestor_name, :doer_name
+  attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal
+  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname
 
   has_one :verb
   has_one :noun
@@ -24,19 +24,27 @@ class ScenarioResource < JSONAPI::Resource
     @model.image.url(:thumb)
   end
 
-  def requestor_name
-    @model.requestor.name
+  def requester_firstname
+    @model.requestor.firstname
   end
 
-  def doer_name
-    @model.doer.name
+  def doer_firstname
+    @model.doer.firstname
   end
 
-  def requestorlat
+  def requester_lastname
+    @model.requestor.lastname
+  end
+
+  def doer_lastname
+    @model.doer.lastname
+  end
+
+  def requesterlat
     @model.requestor.latitude
   end
 
-  def requestorlon
+  def requesterlon
     @model.requestor.longitude
   end
 
