@@ -4,6 +4,8 @@ class DonationResource < JSONAPI::Resource
   has_one :donator
   has_one :scenario
 
+  filters :donator, :amount, :scenario
+
   def scenario
     @model.scenario.description
   end

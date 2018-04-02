@@ -10,6 +10,8 @@ class ScenarioResource < JSONAPI::Resource
   belongs_to :proof
   belongs_to :donation
 
+  filters :verb, :noun, :event, :requester, :doer, :funding_goal
+
   def noun
     @model.noun.description
   end
