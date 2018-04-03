@@ -1,16 +1,19 @@
 class ScenarioResource < JSONAPI::Resource
   attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal
-  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname
+  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname, :parent_scenario, :parent_scenario_id
 
   has_one :verb
   has_one :noun
   has_one :requester
   has_one :doer
   has_one :event
+  has_one :parent_scenario
+
   belongs_to :proof
   belongs_to :donation
+  belongs_to :children_scenario
 
-  filters :verb, :noun, :event, :requester, :doer, :funding_goal
+  filters :verb, :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
 
   def noun
     @model.noun.description
@@ -58,6 +61,10 @@ class ScenarioResource < JSONAPI::Resource
 
   def doerlon
     @model.doer.longitude
+  end
+
+  def parent_scenario
+    @model.parent_description
   end
 
   def donated

@@ -43,6 +43,11 @@
 </div>
 
 <div class="field">
+  <%= form.label :parent_scenario_id %>
+  <%= select("scenario", "parent_scenario_id", Scenario.all.collect {|s| [ s.description, s.id ] }, { include_blank: true }) %>
+</div>
+
+<div class="field">
   <%= form.label :image %>
   <%= form.file_field :image %>
 </div>
