@@ -20,10 +20,10 @@ if Rails.env.development? || Rails.env.test?
   Event.create([{ description: 'Kaikora Earthquake' },
                 { description: 'Hurricane Katrina' }])
 
-  User.create([{ email: 'admin@example.com', firstname: 'john',    lastname: 'johnson', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password', admin: true },
-               { email: 'test@example.com',  firstname: 'jack',    lastname: 'jackson', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
-               { email: 'test2@example.com', firstname: 'jean',    lastname: 'jeanson', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' },
-               { email: 'test3@example.com', firstname: 'jacinda', lastname: 'jacindason', latitude: 1.234, longitude: 1.456, password: 'password', password_confirmation: 'password' }])
+  User.create([{ email: 'admin@example.com', firstname: 'john',    lastname: 'johnson', latitude: -41.2855188, longitude: 174.7952354, password: 'password', password_confirmation: 'password', admin: true },
+               { email: 'test@example.com',  firstname: 'jack',    lastname: 'jackson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' },
+               { email: 'test2@example.com', firstname: 'jean',    lastname: 'jeanson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' },
+               { email: 'test3@example.com', firstname: 'jacinda', lastname: 'jacindason', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' }])
 
 #    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
 
