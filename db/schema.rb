@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 20180404211817) do
     t.datetime "image_updated_at"
     t.decimal "funding_goal", precision: 16, scale: 3
     t.bigint "event_id"
+    t.bigint "parent_scenario_id"
     t.index ["doer_id"], name: "index_scenarios_on_doer_id"
     t.index ["event_id"], name: "index_scenarios_on_event_id"
     t.index ["noun_id"], name: "index_scenarios_on_noun_id"
+    t.index ["parent_scenario_id"], name: "index_scenarios_on_parent_scenario_id"
     t.index ["requester_id"], name: "index_scenarios_on_requester_id"
     t.index ["verb_id"], name: "index_scenarios_on_verb_id"
   end
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
   add_foreign_key "proofs", "scenarios"
   add_foreign_key "scenarios", "events"
   add_foreign_key "scenarios", "nouns"
+  add_foreign_key "scenarios", "scenarios", column: "parent_scenario_id"
   add_foreign_key "scenarios", "users", column: "doer_id"
   add_foreign_key "scenarios", "users", column: "requester_id"
   add_foreign_key "scenarios", "verbs"

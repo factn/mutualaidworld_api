@@ -32,5 +32,27 @@
   <%= @scenario.funding_goal %>
 </p>
 
-<%= link_to 'Edit', edit_scenario_path(@scenario) %> |
+<p>
+  <strong>Is Child Of:</strong>
+  <br/>
+  <% if @scenario.parent_scenario then %>
+    <%= render 'scenario_table_row_short', scenarios: [ @scenario.parent_scenario ] %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<p>
+  <strong>Is Parent Of:</strong>
+  <br/>
+
+  <% if @scenario.children_scenario.count != 0 then %>
+    <%= render 'scenario_table_row_short', scenarios: @scenario.children_scenario %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_scenario_path(@scenario) %>
+|
 <%= link_to 'Back', scenarios_path %>
