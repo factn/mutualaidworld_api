@@ -1,5 +1,5 @@
 class EventResource < JSONAPI::Resource
-  attributes :description
+  attributes :description, :location_name
 
   has_many :scenarios
 

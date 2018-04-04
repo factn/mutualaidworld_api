@@ -1,18 +1,45 @@
 <!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
-<div class="ad">
 
-  <h1>requester Ad</h1>
+<div id="<%= "lion_ad_content_#{scenario.id}_request" %>">
+  <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/requester/") do %>
+    <div class="profile">
+      <img class="profile-icon" src="<%= asset_path( 'fb-profile.jpg' ) %>" />
+      <div class="profile-name">Lion</div>
+    </div>
 
-  <%= image_tag scenario.image.url(:medium) %>
+    <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-  <p>Do you need help with something?
-    <%= scenario.requester.name %>
-    got help with
-    <%= scenario.verb.description.verb.conjugate tense: :past, person: :third, plurality: :singular, aspect: :perfective %>
-    <%= scenario.noun.description %>
-    during
-    <%= scenario.event.description if scenario.event %>.
-  </p>
+    <h1><%= "Need #{scenario.noun.description} #{scenario.verb.description}?" %></h1>
 
-  <%= link_to 'Yes I Can', scenarios_path %>
+    <h2><%= scenario.event.description  if scenario.event %></h2>
+
+    <p>Do you need help with something?</p>
+    <p><%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) %> got help with <%= scenario.verb.description %> <%= scenario.noun.description %></p>
+
+    <div class="location">
+      <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />
+      <% if scenario.event.location_name then %>
+        <span> <%= scenario.event.location_name %></span>
+      <% else %>
+        <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% end %>
+    </div>
+    <div class="progress-bar">
+      <input class="progress-bar-slider" type="range" min="0" max="<%= scenario.funding_goal %>" value="<%= scenario.donated %>" disabled>
+    </div>
+    <div class="progress-data">
+      <div><b>$<%= scenario.donated.to_i %></b> funded</div>
+    </div>
+    <div class="share-bar">
+      <div class="share-bar-left">
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction1.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction2.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction3.png' ) %>" />
+      </div>
+      <div class="share-bar-right">
+        <span>200 Comments  </span>
+        <span>35 Shares</span>
+      </div>
+    </div>
+  <% end %>
 </div>

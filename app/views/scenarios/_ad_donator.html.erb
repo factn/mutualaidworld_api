@@ -1,19 +1,54 @@
 <!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
 
-<div class="ad">
+<div id="<%= "lion_ad_content_#{scenario.id}_donate" %>">
+  <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/donator/") do %>
+    <div class="profile">
+      <img class="profile-icon" src="<%= asset_path( 'fb-profile.jpg' ) %>" />
+      <div class="profile-name">Lion</div>
+    </div>
 
-  <h1>Donator Ad</h1>
+    <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-  <%= image_tag scenario.image.url(:medium) %>
-  <p><h2><%= scenario.event.description  if scenario.event %></h2></p>
+    <h1><%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize}#{scenario.requester.firstname.slice(1..-1)} #{scenario.noun.description}" %></h1>
 
-  <p>Can you donate money to help
-    <%= scenario.doer.name %>
-    <%= scenario.verb.description.verb.conjugate tense: :present, person: :third, plurality: :singular, aspect: :perfective %>
-    <%= scenario.noun.description %>
-    for
-    <%= scenario.requester.name %>?
-  </p>
+    <h2><%= scenario.event.description  if scenario.event %></h2>
 
-  <%= link_to 'Yes I Can', scenarios_path %>
+    <% if scenario.custom_message then %>
+      <p><%= scenario.custom_message %></p>
+    <% else %>
+      <p>Can you donate money to help
+        <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) %>
+        <%= scenario.verb.description %>
+        <%= scenario.noun.description %>
+        for
+        <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) %>?
+      </p>
+    <% end %>
+
+    <div class="location">
+      <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />
+      <% if scenario.event.location_name then %>
+        <span> <%= scenario.event.location_name %></span>
+      <% else %>
+        <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% end %>
+    </div>
+    <div class="progress-bar">
+      <input class="progress-bar-slider" type="range" min="0" max="<%= scenario.funding_goal %>" value="<%= scenario.donated %>" disabled>
+    </div>
+    <div class="progress-data">
+      <div><b>$<%= scenario.donated.to_i %></b> funded</div>
+    </div>
+    <div class="share-bar">
+      <div class="share-bar-left">
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction1.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction2.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction3.png' ) %>" />
+      </div>
+      <div class="share-bar-right">
+        <span>200 Comments  </span>
+        <span>35 Shares</span>
+      </div>
+    </div>
+  <% end %>
 </div>
