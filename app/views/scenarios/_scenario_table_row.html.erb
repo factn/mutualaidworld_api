@@ -1,0 +1,17 @@
+<tr>
+  <td><%= scenario.id %></td>
+  <td><%= image_tag scenario.image.url(:thumb) %></td>
+
+  <td><%= scenario.verb.description %></td>
+  <td><%= scenario.noun.description %></td>
+  <td><%= scenario.requester.name %></td>
+  <td><%= scenario.doer.name %></td>
+  <td><%= scenario.funding_goal %></td>
+  <td><%= scenario.parent_description %></td>
+
+  <td><%= scenario.event.description %></td>
+
+  <td><%= link_to 'Show', scenario %></td>
+  <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
+  <td><%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
