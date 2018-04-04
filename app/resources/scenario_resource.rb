@@ -7,11 +7,11 @@ class ScenarioResource < JSONAPI::Resource
   has_one :requester
   has_one :doer
   has_one :event
-  has_one :parent_scenario
+  has_one :parent_scenario, class_name: 'Scenario'
 
-  belongs_to :proof
-  belongs_to :donation
-  belongs_to :children_scenario
+  has_many :proofs
+  has_many :donations
+  has_many :children_scenario, class_name: 'Scenario'
 
   filters :verb, :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
 
@@ -63,9 +63,9 @@ class ScenarioResource < JSONAPI::Resource
     @model.doer.longitude
   end
 
-  def parent_scenario
-    @model.parent_description
-  end
+  # def parent_scenario
+  #   @model.parent_description
+  # end
 
   def donated
     # TODO: store donations somehow
