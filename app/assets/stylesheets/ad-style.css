@@ -1,0 +1,42 @@
+[id^="lion_ad_content"] {
+  padding: 1em;
+  border: 1px solid #666;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+[id^="lion_ad_content"] a {
+  color: #888;
+  text-decoration: none;
+}
+[id^="lion_ad_content"] a:hover {
+  color: #888;
+  text-decoration: none;
+}
+
+[id^="lion_ad_content"] img {
+  display: block;
+  margin: 0 auto 0.5em;
+  padding: 0.5em;
+}
+
+[id^="lion_ad_content"] h1,
+[id^="lion_ad_content"] h2 {
+  margin: 0 0 0.5em;
+}
+[id^="lion_ad_content"] h1 {
+  color: #333;
+}
+[id^="lion_ad_content"] h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #111;
+  text-decoration: underline;
+}
+[id^="lion_ad_content"] h2:empty {
+  display: none;
+}
+
+[id^="lion_ad_content"] p {
+  margin: 0 0 0.25em;
+}

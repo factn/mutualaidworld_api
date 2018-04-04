@@ -1,6 +1,6 @@
 class ScenarioResource < JSONAPI::Resource
   attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal
-  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname
+  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname, :custom_message
 
   has_one :verb
   has_one :noun
@@ -63,5 +63,9 @@ class ScenarioResource < JSONAPI::Resource
   def donated
     # TODO: store donations somehow
     "$57.34"
+  end
+
+  def custom_message
+    nil
   end
 end

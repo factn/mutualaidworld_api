@@ -22,4 +22,8 @@ class Scenario < ApplicationRecord
   def description
     verb.description + ' ' + noun.description + ' for ' + requester.name + ' in ' + event.description
   end
+
+  def custom_message
+    nil
+  end
 end
