@@ -27,7 +27,11 @@
 
     <div class="location">
       <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />
-      <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% if scenario.event.location_name then %>
+        <span> <%= scenario.event.location_name %></span>
+      <% else %>
+        <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% end %>
     </div>
     <div class="progress-bar">
       <input class="progress-bar-slider" type="range" min="0" max="<%= scenario.funding_goal %>" value="<%= scenario.donated %>" disabled>

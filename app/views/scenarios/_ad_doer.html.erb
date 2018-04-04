@@ -2,6 +2,11 @@
 
 <div id="<%= "lion_ad_content_#{scenario.id}_do" %>">
   <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/doer/") do %>
+    <div class="profile">
+      <img class="profile-icon" src="<%= asset_path( 'fb-profile.jpg' ) %>" />
+      <div class="profile-name">Lion</div>
+    </div>
+
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
     <h1><%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize}#{scenario.requester.firstname.slice(1..-1)} #{scenario.noun.description}" %></h1>
@@ -19,5 +24,31 @@
         <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) %>?
       </p>
     <% end %>
+
+    <div class="location">
+      <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />
+      <% if scenario.event.location_name then %>
+        <span> <%= scenario.event.location_name %></span>
+      <% else %>
+        <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% end %>
+    </div>
+    <div class="progress-bar">
+      <input class="progress-bar-slider" type="range" min="0" max="<%= scenario.funding_goal %>" value="<%= scenario.donated %>" disabled>
+    </div>
+    <div class="progress-data">
+      <div><b>$<%= scenario.donated.to_i %></b> funded</div>
+    </div>
+    <div class="share-bar">
+      <div class="share-bar-left">
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction1.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction2.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction3.png' ) %>" />
+      </div>
+      <div class="share-bar-right">
+        <span>200 Comments  </span>
+        <span>35 Shares</span>
+      </div>
+    </div>
   <% end %>
 </div>
