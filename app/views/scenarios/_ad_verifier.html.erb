@@ -1,7 +1,7 @@
 <!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
 <div id="<%= "lion_ad_content_#{scenario.id}_verify" %>">
   <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/verifier/") do %>
-    <%= image_tag scenario.image.url(:medium) %>
+    <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
     <h1>Help us verify <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1)%></h1>
 

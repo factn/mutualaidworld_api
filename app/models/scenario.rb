@@ -26,4 +26,20 @@ class Scenario < ApplicationRecord
   def custom_message
     nil
   end
+
+  def requesterlat
+    requester.latitude
+  end
+
+  def requesterlon
+    requester.longitude
+  end
+
+  def donated
+    "50" # Currently these are default amounts, will need to be calculated
+  end
+
+  def funding_goal
+    "100" # Currently these are default amounts, will need to be calculated
+  end
 end

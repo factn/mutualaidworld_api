@@ -2,7 +2,7 @@
 
 <div id="<%= "lion_ad_content_#{scenario.id}_request" %>">
   <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/requester/") do %>
-    <%= image_tag scenario.image.url(:medium) %>
+    <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
     <h1><%= "Need #{scenario.noun.description} #{scenario.verb.description}?" %></h1>
 
