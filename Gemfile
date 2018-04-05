@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'rubocop'
   gem 'jsonapi-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do

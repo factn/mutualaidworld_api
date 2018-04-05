@@ -28,13 +28,10 @@ RSpec.describe DonationsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Donation. As you add validations to Donation, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:valid_attributes) { { amount: '1', scenario_id: "1", donator_id: "1" } }
+
+  let(:invalid_attributes) { { not_a_real_attribute: 'invalid value' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -75,6 +72,8 @@ RSpec.describe DonationsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Donation" do
+        user = create(:user)
+
         expect {
           post :create, params: {donation: valid_attributes}, session: valid_session
         }.to change(Donation, :count).by(1)
