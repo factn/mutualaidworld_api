@@ -21,91 +21,111 @@ Note there are no logins etc.... at the moment
 
 ## Usage
 
-To get a scenarios data:
-
-`curl -s -H "Accept: application/vnd.api+json" "http://localhost:3000/scenarios/3" | jq`
-
-This will output:
+Create a donation
 
 ```
-{
+curl --request POST \
+  --url http://localhost:3000/donations \
+  --header 'accept: application/vnd.api+json' \
+  --header 'content-type: application/vnd.api+json' \
+  --data '{
   "data": {
-    "id": "3",
-    "type": "scenarios",
-    "links": {
-      "self": "http://localhost:3000/scenarios/3"
-    },
+    "type": "donations",
     "attributes": {
-      "image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/003/original/food.jpg?1522183655",
-      "verb": "find",
-      "noun": "food",
-      "imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/003/thumb/food.jpg?1522183655",
-      "requesterlat": 1.234,
-      "requesterlon": 1.456,
-      "doerlat": 2.543,
-      "doerlon": 2.987,
-      "donated": "$57.34"
+      "amount": "17"
     },
     "relationships": {
-      "verb": {
-        "links": {
-          "self": "http://localhost:3000/scenarios/3/relationships/verb",
-          "related": "http://localhost:3000/scenarios/3/verb"
+      "donator": {
+        "data": {
+          "type": "users",
+          "id": "1"
         }
       },
-      "noun": {
-        "links": {
-          "self": "http://localhost:3000/scenarios/3/relationships/noun",
-          "related": "http://localhost:3000/scenarios/3/noun"
-        }
-      },
-      "requester": {
-        "links": {
-          "self": "http://localhost:3000/scenarios/3/relationships/requester",
-          "related": "http://localhost:3000/scenarios/3/requester"
-        }
-      },
-      "doer": {
-        "links": {
-          "self": "http://localhost:3000/scenarios/3/relationships/doer",
-          "related": "http://localhost:3000/scenarios/3/doer"
+      "scenario": {
+        "data": {
+          "id": "1",
+          "type": "scenarios"
         }
       }
     }
   }
-}
-
+}'
 ```
 
-To get a scenarios doer user:
-
-`curl -s -H "Accept: application/vnd.api+json" "http://localhost:3000/scenarios/3/doer"  | jq`
-
-which will output:
+Create a scenario - minimum
 
 ```
-{
+curl --request POST \
+  --url http://localhost:3000/scenarios \
+  --header 'accept: application/vnd.api+json' \
+  --header 'content-type: application/vnd.api+json' \
+  --data '{
   "data": {
-    "id": "1",
-    "type": "users",
-    "links": {
-      "self": "http://localhost:3000/users/1"
-    },
+    "type": "scenarios",
     "attributes": {
-      "latitude": 2.543,
-      "longitude": 2.987,
-      "email": "admin@example.com",
-      "firstname": "Place",
-      "lastname": "Holder"
+
+    },
+    "relationships": {
+			"verb": {
+        "data": {
+          "id": "1",
+          "type": "verbs"
+        }
+      },
+			"noun": {
+        "data": {
+          "id": "1",
+          "type": "nouns"
+        }
+      },
+			"event": {
+        "data": {
+          "id": "1",
+          "type": "events"
+        }
+      }
+
     }
   }
-}
-
+}'
 ```
 
-To update a users location:
+update a scenario with a doerlat
 
-`curl -i -H "Accept: application/vnd.api+json" -H 'Content-Type:application/vnd.api+json' -X PATCH -d '{"data": {"type":"users", "id": "1", "attributes":{"latitude":"2.543", "longitude": "2.987"}}}' http://localhost:3000/users/1 | jq`
+```
+curl --request PATCH \
+  --url http://localhost:3000/scenarios/15 \
+  --header 'accept: application/vnd.api+json' \
+  --header 'content-type: application/vnd.api+json' \
+  --data '{
+  "data": {
+    "type": "scenarios",
+		"id": 15,
+    "attributes": {
+
+    },
+    "relationships": {
+			"doer": {
+        "data": {
+          "id": "1",
+          "type": "users"
+        }
+      }
+
+    }
+  }
+}'
+```
+
+Get a scenario with all its child scenarios
+
+```
+curl --request GET \
+  --url 'http://localhost:3000/scenarios/1?include=children_scenario' \
+  --header 'accept: application/vnd.api+json' \
+  --header 'content-type: application/vnd.api+json'
+```
+
 
 
 ## Heroku deployment instructions
