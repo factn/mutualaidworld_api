@@ -9,7 +9,7 @@
 
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-    <h1><%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize}#{scenario.requester.firstname.slice(1..-1)} #{scenario.noun.description}" %></h1>
+    <h1><%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize if scenario.requester}#{scenario.requester.firstname.slice(1..-1) if scenario.requester} #{scenario.noun.description}" %></h1>
 
     <h2><%= scenario.event.description  if scenario.event %></h2>
 
@@ -17,11 +17,11 @@
       <p><%= scenario.custom_message %></p>
     <% else %>
       <p>Can you donate money to help
-        <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) %>
+        <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) if scenario.doer %>
         <%= scenario.verb.description %>
         <%= scenario.noun.description %>
         for
-        <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) %>?
+        <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %>?
       </p>
     <% end %>
 

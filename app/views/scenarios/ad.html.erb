@@ -1,17 +1,21 @@
 <h1>Example Ads</h1>
 
+<% @example_scenarios.each do |scenario| %>
+
 <p class="lion-ad-content">
-<%= render 'ad_doer', scenario: @example_scenarios[0] %>
+<%= render 'ad_doer', scenario: scenario %>
 </p>
 <p class="lion-ad-content">
-<%= render 'ad_donator', scenario: @example_scenarios[1] %>
+<%= render 'ad_donator', scenario: scenario %>
 </p>
 <p class="lion-ad-content">
-<%= render 'ad_requester', scenario: @example_scenarios[2] %>
+<%= render 'ad_requester', scenario: scenario %>
 </p>
 <p class="lion-ad-content">
-<%= render 'ad_verifier', scenario: @example_scenarios[3] %>
+<%= render 'ad_verifier', scenario: scenario %>
 </p>
+<% end %>
+
 
 <p>
   <%= link_to 'Back', scenarios_path %>
