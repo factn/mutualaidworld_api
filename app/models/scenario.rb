@@ -2,8 +2,8 @@ class Scenario < ApplicationRecord
   belongs_to :verb
   belongs_to :noun
   belongs_to :event
-  belongs_to :requester, class_name: 'User', inverse_of: :requested
-  belongs_to :doer, class_name: 'User', inverse_of: :solved
+  belongs_to :requester, class_name: 'User', inverse_of: :requested, optional: true
+  belongs_to :doer, class_name: 'User', inverse_of: :solved, optional: true
   belongs_to :parent_scenario, class_name: 'Scenario', inverse_of: :children_scenario, optional: true
 
   has_many :proofs, dependent: :destroy
@@ -22,7 +22,7 @@ class Scenario < ApplicationRecord
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   def description
-    verb.description + ' ' + noun.description + ' for ' + requester.name + ' in ' + event.description
+    verb.description + ' ' + noun.description + (requester ? ' for ' + requester.name : '') + ' in ' + event.description
   end
 
   def parent_description
@@ -36,11 +36,19 @@ class Scenario < ApplicationRecord
   end
 
   def requesterlat
-    requester.latitude
+    requester.latitude if requester
   end
 
   def requesterlon
-    requester.longitude
+    requester.longitude if requester
+  end
+
+  def doerlat
+    doer.latitude if doer
+  end
+
+  def doerlon
+    doer.longitude if doer
   end
 
   def donated

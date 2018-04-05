@@ -14,13 +14,21 @@
 
 <p>
   <strong>requester:</strong>
-  <%= @scenario.requester.name %>
+
+  <% if @scenario.requester then %>
+    <%= @scenario.requester.name %>
+  <% else %>
+    None
+  <% end %>
 </p>
 
 <p>
   <strong>Doer:</strong>
-  <%= @scenario.doer.name %>
-</p>
+  <% if @scenario.doer then %>
+    <%= @scenario.doer.name %>
+  <% else %>
+    None
+  <% end %></p>
 
 <p>
   <strong>event:</strong>
