@@ -3,9 +3,10 @@ class Scenario < ApplicationRecord
   belongs_to :noun
   belongs_to :event
   belongs_to :requester, class_name: 'User', inverse_of: :requested, optional: true
-  belongs_to :doer, class_name: 'User', inverse_of: :solved, optional: true
+  belongs_to :doer, class_name: 'User', inverse_of: :done, optional: true
   belongs_to :parent_scenario, class_name: 'Scenario', inverse_of: :children_scenario, optional: true
 
+  #has_many :verifications, class_name: 'Proofs', dependent: :destroy, inverse_of: :scenario
   has_many :proofs, dependent: :destroy
   has_many :donations, dependent: :destroy
   has_many :children_scenario, class_name: 'Scenario', dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
