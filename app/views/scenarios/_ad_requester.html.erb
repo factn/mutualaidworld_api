@@ -9,12 +9,12 @@
 
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-    <h1><%= "Need #{scenario.noun.description} #{scenario.verb.description}?" %></h1>
+    <h1><%= "Need #{scenario.noun.description} #{scenario.verb.description}ed?" %></h1>
 
     <h2><%= scenario.event.description  if scenario.event %></h2>
 
     <p>Do you need help with something?</p>
-    <p><%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) if scenario.doer %> got help with <%= scenario.verb.description %> <%= scenario.noun.description %></p>
+    <p><%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %> got help with getting their <%= scenario.verb.description %> <%= scenario.noun.description %>ed.</p>
 
     <div class="location">
       <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />

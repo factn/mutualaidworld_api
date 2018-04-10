@@ -9,7 +9,7 @@
 
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-    <h1>Can you <%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize if scenario.requester}#{scenario.requester.firstname.slice(1..-1)  if scenario.requester} #{scenario.noun.description}" %>?</h1>
+    <h1>Can you <%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize if scenario.requester}#{scenario.requester.firstname.slice(1..-1)  if scenario.requester}'s #{scenario.noun.description}" %>?</h1>
 
     <h2><%= scenario.event.description  if scenario.event %></h2>
 
