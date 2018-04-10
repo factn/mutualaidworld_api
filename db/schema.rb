@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
 
   create_table "proofs", force: :cascade do |t|
     t.bigint "scenario_id"
+    t.bigint "verifier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["scenario_id"], name: "index_proofs_on_scenario_id"
+    t.index ["verifier_id"], name: "index_proofs_on_verifier_id"
   end
 
   create_table "scenarios", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
   add_foreign_key "donations", "scenarios"
   add_foreign_key "donations", "users", column: "donator_id"
   add_foreign_key "proofs", "scenarios"
+  add_foreign_key "proofs", "users", column: "verifier_id"
   add_foreign_key "scenarios", "events"
   add_foreign_key "scenarios", "nouns"
   add_foreign_key "scenarios", "scenarios", column: "parent_scenario_id"
