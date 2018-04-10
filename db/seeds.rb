@@ -41,8 +41,20 @@ if Rails.env.development? || Rails.env.test?
                    { verb_id: 5, noun_id: 5, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1161.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'roof.jpg'))  },
                    { verb_id: 3, noun_id: 6, requester_id: 3, doer_id: 2, event_id: 2, funding_goal: '0',       parent_scenario_id: 9,   image: File.open(Rails.root.join('vendor', 'nails.jpg')) }])
 
-  Proof.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
-                { scenario_id: 6, verifier_id: 2, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])
+  Proof.create([{ scenario_id: 4, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
+                { scenario_id: 6, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])
+
+  AdType.create([{description: 'doer'},
+                 {description: 'requester'},
+                 {description: 'donator'},
+                 {description: 'verifier'}])
+
+  InteractionType.create([{description: 'served to'},
+                          {description: 'dismissed'}])
+
+  UserAdInteraction.create([{user_id: 1, interaction_type_id:1, ad_type_id: 1, scenario_id: 4 },
+                            {user_id: 2, interaction_type_id:2, ad_type_id: 2, scenario_id: 4 },
+                            {user_id: 3, interaction_type_id:1, ad_type_id: 3, scenario_id: 4 }])
 end
 
 

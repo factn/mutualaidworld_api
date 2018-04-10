@@ -126,7 +126,49 @@ curl --request GET \
   --header 'content-type: application/vnd.api+json'
 ```
 
+Create a requester ad "served to" interaction for user id 1, scenario id 1,
 
+```
+curl --request POST \
+  --url http://localhost:3000/user_ad_interactions \
+  --header 'accept: application/vnd.api+json' \
+  --header 'content-type: application/vnd.api+json' \
+  --data '
+  {
+    "data": {
+      "type": "user_ad_interactions",
+      "attributes": {},
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "1"
+          }
+        },
+        "scenario": {
+          "data": {
+            "id": "1",
+            "type": "scenarios"
+          }
+        },
+        "ad_type": {
+          "data": {
+            "id": "2",
+            "type": "ad_types"
+          }
+        },
+        "interaction_type": {
+          "data": {
+            "id": "1",
+            "type": "interaction_types"
+          }
+        }
+      }
+    }
+  }
+
+  '
+  ```
 
 ## Heroku deployment instructions
 

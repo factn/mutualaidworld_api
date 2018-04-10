@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :user_ad_interactions
+  resources :ad_types
+  resources :interaction_types
   resources :donations
   resources :events
   resources :proofs

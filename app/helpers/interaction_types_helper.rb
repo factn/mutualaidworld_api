@@ -1,0 +1,2 @@
+module InteractionTypesHelper
+end

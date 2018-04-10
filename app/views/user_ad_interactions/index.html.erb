@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Ad Interactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Interaction type</th>
+      <th>Ad type</th>
+      <th>Scenario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_ad_interactions.each do |user_ad_interaction| %>
+      <tr>
+        <td><%= user_ad_interaction.user %></td>
+        <td><%= user_ad_interaction.interaction_type %></td>
+        <td><%= user_ad_interaction.ad_type %></td>
+        <td><%= user_ad_interaction.scenario %></td>
+        <td><%= link_to 'Show', user_ad_interaction %></td>
+        <td><%= link_to 'Edit', edit_user_ad_interaction_path(user_ad_interaction) %></td>
+        <td><%= link_to 'Destroy', user_ad_interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Ad Interaction', new_user_ad_interaction_path %>
