@@ -1,0 +1,37 @@
+<%= form_with(model: user_ad_interaction, local: true) do |form| %>
+  <% if user_ad_interaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_ad_interaction.errors.count, "error") %> prohibited this user_ad_interaction from being saved:</h2>
+
+      <ul>
+      <% user_ad_interaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :user_ad_interaction_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :interaction_type_id %>
+    <%= form.text_field :interaction_type_id, id: :user_ad_interaction_interaction_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ad_type_id %>
+    <%= form.text_field :ad_type_id, id: :user_ad_interaction_ad_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scenario_id %>
+    <%= form.text_field :scenario_id, id: :user_ad_interaction_scenario_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

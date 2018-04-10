@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ad Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ad_types.each do |ad_type| %>
+      <tr>
+        <td><%= ad_type.description %></td>
+        <td><%= link_to 'Show', ad_type %></td>
+        <td><%= link_to 'Edit', edit_ad_type_path(ad_type) %></td>
+        <td><%= link_to 'Destroy', ad_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ad Type', new_ad_type_path %>

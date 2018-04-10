@@ -43,6 +43,18 @@ if Rails.env.development? || Rails.env.test?
 
   Proof.create([{ scenario_id: 4, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
                 { scenario_id: 6, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])
+
+  AdType.create([{description: 'doer'},
+                 {description: 'requester'},
+                 {description: 'donator'},
+                 {description: 'verifier'}])
+
+  InteractionType.create([{description: 'served to'},
+                          {description: 'dismissed'}])
+
+  UserAdInteraction.create([{user_id: 1, interaction_type_id:1, ad_type_id: 1, scenario_id: 4 },
+                            {user_id: 2, interaction_type_id:2, ad_type_id: 2, scenario_id: 4 },
+                            {user_id: 3, interaction_type_id:1, ad_type_id: 3, scenario_id: 4 }])
 end
 
 

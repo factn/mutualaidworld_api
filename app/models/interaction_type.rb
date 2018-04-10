@@ -1,0 +1,2 @@
+class InteractionType < ApplicationRecord
+end
