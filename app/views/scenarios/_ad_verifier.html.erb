@@ -8,16 +8,16 @@
 
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
-    <h1>Help us verify <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1)%></h1>
+    <h1>Help us verify <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %></h1>
 
     <h2><%= scenario.event.description  if scenario.event %></h2>
 
     <p>Are you able to verify that
-      <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) %>
+      <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) if scenario.doer %>
       <%= scenario.verb.description %>
       <%= scenario.noun.description %>
       for
-      <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) %>?
+      <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %>?
     </p>
 
     <div class="location">

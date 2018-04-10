@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_ad_interaction.user.name %>
+</p>
+
+<p>
+  <strong>Interaction type:</strong>
+  <%= @user_ad_interaction.interaction_type.description %>
+</p>
+
+<p>
+  <strong>Ad type:</strong>
+  <%= @user_ad_interaction.ad_type.description %>
+</p>
+
+<p>
+  <strong>Scenario:</strong>
+  <%= @user_ad_interaction.scenario.description %>
+</p>
+
+<%= link_to 'Edit', edit_user_ad_interaction_path(@user_ad_interaction) %> |
+<%= link_to 'Back', user_ad_interactions_path %>

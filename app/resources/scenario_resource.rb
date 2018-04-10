@@ -32,41 +32,36 @@ class ScenarioResource < JSONAPI::Resource
   end
 
   def requester_firstname
-    @model.requester.firstname
+    @model.requester.firstname if @model.requester
   end
 
   def doer_firstname
-    @model.doer.firstname
+    @model.doer.firstname if @model.doer
   end
 
   def requester_lastname
-    @model.requester.lastname
+    @model.requester.lastname if @model.requester
   end
 
   def doer_lastname
-    @model.doer.lastname
+    @model.doer.lastname if @model.doer
   end
 
-  def requesterlat
-    @model.requester.latitude
-  end
-
-  def requesterlon
-    @model.requester.longitude
-  end
-
-  def doerlat
-    @model.doer.latitude
-  end
-
-  def doerlon
-    @model.doer.longitude
-  end
-
-  def donated
-    # TODO: store donations somehow
-    "$57.34"
-  end
+  # def requesterlat
+    # @model.requester.latitude
+  # end
+#
+  # def requesterlon
+    # @model.requester.longitude
+  # end
+#
+  # def doerlat
+    # @model.doer.latitude
+  # end
+#
+  # def doerlon
+    # @model.doer.longitude
+  # end
 
   def custom_message
     nil

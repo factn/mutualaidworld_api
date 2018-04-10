@@ -2,10 +2,11 @@ class Scenario < ApplicationRecord
   belongs_to :verb
   belongs_to :noun
   belongs_to :event
-  belongs_to :requester, class_name: 'User', inverse_of: :requested
-  belongs_to :doer, class_name: 'User', inverse_of: :solved
+  belongs_to :requester, class_name: 'User', inverse_of: :requested, optional: true
+  belongs_to :doer, class_name: 'User', inverse_of: :done, optional: true
   belongs_to :parent_scenario, class_name: 'Scenario', inverse_of: :children_scenario, optional: true
 
+  #has_many :verifications, class_name: 'Proofs', dependent: :destroy, inverse_of: :scenario
   has_many :proofs, dependent: :destroy
   has_many :donations, dependent: :destroy
   has_many :children_scenario, class_name: 'Scenario', dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
@@ -21,8 +22,10 @@ class Scenario < ApplicationRecord
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
+  scope :examples_for_demo, -> { where("id in (1)") }
+
   def description
-    verb.description + ' ' + noun.description + ' for ' + requester.name + ' in ' + event.description
+    verb.description + ' ' + noun.description + (requester ? ' for ' + requester.name : '') + ' in ' + event.description
   end
 
   def parent_description
@@ -36,11 +39,19 @@ class Scenario < ApplicationRecord
   end
 
   def requesterlat
-    requester.latitude
+    requester.latitude if requester
   end
 
   def requesterlon
-    requester.longitude
+    requester.longitude if requester
+  end
+
+  def doerlat
+    doer.latitude if doer
+  end
+
+  def doerlon
+    doer.longitude if doer
   end
 
   def donated

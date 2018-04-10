@@ -5,8 +5,13 @@
 <table>
   <thead>
     <tr>
-      <th colspan="4">Scenario</th>
+      <th>Scenario</th>
+      <th>Verb</th>
+      <th>Noun</th>
+      <th>Scenario Requester</th>
+      <th>Verifier</th>
       <th>Image</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -17,7 +22,7 @@
         <td><%= proof.scenario.verb.description %></td>
         <td><%= proof.scenario.noun.description %></td>
         <td><%= proof.scenario.requester.name %></td>
-
+        <td><%= proof.verifier.name %></td>
         <td><%= image_tag proof.image.url(:thumb) %></td>
 
         <td><%= link_to 'Show', proof %></td>

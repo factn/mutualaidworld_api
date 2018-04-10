@@ -31,6 +31,7 @@
   display: block;
   margin: 0 auto 0.5em;
   padding: 0.5em;
+  max-width: 270px;
 }
 
 [id^="lion_ad_content"] h1,

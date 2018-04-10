@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404211817) do
+ActiveRecord::Schema.define(version: 20180410030322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ad_types", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "donations", force: :cascade do |t|
     t.decimal "amount", precision: 16, scale: 3
@@ -32,6 +38,12 @@ ActiveRecord::Schema.define(version: 20180404211817) do
     t.string "location_name"
   end
 
+  create_table "interaction_types", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "nouns", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -40,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
 
   create_table "proofs", force: :cascade do |t|
     t.bigint "scenario_id"
+    t.bigint "verifier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -47,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180404211817) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["scenario_id"], name: "index_proofs_on_scenario_id"
+    t.index ["verifier_id"], name: "index_proofs_on_verifier_id"
   end
 
   create_table "scenarios", force: :cascade do |t|
@@ -69,6 +83,19 @@ ActiveRecord::Schema.define(version: 20180404211817) do
     t.index ["parent_scenario_id"], name: "index_scenarios_on_parent_scenario_id"
     t.index ["requester_id"], name: "index_scenarios_on_requester_id"
     t.index ["verb_id"], name: "index_scenarios_on_verb_id"
+  end
+
+  create_table "user_ad_interactions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "interaction_type_id"
+    t.bigint "ad_type_id"
+    t.bigint "scenario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_type_id"], name: "index_user_ad_interactions_on_ad_type_id"
+    t.index ["interaction_type_id"], name: "index_user_ad_interactions_on_interaction_type_id"
+    t.index ["scenario_id"], name: "index_user_ad_interactions_on_scenario_id"
+    t.index ["user_id"], name: "index_user_ad_interactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,10 +129,15 @@ ActiveRecord::Schema.define(version: 20180404211817) do
   add_foreign_key "donations", "scenarios"
   add_foreign_key "donations", "users", column: "donator_id"
   add_foreign_key "proofs", "scenarios"
+  add_foreign_key "proofs", "users", column: "verifier_id"
   add_foreign_key "scenarios", "events"
   add_foreign_key "scenarios", "nouns"
   add_foreign_key "scenarios", "scenarios", column: "parent_scenario_id"
   add_foreign_key "scenarios", "users", column: "doer_id"
   add_foreign_key "scenarios", "users", column: "requester_id"
   add_foreign_key "scenarios", "verbs"
+  add_foreign_key "user_ad_interactions", "ad_types"
+  add_foreign_key "user_ad_interactions", "interaction_types"
+  add_foreign_key "user_ad_interactions", "scenarios"
+  add_foreign_key "user_ad_interactions", "users"
 end

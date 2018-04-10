@@ -24,12 +24,12 @@
 
 <div class="field">
   <%= form.label :requester_id %>
-  <%= select("scenario", "requester_id", User.all.collect {|u| [ u.name, u.id ] }, {}) %>
+  <%= select("scenario", "requester_id", User.all.collect {|u| [ u.name, u.id ] }, { include_blank: true }) %>
 </div>
 
 <div class="field">
   <%= form.label :doer_id %>
-  <%= select("scenario", "doer_id", User.all.collect {|u| [ u.name, u.id ] }, {}) %>
+  <%= select("scenario", "doer_id", User.all.collect {|u| [ u.name, u.id ] }, { include_blank: true }) %>
 </div>
 
 <div class="field">
