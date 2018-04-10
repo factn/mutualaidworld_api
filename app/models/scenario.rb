@@ -22,6 +22,8 @@ class Scenario < ApplicationRecord
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
+  scope :examples_for_demo, -> { where("id in (1,2,3)") }
+
   def description
     verb.description + ' ' + noun.description + (requester ? ' for ' + requester.name : '') + ' in ' + event.description
   end

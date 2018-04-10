@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :verifier_id %>
+    <%= select("proof", "verifier_id", User.all.collect {|u| [ u.name, u.id ] }, { }) %>
+  </div>
+
+  <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image %>
   </div>

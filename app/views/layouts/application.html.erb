@@ -22,13 +22,17 @@
       </li>
     <% end %>
 
-    <p><%= link_to 'Scenarios', scenarios_path %>
+    <p>
+      <%= link_to 'Scenarios', scenarios_path %>
       <%= link_to 'Proofs', proofs_path %>
       <%= link_to 'Verbs', verbs_path %>
       <%= link_to 'Nouns', nouns_path %>
       <%= link_to 'Ads', ad_path %>
       <%= link_to 'Events', events_path %>
       <%= link_to 'Donations', donations_path %>
+      <%= link_to 'Ad Types', ad_types_path %>
+      <%= link_to 'Interaction Types', interaction_types_path %>
+      <%= link_to 'User Ad Interactions', user_ad_interactions_path %>
 
     </p>
     <%= yield %>

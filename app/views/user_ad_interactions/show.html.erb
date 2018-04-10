@@ -2,22 +2,22 @@
 
 <p>
   <strong>User:</strong>
-  <%= @user_ad_interaction.user %>
+  <%= @user_ad_interaction.user.name %>
 </p>
 
 <p>
   <strong>Interaction type:</strong>
-  <%= @user_ad_interaction.interaction_type %>
+  <%= @user_ad_interaction.interaction_type.description %>
 </p>
 
 <p>
   <strong>Ad type:</strong>
-  <%= @user_ad_interaction.ad_type %>
+  <%= @user_ad_interaction.ad_type.description %>
 </p>
 
 <p>
   <strong>Scenario:</strong>
-  <%= @user_ad_interaction.scenario %>
+  <%= @user_ad_interaction.scenario.description %>
 </p>
 
 <%= link_to 'Edit', edit_user_ad_interaction_path(@user_ad_interaction) %> |

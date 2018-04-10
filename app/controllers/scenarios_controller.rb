@@ -20,7 +20,7 @@ class ScenariosController < ApplicationController
   def ad
     # authorize :admin_ad, :show?
 
-    @example_scenarios = Scenario.all
+    @example_scenarios = Scenario.examples_for_demo
     # binding.pry
     # <%= Verbs::Conjugator.conjugate scenario.verb.description.to_sym tense: :present, person: :second, plurality: :singular, aspect: :perfective %>
 
