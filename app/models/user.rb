@@ -10,6 +10,15 @@ class User < ApplicationRecord
   has_many :donated, class_name: 'Donation', dependent: :nullify, inverse_of: :donator, foreign_key: :donator_id
   has_many :verified, class_name: 'Proof', dependent: :nullify, inverse_of: :verifier, foreign_key: :verifier_id
 
+  has_attached_file :avatar, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+
+  # Validate the attached image is image/jpg, image/png, etc
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+
   def name
     firstname + ' ' + lastname
   end

@@ -59,4 +59,8 @@ class Scenario < ApplicationRecord
     donations.sum(:amount)
   end
 
+  def verified
+    return false if proofs.count.zero?
+    true
+  end
 end

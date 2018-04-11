@@ -1,5 +1,5 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal
+  attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal, :verified
   attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname
 
   has_one :verb

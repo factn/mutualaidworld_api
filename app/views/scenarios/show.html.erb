@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @scenario.image.url %>
+<%= image_tag @scenario.image.url(:medium) %>
 
 <p>
   <strong>Verb:</strong>
@@ -17,6 +17,8 @@
 
   <% if @scenario.requester then %>
     <%= @scenario.requester.name %>
+    <br>
+    <%= image_tag @scenario.requester.avatar(:thumb) %>
   <% else %>
     None
   <% end %>
@@ -26,6 +28,8 @@
   <strong>Doer:</strong>
   <% if @scenario.doer then %>
     <%= @scenario.doer.name %>
+    <br>
+    <%= image_tag @scenario.doer.avatar(:thumb)  %>
   <% else %>
     None
   <% end %></p>
@@ -38,6 +42,11 @@
 <p>
   <strong>Funding Goal:</strong>
   <%= @scenario.funding_goal %>
+</p>
+
+<p>
+  <strong>Verified:</strong>
+  <%= @scenario.verified %>
 </p>
 
 <p>
