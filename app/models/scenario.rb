@@ -10,6 +10,7 @@ class Scenario < ApplicationRecord
   has_many :proofs, dependent: :destroy
   has_many :donations, dependent: :destroy
   has_many :children_scenario, class_name: 'Scenario', dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
+  has_many :user_ad_interactions, dependent: :destroy
 
   # has_many :ads
 

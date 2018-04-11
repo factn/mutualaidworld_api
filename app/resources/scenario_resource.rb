@@ -12,6 +12,7 @@ class ScenarioResource < JSONAPI::Resource
   has_many :proofs
   has_many :donations
   has_many :children_scenario, class_name: 'Scenario'
+  has_many :user_ad_interaction
 
   filters :verb, :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
 
@@ -46,22 +47,6 @@ class ScenarioResource < JSONAPI::Resource
   def doer_lastname
     @model.doer.lastname if @model.doer
   end
-
-  # def requesterlat
-    # @model.requester.latitude
-  # end
-#
-  # def requesterlon
-    # @model.requester.longitude
-  # end
-#
-  # def doerlat
-    # @model.doer.latitude
-  # end
-#
-  # def doerlon
-    # @model.doer.longitude
-  # end
 
   def custom_message
     nil
