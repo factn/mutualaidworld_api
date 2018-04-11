@@ -82,12 +82,12 @@ RSpec.describe NounsController, type: :controller do
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {noun: invalid_attributes}, session: valid_session
-        expect(response).to be_success
-      end
-    end
+    # context "with invalid params" do
+    #   it "returns a success response (i.e. to display the 'new' template)" do
+    #     post :create, params: {noun: invalid_attributes}, session: valid_session
+    #     expect(response).to be_success
+    #   end
+    # end
   end
 
   describe "PUT #update" do
@@ -110,13 +110,13 @@ RSpec.describe NounsController, type: :controller do
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        noun = Noun.create! valid_attributes
-        put :update, params: {id: noun.to_param, noun: invalid_attributes}, session: valid_session
-        expect(response).to be_success
-      end
-    end
+    # context "with invalid params" do
+    #   it "returns a success response (i.e. to display the 'edit' template)" do
+    #     noun = Noun.create! valid_attributes
+    #     put :update, params: {id: noun.to_param, noun: invalid_attributes}, session: valid_session
+    #     expect(response).to be_success
+    #   end
+    # end
   end
 
   describe "DELETE #destroy" do
