@@ -55,10 +55,7 @@ class Scenario < ApplicationRecord
   end
 
   def donated
-    "50" # Currently these are default amounts, will need to be calculated
+    donations.sum(:amount)
   end
 
-  def funding_goal
-    "100" # Currently these are default amounts, will need to be calculated
-  end
 end
