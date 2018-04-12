@@ -7,58 +7,96 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env.development? || Rails.env.test?
-  Verb.create([{ description: 'get' },
-               { description: 'give' },
-               { description: 'find' },
-               { description: 'throw' },
-               { description: 'fix' },
-               { description: 'patch' }])
+  puts 'lookup data'
+  # lookup data
+  verbs = %w[get deliver find throw fix patch attach borrow]
+  nouns = ['water', 'food', 'gold', 'child', 'roof', 'nails', 'materials', 'corrugated iron', 'h4 2x4 rafters', 'waratah', 'tarpaulin', 'rope', 'truck', 'car', 'ute', 'airboat', 'labourer', 'volunteers', 'transportation']
+  events = ['Kaikora Earthquake', 'Hurricane Katrina']
+  adtypes = %w[doer requester donator verifier]
+  interactiontypes = ['served to', 'dismissed']
 
-  Noun.create([{ description: 'water' },
-               { description: 'food' },
-               { description: 'gold' },
-               { description: 'child' },
-               { description: 'roof' },
-               { description: 'nails'}])
+  verbs.each do |x|
+    Verb.create(description: x)
+  end
 
-  Event.create([{ description: 'Kaikora Earthquake' },
-                { description: 'Hurricane Katrina' }])
+  nouns.each do |x|
+    Noun.create(description: x)
+  end
 
-  User.create([{ email: 'admin@example.com', firstname: 'john',    lastname: 'johnson', latitude: -41.2855188, longitude: 174.7952354, password: 'password', password_confirmation: 'password', admin: true },
-               { email: 'test@example.com',  firstname: 'jack',    lastname: 'jackson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' },
-               { email: 'test2@example.com', firstname: 'jean',    lastname: 'jeanson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' },
-               { email: 'Audrey@example.com', firstname: 'Audrey', lastname: 'Audreyson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password' }])
+  events.each do |x|
+    Event.create(description: x)
+  end
 
-#    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
+  adtypes.each do |x|
+    AdType.create(description: x)
+  end
 
-  Scenario.create([{ verb_id: 6, noun_id: 5, requester_id: 4, doer_id: nil, event_id: 2, funding_goal: '1000.00', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'audrey.jpeg')) },
-                   { verb_id: 2, noun_id: 3, requester_id: 2, doer_id: 3, event_id: 1, funding_goal: '3334.43', parent_scenario_id: 1,   image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
-                   { verb_id: 3, noun_id: 2, requester_id: 3, doer_id: 1, event_id: 1, funding_goal: '1111.22', parent_scenario_id: 1,   image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
-                   { verb_id: 4, noun_id: 1, requester_id: 1, doer_id: 2, event_id: 1, funding_goal: '1111.22', parent_scenario_id: 1,   image: File.open(Rails.root.join('vendor', 'water.jpg')) },
-                   { verb_id: 1, noun_id: 1, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1111.22', parent_scenario_id: 1,   image: File.open(Rails.root.join('vendor', 'water.jpg')) },
-                   { verb_id: 2, noun_id: 2, requester_id: 3, doer_id: 1, event_id: 2, funding_goal: '1111.22', parent_scenario_id: 1,   image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
-                   { verb_id: 3, noun_id: 3, requester_id: 1, doer_id: 2, event_id: 2, funding_goal: '1111.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
-                   { verb_id: 4, noun_id: 4, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1111.22', parent_scenario_id: 7,   image: File.open(Rails.root.join('vendor', 'child.jpg')) },
-                   { verb_id: 5, noun_id: 5, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1161.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'roof.jpg'))  },
-                   { verb_id: 3, noun_id: 6, requester_id: 3, doer_id: 2, event_id: 2, funding_goal: '0',       parent_scenario_id: 9,   image: File.open(Rails.root.join('vendor', 'nails.jpg')) }])
+  interactiontypes.each do |x|
+    InteractionType.create(description: x)
+  end
 
- Proof.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
+  puts 'users'
+  User.create([{ email: 'admin@example.com',  firstname: 'john',   lastname: 'johnson',   latitude: -41.2855188, longitude: 174.7952354, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face1.jpg')), admin: true },
+               { email: 'test@example.com',   firstname: 'jack',   lastname: 'jackson',   latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face2.jpg')) },
+               { email: 'test2@example.com',  firstname: 'jean',   lastname: 'jeanson',   latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face3.jpg')) },
+               { email: 'Audrey@example.com', firstname: 'Audrey', lastname: 'Audreyson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face4.jpg')) },
+               { email: 'tracey@example.com', firstname: 'Tracey', lastname: 'Traceyson', latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face5.jpg')) },
+               { email: 'terry@example.com',  firstname: 'Terry',  lastname: 'Terryson',  latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face6.jpg')) },
+               { email: 'simon@example.com',  firstname: 'Simon',  lastname: 'Simonson',  latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face7.jpg')) },
+               { email: 'sally@example.com',  firstname: 'Sally',  lastname: 'Sallyson',  latitude: -41.2718598, longitude: 174.7818482, password: 'password', password_confirmation: 'password', avatar: File.open(Rails.root.join('vendor', 'avatars', 'face8.jpg')) }
+              ])
+
+  #    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
+  puts 'scenarios'
+
+  Scenario.create([{ verb_id: 6, noun_id: 5, requester_id: 4, doer_id: 2, event_id: 2, funding_goal: '1000.00', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'audrey.jpeg')) },
+                   { verb_id: 2, noun_id: 3, requester_id: 2, doer_id: 3, event_id: 1, funding_goal: '3334.43', parent_scenario_id: nil,   image: File.open(Rails.root.join('vendor', 'gold.jpg'))  },
+                   { verb_id: 3, noun_id: 2, requester_id: 3, doer_id: 1, event_id: 1, funding_goal: '1111.22', parent_scenario_id: nil,   image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
+                   { verb_id: 4, noun_id: 1, requester_id: 1, doer_id: 2, event_id: 1, funding_goal: '1111.22', parent_scenario_id: nil,   image: File.open(Rails.root.join('vendor', 'water.jpg')) },
+                   { verb_id: 1, noun_id: 1, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1111.22', parent_scenario_id: nil,   image: File.open(Rails.root.join('vendor', 'water.jpg')) },
+                   { verb_id: 2, noun_id: 2, requester_id: 3, doer_id: 1, event_id: 2, funding_goal: '1111.22', parent_scenario_id: nil,   image: File.open(Rails.root.join('vendor', 'food.jpg'))  },
+                   { verb_id: 3, noun_id: 3, requester_id: 1, doer_id: 2, event_id: 2, funding_goal: '1111.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'gold.jpg')) },
+                   { verb_id: 4, noun_id: 4, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1111.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'child.jpg')) },
+                   { verb_id: 5, noun_id: 5, requester_id: 2, doer_id: 3, event_id: 2, funding_goal: '1161.22', parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'roof.jpg')) },
+                   { verb_id: 3, noun_id: 6, requester_id: 3, doer_id: 2, event_id: 2, funding_goal: '0',       parent_scenario_id: nil, image: File.open(Rails.root.join('vendor', 'nails.jpg')) }])
+
+  Scenario.create(verb_id: Verb.find_by(description: 'get').id,
+                  noun_id: Noun.find_by(description: 'materials').id,
+                  requester_id: User.find_by(email: 'test@example.com').id,
+                  doer_id: nil,
+                  event_id: Event.find_by(description: 'Hurricane Katrina').id,
+                  funding_goal: nil,
+                  parent_scenario_id: 1,
+                  image: nil)
+
+  Scenario.create(verb_id: Verb.find_by(description: 'get').id,
+                  noun_id: Noun.find_by(description: 'transportation').id,
+                  requester_id: User.find_by(email: 'test@example.com').id,
+                  doer_id: nil,
+                  event_id: Event.find_by(description: 'Hurricane Katrina').id,
+                  funding_goal: nil,
+                  parent_scenario_id: 1,
+                  image: nil)
+
+  Scenario.create(verb_id: Verb.find_by(description: 'get').id,
+                  noun_id: Noun.find_by(description: 'volunteers').id,
+                  requester_id: User.find_by(email: 'test@example.com').id,
+                  doer_id: nil,
+                  event_id: Event.find_by(description: 'Hurricane Katrina').id,
+                  funding_goal: nil,
+                  parent_scenario_id: 1,
+                  image: nil)
+
+  puts 'proofs'
+
+  Proof.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join('vendor', 'wetperson.jpg')) },
                 { scenario_id: 6, verifier_id: 2, image: File.open(Rails.root.join('vendor', 'personeating.jpg')) }])
 
-  AdType.create([{description: 'doer'},
-                 {description: 'requester'},
-                 {description: 'donator'},
-                 {description: 'verifier'}])
+  puts 'ad user interactions'
+  UserAdInteraction.create([{ user_id: 1, interaction_type_id: 1, ad_type_id: 1, scenario_id: 4 },
+                            { user_id: 2, interaction_type_id: 2, ad_type_id: 2, scenario_id: 4 },
+                            { user_id: 3, interaction_type_id: 1, ad_type_id: 3, scenario_id: 4 }])
 
-  InteractionType.create([{description: 'served to'},
-                          {description: 'dismissed'}])
-
-  UserAdInteraction.create([{user_id: 1, interaction_type_id:1, ad_type_id: 1, scenario_id: 4 },
-                            {user_id: 2, interaction_type_id:2, ad_type_id: 2, scenario_id: 4 },
-                            {user_id: 3, interaction_type_id:1, ad_type_id: 3, scenario_id: 4 }])
 end
-
-
-
 
 # user.avatar = File.open(Dir['app/assets/images/*.jpg'].sample)

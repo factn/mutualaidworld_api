@@ -1,5 +1,5 @@
 class UserResource < JSONAPI::Resource
-  attributes :latitude, :longitude, :email, :firstname, :lastname, :password, :password_confirmation
+  attributes :avatar, :avatarthumb, :latitude, :longitude, :email, :firstname, :lastname, :password, :password_confirmation
 
   filters :latitude, :longitude, :email, :firstname, :lastname
 
@@ -12,4 +12,7 @@ class UserResource < JSONAPI::Resource
   has_many :donated, class_name: 'Donation'
   has_many :verified, class_name: 'Proof'
 
+  def avatarthumb
+    @model.avatar.url(:thumb)
+  end
 end
