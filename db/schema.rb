@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411210513) do
+ActiveRecord::Schema.define(version: 20180412000710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20180411210513) do
     t.decimal "funding_goal", precision: 16, scale: 3
     t.bigint "event_id"
     t.bigint "parent_scenario_id"
+    t.string "custom_message"
     t.index ["doer_id"], name: "index_scenarios_on_doer_id"
     t.index ["event_id"], name: "index_scenarios_on_event_id"
     t.index ["noun_id"], name: "index_scenarios_on_noun_id"
