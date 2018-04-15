@@ -170,6 +170,25 @@ curl --request POST \
   '
   ```
 
+  Add a parent_scenario to a scenarios
+
+  ```
+  {
+  "data": {
+    "type": "scenarios",
+		"id": 1,
+    "relationships": {
+			"parent_scenario": {
+        "data": {
+          "id": "2",
+          "type": "scenarios"
+        }
+      }
+    }
+  }
+}
+```
+
 ## Heroku deployment instructions
 
 Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line

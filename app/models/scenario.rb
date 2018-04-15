@@ -35,10 +35,6 @@ class Scenario < ApplicationRecord
     parent_scenario.description
   end
 
-  def custom_message
-    nil
-  end
-
   def requesterlat
     requester.latitude if requester
   end
@@ -60,7 +56,6 @@ class Scenario < ApplicationRecord
   end
 
   def verified
-    return false if proofs.count.zero?
-    true
+    proofs.count.positive?
   end
 end

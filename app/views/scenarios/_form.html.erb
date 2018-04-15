@@ -43,6 +43,11 @@
 </div>
 
 <div class="field">
+  <%= form.label :custom_message %>
+  <%= form.text_field :custom_message, id: :scenario_custom_message %>
+</div>
+
+<div class="field">
   <%= form.label :parent_scenario_id %>
   <%= select("scenario", "parent_scenario_id", Scenario.all.collect {|s| [ s.description, s.id ] }, { include_blank: true }) %>
 </div>

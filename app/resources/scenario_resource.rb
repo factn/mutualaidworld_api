@@ -1,6 +1,6 @@
 class ScenarioResource < JSONAPI::Resource
   attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal, :verified
-  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname
+  attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname, :custom_message
 
   has_one :verb
   has_one :noun
@@ -14,7 +14,7 @@ class ScenarioResource < JSONAPI::Resource
   has_many :children_scenario, class_name: 'Scenario'
   has_many :user_ad_interaction
 
-  filters :verb, :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
+  filters :verb, :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id, :custom_message, :verified
 
   def noun
     @model.noun.description
@@ -48,7 +48,4 @@ class ScenarioResource < JSONAPI::Resource
     @model.doer.lastname if @model.doer
   end
 
-  def custom_message
-    nil
-  end
 end
