@@ -1584,6 +1584,573 @@ Combining Limiting/Offsetting:
 ```
 
 
+## Walkthrough of a process to add children to a parent
+
+Say we have 3 existing scenarios, 1, 2, and 3. We want 2 to be the parent and 1 and 3 to be children. At the moment, none of them have children or parents.
+
+Here are the steps I took to assign scenario 1 a parent. The parent is scenario 2. This makes scenario 1 a child of scenario 2.
+
+PATCH to `https://lion-uat.herokuapp.com/scenarios/1` with
+
+```
+{
+  "data": {
+    "type": "scenarios",
+		"id": 1,
+    "relationships": {
+			"parent_scenario": {
+        "data": {
+          "id": "2",
+          "type": "scenarios"
+        }
+      }
+
+    }
+  }
+}
+```
+
+we get a 200 response, with this partial json including
+
+```
+{
+	"data": {
+		"id": "1",
+		"type": "scenarios",
+		...
+		"attributes": {
+			...
+      ...
+			"parent_scenario_id": 2,
+			"ratio_for_user": 2,
+			"is_parent": false,
+			"is_child": true,
+			"is_complete": false
+		},
+		"relationships": {
+    ...
+    ...
+```
+
+Now, we GET the parent scenario 2 - including the children with `https://lion-uat.herokuapp.com/scenarios/2?include=children_scenario`
+
+which gives us a scenario stanza with the boolean "is_parent": true, and an included child scenario under "relationships", and also it adds an "included" element as a sibling of "data"  :
+
+```
+{
+	"data": {
+		"id": "2",
+		"type": "scenarios",child
+    ...
+		"attributes": {
+      ...
+    	"parent_scenario_id": null,
+			"ratio_for_user": 2,
+			"is_parent": true,
+			"is_child": false,
+			"is_complete": false
+		},
+		"relationships": {
+			...
+      ...
+			"children_scenario": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/children-scenario",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/children-scenario"
+				},
+				"data": [
+					{
+						"type": "scenarios",
+						"id": "1"
+					}
+				]
+			},
+			...
+      ...
+		}
+	},
+	"included": [
+		{
+			"id": "1",
+			"type": "scenarios",
+			"links": {
+				"self": "https://lion-uat.herokuapp.com/scenarios/1"
+			},
+			"attributes": {
+				"image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/001/original/audrey.jpeg?1523932085",
+				"noun": "roof",
+				"event": "Hurricane Katrina",
+				"imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/001/thumb/audrey.jpeg?1523932085",
+				"requesterlat": -41.2718598,
+				"requesterlon": 174.7818482,
+				"doerlat": -41.2718598,
+				"doerlon": 174.7818482,
+				"donated": "0.0",
+				"funding_goal": "1000.0",
+				"verified": false,
+				"requester_firstname": "Audrey",
+				"requester_lastname": "Audreyson",
+				"doer_firstname": "jack",
+				"doer_lastname": "jackson",
+				"custom_message": "Help me fix my roof!",
+				"parent_scenario_id": 2,
+				"ratio_for_user": 2,
+				"is_parent": false,
+				"is_child": true,
+				"is_complete": false
+			},
+			"relationships": {
+				"verb": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/verb",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/verb"
+					}
+				},
+				"noun": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/noun",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/noun"
+					}
+				},
+				"requester": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/requester",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/requester"
+					}
+				},
+				"doer": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/doer",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/doer"
+					}
+				},
+				"event": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/event",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/event"
+					}
+				},
+				"parent_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/parent-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/parent-scenario"
+					}
+				},
+				"proofs": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/proofs",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/proofs"
+					}
+				},
+				"donations": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/donations",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/donations"
+					}
+				},
+				"children_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/children-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/children-scenario"
+					}
+				},
+				"user_ad_interaction": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/user-ad-interaction",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/user-ad-interaction"
+					}
+				}
+			}
+		}
+	]
+}
+```
+
+Lets make scenario 2 the parent of the other scenario - scenario 3:
+
+PATCH `https://lion-uat.herokuapp.com/scenarios/3` with
+
+```
+{
+  "data": {
+    "type": "scenarios",
+		"id": 3,
+    "relationships": {
+			"parent_scenario": {
+        "data": {
+          "id": "2",
+          "type": "scenarios"
+        }
+      }
+    }
+  }
+}
+```
+
+We get back a 200 and a similar body to the first one.
+
+Again, GET the parent scenario 2 - including the children with `https://lion-uat.herokuapp.com/scenarios/2?include=children_scenario`
+
+we get a response that includes both children:
+
+```
+{
+	"data": {
+		"id": "2",
+		"type": "scenarios",
+    ...
+		"attributes": {
+			"image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/002/original/gold.jpg?1523932087",
+			...
+			"parent_scenario_id": null,
+			"ratio_for_user": 2,
+			"is_parent": true,
+			"is_child": false,
+			"is_complete": false
+		},
+		"relationships": {
+			...
+      ...
+			"children_scenario": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/children-scenario",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/children-scenario"
+				},
+				"data": [
+					{
+						"type": "scenarios",
+						"id": "1"
+					},
+					{
+						"type": "scenarios",
+						"id": "3"
+					}
+				]
+			},
+      ...
+		}
+	},
+	"included": [
+		{
+			"id": "1",
+			"type": "scenarios",
+			"links": {
+				"self": "https://lion-uat.herokuapp.com/scenarios/1"
+			},
+      ...
+      ...
+		},
+		{
+			"id": "3",
+			"type": "scenarios",
+			"links": {
+				"self": "https://lion-uat.herokuapp.com/scenarios/3"
+			},
+		  ...
+      ...
+		}
+	]
+}
+```
+
+
+The full response is:
+
+```
+{
+	"data": {
+		"id": "2",
+		"type": "scenarios",
+		"links": {
+			"self": "https://lion-uat.herokuapp.com/scenarios/2"
+		},
+		"attributes": {
+			"image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/002/original/gold.jpg?1523932087",
+			"noun": "gold",
+			"event": "Kaikora Earthquake",
+			"imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/002/thumb/gold.jpg?1523932087",
+			"requesterlat": -41.2718598,
+			"requesterlon": 174.7818482,
+			"doerlat": -41.2718598,
+			"doerlon": 174.7818482,
+			"donated": "0.0",
+			"funding_goal": "3334.43",
+			"verified": false,
+			"requester_firstname": "jack",
+			"requester_lastname": "jackson",
+			"doer_firstname": "jean",
+			"doer_lastname": "jeanson",
+			"custom_message": null,
+			"parent_scenario_id": null,
+			"ratio_for_user": 2,
+			"is_parent": true,
+			"is_child": false,
+			"is_complete": false
+		},
+		"relationships": {
+			"verb": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/verb",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/verb"
+				}
+			},
+			"noun": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/noun",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/noun"
+				}
+			},
+			"requester": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/requester",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/requester"
+				}
+			},
+			"doer": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/doer",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/doer"
+				}
+			},
+			"event": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/event",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/event"
+				}
+			},
+			"parent_scenario": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/parent-scenario",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/parent-scenario"
+				}
+			},
+			"proofs": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/proofs",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/proofs"
+				}
+			},
+			"donations": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/donations",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/donations"
+				}
+			},
+			"children_scenario": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/children-scenario",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/children-scenario"
+				},
+				"data": [
+					{
+						"type": "scenarios",
+						"id": "1"
+					},
+					{
+						"type": "scenarios",
+						"id": "3"
+					}
+				]
+			},
+			"user_ad_interaction": {
+				"links": {
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/user-ad-interaction",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/user-ad-interaction"
+				}
+			}
+		}
+	},
+	"included": [
+		{
+			"id": "1",
+			"type": "scenarios",
+			"links": {
+				"self": "https://lion-uat.herokuapp.com/scenarios/1"
+			},
+			"attributes": {
+				"image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/001/original/audrey.jpeg?1523932085",
+				"noun": "roof",
+				"event": "Hurricane Katrina",
+				"imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/001/thumb/audrey.jpeg?1523932085",
+				"requesterlat": -41.2718598,
+				"requesterlon": 174.7818482,
+				"doerlat": -41.2718598,
+				"doerlon": 174.7818482,
+				"donated": "0.0",
+				"funding_goal": "1000.0",
+				"verified": false,
+				"requester_firstname": "Audrey",
+				"requester_lastname": "Audreyson",
+				"doer_firstname": "jack",
+				"doer_lastname": "jackson",
+				"custom_message": "Help me fix my roof!",
+				"parent_scenario_id": 2,
+				"ratio_for_user": 2,
+				"is_parent": false,
+				"is_child": true,
+				"is_complete": false
+			},
+			"relationships": {
+				"verb": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/verb",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/verb"
+					}
+				},
+				"noun": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/noun",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/noun"
+					}
+				},
+				"requester": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/requester",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/requester"
+					}
+				},
+				"doer": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/doer",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/doer"
+					}
+				},
+				"event": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/event",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/event"
+					}
+				},
+				"parent_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/parent-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/parent-scenario"
+					}
+				},
+				"proofs": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/proofs",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/proofs"
+					}
+				},
+				"donations": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/donations",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/donations"
+					}
+				},
+				"children_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/children-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/children-scenario"
+					}
+				},
+				"user_ad_interaction": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/user-ad-interaction",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/user-ad-interaction"
+					}
+				}
+			}
+		},
+		{
+			"id": "3",
+			"type": "scenarios",
+			"links": {
+				"self": "https://lion-uat.herokuapp.com/scenarios/3"
+			},
+			"attributes": {
+				"image": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/003/original/food.jpg?1523932090",
+				"noun": "food",
+				"event": "Kaikora Earthquake",
+				"imagethumb": "//s3-ap-southeast-2.amazonaws.com/lion-uat/scenarios/images/000/000/003/thumb/food.jpg?1523932090",
+				"requesterlat": -41.2718598,
+				"requesterlon": 174.7818482,
+				"doerlat": -41.2855188,
+				"doerlon": 174.7952354,
+				"donated": "0.0",
+				"funding_goal": "1111.22",
+				"verified": false,
+				"requester_firstname": "jean",
+				"requester_lastname": "jeanson",
+				"doer_firstname": "john",
+				"doer_lastname": "johnson",
+				"custom_message": null,
+				"parent_scenario_id": 2,
+				"ratio_for_user": 2,
+				"is_parent": false,
+				"is_child": true,
+				"is_complete": false
+			},
+			"relationships": {
+				"verb": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/verb",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/verb"
+					}
+				},
+				"noun": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/noun",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/noun"
+					}
+				},
+				"requester": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/requester",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/requester"
+					}
+				},
+				"doer": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/doer",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/doer"
+					}
+				},
+				"event": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/event",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/event"
+					}
+				},
+				"parent_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/parent-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/parent-scenario"
+					}
+				},
+				"proofs": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/proofs",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/proofs"
+					}
+				},
+				"donations": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/donations",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/donations"
+					}
+				},
+				"children_scenario": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/children-scenario",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/children-scenario"
+					}
+				},
+				"user_ad_interaction": {
+					"links": {
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/user-ad-interaction",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/user-ad-interaction"
+					}
+				}
+			}
+		}
+	]
+}
+```
+
+
+
 ## Heroku deployment instructions
 
 Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
