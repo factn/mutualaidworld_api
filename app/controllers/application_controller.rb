@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:longitude, :latitude, :firstname, :lastname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[longitude latitude firstname lastname])
+  end
+
+  def current_user
+    id = params[:id] ? params[:id] : 1
+    User.find(id)
   end
 end
