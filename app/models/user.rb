@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :donated, class_name: 'Donation', dependent: :nullify, inverse_of: :donator, foreign_key: :donator_id
   has_many :verified, class_name: 'Proof', dependent: :nullify, inverse_of: :verifier, foreign_key: :verifier_id
 
+  has_many :user_ad_interactions, dependent: :nullify
+
+
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
     square: '200x200#',
