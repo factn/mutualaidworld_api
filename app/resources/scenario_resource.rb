@@ -1,5 +1,5 @@
 class ScenarioResource < JSONAPI::Resource
-  attributes :image, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal, :verified
+  attributes :image, :verb, :noun, :event, :imagethumb, :requesterlat, :requesterlon, :doerlat, :doerlon, :donated, :funding_goal, :verified
   attributes :requester_firstname, :requester_lastname, :doer_firstname, :doer_lastname, :custom_message, :parent_scenario_id
   attributes :ratio_for_user, :is_parent, :is_child, :is_complete
 
@@ -15,7 +15,8 @@ class ScenarioResource < JSONAPI::Resource
   has_many :children_scenario, class_name: 'Scenario'
   has_many :user_ad_interaction
 
-  filters :noun, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id, :custom_message, :verified
+  filters :noun, :verb, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
+  filters :custom_message, :verified
 
   filter :is_sub_task, apply: ->(records, value, _options) {
     clause = "parent_scenario_id is null"
@@ -25,11 +26,23 @@ class ScenarioResource < JSONAPI::Resource
     records.where(clause)
   }
 
+  filter :is_parent, apply: ->(records, _value, _options) {
+    clause = "parent_scenario_id is null"
+
+    records.where(clause)
+  }
+
+  filter :is_child, apply: ->(records, _value, _options) {
+    clause = "parent_scenario_id is not null"
+
+    records.where(clause)
+  }
+
   def noun
     @model.noun.description
   end
 
-  def ver
+  def verb
     @model.verb.description
   end
 
