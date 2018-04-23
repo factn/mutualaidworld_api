@@ -1,5 +1,5 @@
 class ProofResource < JSONAPI::Resource
-  attributes :image, :imagethumb, :scenario
+  attributes :image, :imagethumb, :scenario, :created_at, :updated_at
 
   has_one :scenario
   has_one :verifier

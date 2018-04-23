@@ -1,5 +1,5 @@
 class UserAdInteractionResource < JSONAPI::Resource
-  attributes :firstname, :lastname, :scenario, :ad_type, :interaction_type
+  attributes :firstname, :lastname, :scenario, :ad_type, :interaction_type, :created_at, :updated_at
 
   has_one :user
   has_one :scenario

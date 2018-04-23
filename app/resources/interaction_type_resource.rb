@@ -1,5 +1,5 @@
 class InteractionTypeResource < JSONAPI::Resource
-  attributes :description
+  attributes :description, :created_at, :updated_at
 
   has_many :user_ad_interactions
 

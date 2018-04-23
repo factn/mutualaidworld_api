@@ -1,5 +1,5 @@
 class UserResource < JSONAPI::Resource
-  attributes :avatar, :avatarthumb, :latitude, :longitude, :email, :firstname, :lastname, :password, :password_confirmation
+  attributes :avatar, :avatarthumb, :latitude, :longitude, :email, :firstname, :lastname, :password, :password_confirmation, :created_at, :updated_at
 
   filters :latitude, :longitude, :email, :firstname, :lastname
 

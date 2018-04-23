@@ -1,5 +1,5 @@
 class DonationResource < JSONAPI::Resource
-  attributes :donator_firstname, :donator_lastname, :amount, :scenario
+  attributes :donator_firstname, :donator_lastname, :amount, :scenario, :created_at, :updated_at
 
   has_one :donator
   has_one :scenario
