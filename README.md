@@ -38,7 +38,15 @@ heroku rake db:migrate db:seed
 
 ## Examples of use
 
-Create a donation
+To use these endpoints, you must set certain headers correctly - "Accept" must be set to "application/vnd.api+json" for GET, if you are POST, PATCH, or PUTting you need to also set "Content-Type" to "application/vnd.api+json"
+One way to interact with the API is on the command line with curl:
+
+To get the data for scenario with id 2:
+`curl -s -H "Accept: application/vnd.api+json"  "https://lion-uat.herokuapp.com/scenarios/2/"`
+
+you can also use postman, or insomnia, if you prefer a GUI. The API conforms to the [jsonapi specifications](http://jsonapi.org/format/), but I've added some fields - such as `requester_username` in the `scenario` resrouce - for convieniance that don't actually exist in that specific resource. I did this before I fully understood the API, and how the API consumer could properly ask for that information, but I guess thats fine for now.
+
+Create a donation:
 
 ```
 curl --request POST \
@@ -1577,29 +1585,22 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 }
 ```
 
-Pagination:
+## Pagination:
 
-```
 Offset Pagination
 
-Limiting Returned Resources:
-
-    /users?page[limit]={resource_count}
-    {resource_count} = number of resources you want returned
-    e.g. /users?page[limit]=5 will return the first 5 user resources
+Limiting Returned Resources `/users?page[limit]={resource_count}` where {resource_count} = number of resources you want returned
+e.g. `/users?page[limit]=5` will return the first 5 user resources
 
 Offsetting Returned Resources:
 
-    /users?page[offset]={resource_offset}
-    {resource_offset} = the number of records to offset by prior to returning resources
-    e.g. /users?page[offset]=10 will skip the first 10 user resources in the collection
+`/users?page[offset]={resource_offset}` where {resource_offset} = the number of records to offset by prior to returning resources
+e.g. `/users?page[offset]=10` will skip the first 10 user resources in the collection
 
 Combining Limiting/Offsetting:
 
-    /users?page[limit]={resource_count}&page[offset]={resource_offset}
-    e.g. /users?page[limit]=5&page[offset]=10 will skip user resources 0-10 and return resources 11-15
-```
-
+The limit and offset can be combined `/users?page[limit]={resource_count}&page[offset]={resource_offset}`
+e.g. `/users?page[limit]=5&page[offset]=10` will skip user resources 0-10 and return resources 11-15
 
 ## Walkthrough of a process to add children to a parent
 
@@ -2166,23 +2167,187 @@ The full response is:
 }
 ```
 
+## A list of endpoints:
 
+Below are all the endpoints available. They all conform to the [jsonapi specifications](http://jsonapi.org/format/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The types of ad's that can exist - requester, doer, donater and verifier at the moment
+```
+GET       /ad_types
+POST      /ad_types
+GET       /ad_types/:id
+PUT|PATCH /ad_types/:id
+DELETE    /ad_types/:id
+```
 
-Things you may want to cover:
+Ways an ad can be interacted with that isn't "doing" it - "dismissed" and "served to" at the moment.
+```
+GET       /interaction_types
+POST      /interaction_types
+GET       /interaction_types/:id
+PUT|PATCH /interaction_types/:id
+DELETE    /interaction_types/:id
+```
 
-* Ruby version
+A list of ad interactions that a user performed - User X Dismissed the Doer ad for Scenario X:
+```
+GET       /user_ad_interactions
+POST      /user_ad_interactions
+GET       /user_ad_interactions/:id
+PUT|PATCH /user_ad_interactions/:id
+DELETE    /user_ad_interactions/:id
+```
 
-* System dependencies
+Any donations made by a user to a scenario:
+```
+GET       /donations
+POST      /donations
+GET       /donations/:id
+PUT|PATCH /donations/:id
+DELETE    /donations/:id
+```
 
-* Configuration
+The events a scenario can be a part of - like "Kaikora Earthquake" or "Hurricane Katrina":
+```
+GET       /events
+POST      /events
+GET       /events/:id
+PUT|PATCH /events/:id
+DELETE    /events/:id
+```
 
-* Database creation
+Any photos of the scenario being completed - a picture of a fixed roof, a picture of some bottles of delivered water, this is what a verifier produces:
+```
+GET       /proofs
+POST      /proofs
+GET       /proofs/:id
+PUT|PATCH /proofs/:id
+DELETE    /proofs/:id
+```
 
-* Database initialization
+These get and change related data - /proofs/:proof_id/scenario gets the scenario this proof is for
+```
+GET       /proofs/:proof_id/relationships/scenario
+PUT|PATCH /proofs/:proof_id/relationships/scenario
+DELETE    /proofs/:proof_id/relationships/scenario
+GET       /proofs/:proof_id/scenario
+GET       /proofs/:proof_id/relationships/verifier
+PUT|PATCH /proofs/:proof_id/relationships/verifier
+DELETE    /proofs/:proof_id/relationships/verifier
+GET       /proofs/:proof_id/verifier
+```
 
-* How to run the test suite
+The scenarios requesters create, verb noun for requester. Subtasks are stored as other scenarios and can be gotten with `GET {{ base_url }}/scenarios/:scenario_id/children-scenario`
+```
+GET       /scenarios
+POST      /scenarios
+GET       /scenarios/:id
+PUT|PATCH /scenarios/:id
+DELETE    /scenarios/:id
+GET       /scenarios/:scenario_id/relationships/verb
+PUT|PATCH /scenarios/:scenario_id/relationships/verb
+DELETE    /scenarios/:scenario_id/relationships/verb
+GET       /scenarios/:scenario_id/verb
+GET       /scenarios/:scenario_id/relationships/noun
+PUT|PATCH /scenarios/:scenario_id/relationships/noun
+DELETE    /scenarios/:scenario_id/relationships/noun
+GET       /scenarios/:scenario_id/noun
+GET       /scenarios/:scenario_id/relationships/requester
+PUT|PATCH /scenarios/:scenario_id/relationships/requester
+DELETE    /scenarios/:scenario_id/relationships/requester
+GET       /scenarios/:scenario_id/requester
+GET       /scenarios/:scenario_id/relationships/doer
+PUT|PATCH /scenarios/:scenario_id/relationships/doer
+DELETE    /scenarios/:scenario_id/relationships/doer
+GET       /scenarios/:scenario_id/doer
+GET       /scenarios/:scenario_id/relationships/event
+PUT|PATCH /scenarios/:scenario_id/relationships/event
+DELETE    /scenarios/:scenario_id/relationships/event
+GET       /scenarios/:scenario_id/event
+GET       /scenarios/:scenario_id/relationships/parent-scenario
+PUT|PATCH /scenarios/:scenario_id/relationships/parent-scenario
+DELETE    /scenarios/:scenario_id/relationships/parent-scenario
+GET       /scenarios/:scenario_id/parent-scenario
+GET       /scenarios/:scenario_id/relationships/proofs
+POST      /scenarios/:scenario_id/relationships/proofs
+PUT|PATCH /scenarios/:scenario_id/relationships/proofs
+DELETE    /scenarios/:scenario_id/relationships/proofs
+GET       /scenarios/:scenario_id/proofs
+GET       /scenarios/:scenario_id/relationships/donations
+POST      /scenarios/:scenario_id/relationships/donations
+PUT|PATCH /scenarios/:scenario_id/relationships/donations
+DELETE    /scenarios/:scenario_id/relationships/donations
+GET       /scenarios/:scenario_id/donations
+GET       /scenarios/:scenario_id/relationships/children-scenario
+POST      /scenarios/:scenario_id/relationships/children-scenario
+PUT|PATCH /scenarios/:scenario_id/relationships/children-scenario
+DELETE    /scenarios/:scenario_id/relationships/children-scenario
+GET       /scenarios/:scenario_id/children-scenario
+GET       /scenarios/:scenario_id/relationships/user-ad-interaction
+POST      /scenarios/:scenario_id/relationships/user-ad-interaction
+PUT|PATCH /scenarios/:scenario_id/relationships/user-ad-interaction
+DELETE    /scenarios/:scenario_id/relationships/user-ad-interaction
+GET       /scenarios/:scenario_id/user-ad-interaction
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+A user:
+```
+GET       /users
+POST      /users
+GET       /users/:id
+PUT|PATCH /users/:id
+DELETE    /users/:id
+GET       /users/:user_id/relationships/scenarios
+POST      /users/:user_id/relationships/scenarios
+PUT|PATCH /users/:user_id/relationships/scenarios
+DELETE    /users/:user_id/relationships/scenarios
+GET       /users/:user_id/scenarios
+GET       /users/:user_id/relationships/requested
+POST      /users/:user_id/relationships/requested
+PUT|PATCH /users/:user_id/relationships/requested
+DELETE    /users/:user_id/relationships/requested
+GET       /users/:user_id/requested
+GET       /users/:user_id/relationships/done
+POST      /users/:user_id/relationships/done
+PUT|PATCH /users/:user_id/relationships/done
+DELETE    /users/:user_id/relationships/done
+GET       /users/:user_id/done
+GET       /users/:user_id/relationships/donated
+POST      /users/:user_id/relationships/donated
+PUT|PATCH /users/:user_id/relationships/donated
+DELETE    /users/:user_id/relationships/donated
+GET       /users/:user_id/donated
+GET       /users/:user_id/relationships/verified
+POST      /users/:user_id/relationships/verified
+PUT|PATCH /users/:user_id/relationships/verified
+DELETE    /users/:user_id/relationships/verified
+GET       /users/:user_id/verified
+```
+
+Nouns:
+```
+GET       /nouns
+POST      /nouns
+GET       /nouns/:id
+PUT|PATCH /nouns/:id
+DELETE    /nouns/:id
+GET       /nouns/:noun_id/relationships/scenarios
+POST      /nouns/:noun_id/relationships/scenarios
+PUT|PATCH /nouns/:noun_id/relationships/scenarios
+DELETE    /nouns/:noun_id/relationships/scenarios
+GET       /nouns/:noun_id/scenarios
+```
+
+Verbs:
+```
+GET       /verbs
+POST      /verbs
+GET       /verbs/:id
+PUT|PATCH /verbs/:id
+DELETE    /verbs/:id
+GET       /verbs/:verb_id/relationships/scenarios
+POST      /verbs/:verb_id/relationships/scenarios
+PUT|PATCH /verbs/:verb_id/relationships/scenarios
+DELETE    /verbs/:verb_id/relationships/scenarios
+GET       /verbs/:verb_id/scenarios
+```
