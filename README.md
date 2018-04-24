@@ -142,6 +142,7 @@ curl --request PATCH \
 }'
 ```
 
+
 Get a scenario with all its child scenarios
 
 ```
@@ -151,7 +152,8 @@ curl --request GET \
   --header 'content-type: application/vnd.api+json'
 ```
 
-Create a requester ad "served to" interaction for user id 1, scenario id 1,
+
+Create a requester ad "served to" interaction for user id 1, scenario id 1:
 
 ```
 curl --request POST \
@@ -190,14 +192,12 @@ curl --request POST \
         }
       }
     }
-  }
+  }'
+```
 
-  '
-  ```
+Add a parent_scenario to a scenario:
 
-  Add a parent_scenario to a scenarios
-
-  ```
+```
   {
   "data": {
     "type": "scenarios",
