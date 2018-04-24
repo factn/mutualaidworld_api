@@ -115,7 +115,7 @@ curl --request POST \
 }'
 ```
 
-update a scenario with a doerlat
+update a scenario, assigning it to a user to perform (a "doer")
 
 ```
 curl --request PATCH \
@@ -190,10 +190,8 @@ curl --request POST \
         }
       }
     }
-  }
-
-  '
-  ```
+  }'
+```
 
   Add a parent_scenario to a scenarios
 
