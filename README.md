@@ -1,25 +1,42 @@
-# README
+# LION project
 
-## Development first-time deployment instructions
+## Development deployment instructions
 
-Pull this repos
-Install the gems:
+1. Ensure ImageMagick is installed locally, this is used for image manipulation.
+1. Pull this repos
+1. Install the gems - `bundle install`
+1. Create, and seed, the database - `rake db:drop db:create db:migrate db:seed`
+1. Run `rails s`
+1. Connect to [http://localhost:3000]
 
-`bundle install`
+## Seed data
 
-Create, and seed, the database:
+This is stored in db/seed.rb
 
-`rake db:drop db:create db:migrate db:seed`
+## Heroku deployment instructions
 
-Run:
+Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
 
-`rails s`
+`heroku login`
 
-Connect to localhost:3000
+`heroku git:remote -a lion-uat`
 
-Note there are no logins etc.... at the moment
+Deploy your application
 
-## Usage
+`git push heroku master`
+
+Reset database, note this is a destructive operation and should only be done if you don't want the data:
+
+```
+heroku pg:reset --confirm lion-uat
+```
+
+migrate and seed:
+```
+heroku rake db:migrate db:seed
+```
+
+## Examples of use
 
 Create a donation
 
@@ -2147,38 +2164,6 @@ The full response is:
 		}
 	]
 }
-```
-
-
-
-## Heroku deployment instructions
-
-Download and install the Heroku CLI https://devcenter.heroku.com/articles/heroku-command-line
-
-`heroku login`
-
-`heroku git:remote -a lion-uat`
-
-Deploy your application
-
-`git push heroku master`
-
-This stuff should be automated, but isn't at the moment:
-Migrate and seed:
-
-```
-heroku rake db:migrate
-heroku rake db:seed
-```
-
-Now create some test users for testing
-
-`heroku run rails console`
-
-```
-User.create([{ email: 'test@example.com', password: 'password', password_confirmation: 'password' },
-               { email: 'test2@example.com', password: 'password', password_confirmation: 'password' },
-               { email: 'test3@example.com', password: 'password', password_confirmation: 'password' }])
 ```
 
 
