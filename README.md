@@ -46,7 +46,7 @@ To get the data for scenario with id 2:
 
 you can also use postman, or insomnia, if you prefer a GUI. The API conforms to the [jsonapi specifications](http://jsonapi.org/format/), but I've added some fields - such as `requester_username` in the `scenario` resrouce - for convieniance that don't actually exist in that specific resource. I did this before I fully understood the API, and how the API consumer could properly ask for that information, but I guess thats fine for now.
 
-Create a donation:
+Create a donation using curl:
 
 ```
 curl --request POST \
