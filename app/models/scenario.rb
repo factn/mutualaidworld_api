@@ -62,7 +62,8 @@ class Scenario < ApplicationRecord
   def ratio_for_user(user)
     # need to implement https://github.com/togglepro/pundit-resources or something for user
     # but lkets fake it for now
-    user = User.find(1) if user.nil?
+    # user = User.find(1) if user.nil?
+    return 0 if user.nil?
     ratio = 0
 
     done = user.done.count

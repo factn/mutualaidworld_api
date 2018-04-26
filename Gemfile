@@ -25,11 +25,12 @@ gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'jsonapi-rspec'
   gem 'pry'
   gem 'pry-remote'
+  gem 'rspec-json_expectations'
   gem 'rubocop'
-  gem 'jsonapi-rspec'
-  gem 'factory_bot_rails'
 end
 
 group :development do

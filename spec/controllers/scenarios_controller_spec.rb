@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ScenariosController, type: :request do
+  let(:user) { FactoryBot.create(:user) }
   let(:verb) { FactoryBot.create(:verb) }
   let(:noun) { FactoryBot.create(:noun) }
   let(:event) { FactoryBot.create(:event) }
   let(:scenario) { FactoryBot.create(:scenario) }
-  let(:user) { FactoryBot.create(:user) }
 
   describe "POST #create" do
     context "with valid params" do

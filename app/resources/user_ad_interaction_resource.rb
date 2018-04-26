@@ -25,7 +25,7 @@ class UserAdInteractionResource < JSONAPI::Resource
   end
 
   def lastname
-    @model.user.firstname
+    @model.user.lastname
   end
 
 

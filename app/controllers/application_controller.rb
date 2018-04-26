@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    id = params[:id] ? params[:id] : 1
-    User.find(id)
+    return if params[:id].nil?
+
+    User.find(params[:id])
   end
 end
