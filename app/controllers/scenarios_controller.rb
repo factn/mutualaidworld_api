@@ -1,5 +1,11 @@
 class ScenariosController < ApplicationController
   before_action :set_scenario, only: %i[show edit update destroy]
+  # get/materials", "get/transportation", "patch/roof", and "fix/roof"
+
+  @@subtask_goals = [{ verb: "get", noun: "materials" },
+                     { verb: "get", noun: "transportation" },
+                     { verb: "patch", noun: "roof" },
+                     { verb: "fix", noun: "roof" }]
 
   # GET /scenarios
   # GET /scenarios.json
@@ -45,7 +51,12 @@ class ScenariosController < ApplicationController
   # POST /scenarios.json
   def create
     if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
-      super
+      Scenario.transaction do
+        super
+        new_scenario =  Scenario.find(JSON.parse(response.body).dig("data", "id"))
+
+        @@subtask_goals.each { |goal| Scenario.create_subtask(new_scenario, goal)}
+      end
     else
       @scenario = Scenario.new(scenario_params)
 

@@ -25,6 +25,11 @@ class Scenario < ApplicationRecord
 
   scope :examples_for_demo, -> { where("id in (1)") }
 
+#  a = Scenario.create_subtask(parent_scenario_id: new_scenario_id, verb: Verb.find_by(description: "get"), noun: Noun.find_by(description: "materials"))
+  def self.create_subtask(new_scenario, goal)
+    Scenario.create(parent_scenario: new_scenario, event: new_scenario.event, verb: Verb.find_or_create_by(description: goal[:verb]), noun: Noun.find_or_create_by(description: goal[:noun]))
+  end
+
   def description
     verb.description + ' ' + noun.description + (requester ? ' for ' + requester.name : '') + ' in ' + event.description
   end
