@@ -2,22 +2,22 @@ class Scenario < ApplicationRecord
   belongs_to :verb
   belongs_to :noun
   belongs_to :event
-  belongs_to :requester, class_name: 'User', inverse_of: :requested, optional: true
-  belongs_to :doer, class_name: 'User', inverse_of: :done, optional: true
-  belongs_to :parent_scenario, class_name: 'Scenario', inverse_of: :children_scenario, optional: true
+  belongs_to :requester, class_name: "User", inverse_of: :requested, optional: true
+  belongs_to :doer, class_name: "User", inverse_of: :done, optional: true
+  belongs_to :parent_scenario, class_name: "Scenario", inverse_of: :children_scenario, optional: true
 
   # has_many :verifications, class_name: 'Proofs', dependent: :destroy, inverse_of: :scenario
   has_many :proofs, dependent: :destroy
   has_many :donations, dependent: :destroy
-  has_many :children_scenario, class_name: 'Scenario', dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
+  has_many :children_scenario, class_name: "Scenario", dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
   has_many :user_ad_interactions, dependent: :destroy
 
   # has_many :ads
 
   has_attached_file :image, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
+    thumb: "100x100>",
+    square: "200x200#",
+    medium: "300x300>"
   }
 
   # Validate the attached image is image/jpg, image/png, etc
@@ -25,13 +25,12 @@ class Scenario < ApplicationRecord
 
   scope :examples_for_demo, -> { where("id in (1)") }
 
-#  a = Scenario.create_subtask(parent_scenario_id: new_scenario_id, verb: Verb.find_by(description: "get"), noun: Noun.find_by(description: "materials"))
   def self.create_subtask(new_scenario, goal)
     Scenario.create(parent_scenario: new_scenario, event: new_scenario.event, verb: Verb.find_or_create_by(description: goal[:verb]), noun: Noun.find_or_create_by(description: goal[:noun]))
   end
 
   def description
-    verb.description + ' ' + noun.description + (requester ? ' for ' + requester.name : '') + ' in ' + event.description
+    verb.description + " " + noun.description + (requester ? " for " + requester.name : "") + " in " + event.description
   end
 
   def parent_description
@@ -89,5 +88,4 @@ class Scenario < ApplicationRecord
   def is_complete
     !proofs.count.zero?
   end
-
 end

@@ -10,8 +10,7 @@ class AdminsController < ApplicationController
 
   # GET /verbs/1
   # GET /verbs/1.json
-  def show
-  end
+  def show; end
 
   # GET /verbs/new
   def new
@@ -19,8 +18,7 @@ class AdminsController < ApplicationController
   end
 
   # GET /verbs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /verbs
   # POST /verbs.json
@@ -29,7 +27,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @verb.save
-        format.html { redirect_to @verb, notice: 'Verb was successfully created.' }
+        format.html { redirect_to @verb, notice: "Verb was successfully created." }
         format.json { render :show, status: :created, location: @verb }
       else
         format.html { render :new }
@@ -43,7 +41,7 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @verb.update(verb_params)
-        format.html { redirect_to @verb, notice: 'Verb was successfully updated.' }
+        format.html { redirect_to @verb, notice: "Verb was successfully updated." }
         format.json { render :show, status: :ok, location: @verb }
       else
         format.html { render :edit }
@@ -57,19 +55,20 @@ class AdminsController < ApplicationController
   def destroy
     @verb.destroy
     respond_to do |format|
-      format.html { redirect_to verbs_url, notice: 'Verb was successfully destroyed.' }
+      format.html { redirect_to verbs_url, notice: "Verb was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_verb
-      @verb = Verb.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def verb_params
-      params.require(:verb).permit(:description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_verb
+    @verb = Verb.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def verb_params
+    params.require(:verb).permit(:description)
+  end
 end

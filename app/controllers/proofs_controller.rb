@@ -4,7 +4,7 @@ class ProofsController < ApplicationController
   # GET /proofs
   # GET /proofs.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @proofs = Proof.all
@@ -14,12 +14,12 @@ class ProofsController < ApplicationController
   # GET /proofs/1
   # GET /proofs/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /proofs/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @proof = Proof.new
@@ -32,13 +32,13 @@ class ProofsController < ApplicationController
   # POST /proofs
   # POST /proofs.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @proof = Proof.new(proof_params)
 
       if @proof.save
-        redirect_to @proof, notice: 'Proof was successfully created.'
+        redirect_to @proof, notice: "Proof was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class ProofsController < ApplicationController
   # PATCH/PUT /proofs/1
   # PATCH/PUT /proofs/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @proof.update(proof_params)
-        redirect_to @proof, notice: 'Proof was successfully updated.'
+        redirect_to @proof, notice: "Proof was successfully updated."
       else
         render :edit
       end
@@ -62,22 +62,23 @@ class ProofsController < ApplicationController
   # DELETE /proofs/1
   # DELETE /proofs/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @proof.destroy
-      redirect_to proofs_url, notice: 'Proof was successfully destroyed.'
+      redirect_to proofs_url, notice: "Proof was successfully destroyed."
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_proof
-      @proof = Proof.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def proof_params
-      params.require(:proof).permit(:scenario_id, :verifier_id, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_proof
+    @proof = Proof.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def proof_params
+    params.require(:proof).permit(:scenario_id, :verifier_id, :image)
+  end
 end

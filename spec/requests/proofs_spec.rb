@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Proofs", type: :request do
   describe "GET /proofs" do

@@ -10,7 +10,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @scenarios = Scenario.all
@@ -20,7 +20,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   def ad
@@ -37,7 +37,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @scenario = Scenario.new
@@ -50,18 +50,18 @@ class ScenariosController < ApplicationController
   # POST /scenarios
   # POST /scenarios.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       Scenario.transaction do
         super
-        new_scenario =  Scenario.find(JSON.parse(response.body).dig("data", "id"))
+        new_scenario = Scenario.find(JSON.parse(response.body).dig("data", "id"))
 
-        @@subtask_goals.each { |goal| Scenario.create_subtask(new_scenario, goal)}
+        @@subtask_goals.each { |goal| Scenario.create_subtask(new_scenario, goal) }
       end
     else
       @scenario = Scenario.new(scenario_params)
 
       if @scenario.save
-        redirect_to @scenario, notice: 'Scenario was successfully created.'
+        redirect_to @scenario, notice: "Scenario was successfully created."
       else
         render :new
       end
@@ -71,25 +71,23 @@ class ScenariosController < ApplicationController
   # PATCH/PUT /scenarios/1
   # PATCH/PUT /scenarios/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
+    elsif @scenario.update(scenario_params)
+      redirect_to @scenario, notice: "Scenario was successfully updated."
     else
-      if @scenario.update(scenario_params)
-        redirect_to @scenario, notice: 'Scenario was successfully updated.'
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
   # DELETE /scenarios/1
   # DELETE /scenarios/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @scenario.destroy
-      redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.'
+      redirect_to scenarios_url, notice: "Scenario was successfully destroyed."
     end
   end
 

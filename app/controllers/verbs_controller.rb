@@ -4,7 +4,7 @@ class VerbsController < ApplicationController
   # GET /verbs
   # GET /verbs.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @verbs = Verb.all
@@ -14,12 +14,12 @@ class VerbsController < ApplicationController
   # GET /verbs/1
   # GET /verbs/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /verbs/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @verb = Verb.new
@@ -32,13 +32,13 @@ class VerbsController < ApplicationController
   # POST /verbs
   # POST /verbs.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @verb = Verb.new(verb_params)
 
       if @verb.save
-        redirect_to @verb, notice: 'Verb was successfully created.'
+        redirect_to @verb, notice: "Verb was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class VerbsController < ApplicationController
   # PATCH/PUT /verbs/1
   # PATCH/PUT /verbs/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @verb.update(verb_params)
-        redirect_to @verb, notice: 'Verb was successfully updated.'
+        redirect_to @verb, notice: "Verb was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class VerbsController < ApplicationController
   # DELETE /verbs/1
   # DELETE /verbs/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @verb.destroy
-      redirect_to verbs_url, notice: 'Verb was successfully destroyed.'
+      redirect_to verbs_url, notice: "Verb was successfully destroyed."
     end
   end
 

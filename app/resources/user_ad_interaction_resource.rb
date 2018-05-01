@@ -28,8 +28,6 @@ class UserAdInteractionResource < JSONAPI::Resource
     @model.user.lastname
   end
 
-
-
   # def donator_firstname
   #   @model.donator.firstname
   # end

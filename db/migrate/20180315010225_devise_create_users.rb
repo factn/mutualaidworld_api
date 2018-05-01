@@ -46,7 +46,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
 
-     reversible do |mig|
+    reversible do |mig|
       mig.up do
         # add a CHECK constraint
         execute <<-SQL
@@ -62,6 +62,5 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
          SQL
       end
     end
-
   end
 end

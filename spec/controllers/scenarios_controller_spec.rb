@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ScenariosController, type: :request do
   let(:user) { FactoryBot.create(:user) }
@@ -40,7 +40,6 @@ RSpec.describe ScenariosController, type: :request do
 
         scenario.reload
         expect(scenario.doer_id).to equal(user.id)
-
       end
     end
   end

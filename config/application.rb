@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("boot", __dir__)
 
 require "rails"
 # Pick the frameworks you want:
@@ -9,7 +9,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
-require 'action_cable/engine'
+require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -34,8 +34,8 @@ module Lion
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: %i[get post put patch delete options head]
+        origins "*"
+        resource "*", headers: :any, methods: %i[get post put patch delete options head]
       end
     end
   end
