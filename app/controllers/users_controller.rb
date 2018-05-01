@@ -79,6 +79,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:description)
+    params.require(:user).permit(:description, :default_total_session_donation, :default_swipe_donation)
   end
 end
