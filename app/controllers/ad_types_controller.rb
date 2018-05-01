@@ -4,7 +4,7 @@ class AdTypesController < ApplicationController
   # GET /ad_types
   # GET /ad_types.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @ad_types = AdType.all
@@ -14,12 +14,12 @@ class AdTypesController < ApplicationController
   # GET /ad_types/1
   # GET /ad_types/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /ad_types/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @ad_type = AdType.new
@@ -32,13 +32,13 @@ class AdTypesController < ApplicationController
   # POST /ad_types
   # POST /ad_types.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @ad_type = AdType.new(ad_type_params)
 
       if @ad_type.save
-        redirect_to @ad_type, notice: 'AdType was successfully created.'
+        redirect_to @ad_type, notice: "AdType was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class AdTypesController < ApplicationController
   # PATCH/PUT /ad_types/1
   # PATCH/PUT /ad_types/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @ad_type.update(ad_type_params)
-        redirect_to @ad_type, notice: 'AdType was successfully updated.'
+        redirect_to @ad_type, notice: "AdType was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class AdTypesController < ApplicationController
   # DELETE /ad_types/1
   # DELETE /ad_types/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @ad_type.destroy
-      redirect_to ad_types_url, notice: 'AdType was successfully destroyed.'
+      redirect_to ad_types_url, notice: "AdType was successfully destroyed."
     end
   end
 

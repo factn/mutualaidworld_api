@@ -4,7 +4,7 @@ class UserAdInteractionsController < ApplicationController
   # GET /user_ad_interactions
   # GET /user_ad_interactions.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @user_ad_interactions = UserAdInteraction.all
@@ -14,12 +14,12 @@ class UserAdInteractionsController < ApplicationController
   # GET /user_ad_interactions/1
   # GET /user_ad_interactions/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /user_ad_interactions/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @user_ad_interaction = UserAdInteraction.new
@@ -32,13 +32,13 @@ class UserAdInteractionsController < ApplicationController
   # POST /user_ad_interactions
   # POST /user_ad_interactions.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @user_ad_interaction = UserAdInteraction.new(user_ad_interaction_params)
 
       if @user_ad_interaction.save
-        redirect_to @user_ad_interaction, notice: 'UserAdInteraction was successfully created.'
+        redirect_to @user_ad_interaction, notice: "UserAdInteraction was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class UserAdInteractionsController < ApplicationController
   # PATCH/PUT /user_ad_interactions/1
   # PATCH/PUT /user_ad_interactions/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @user_ad_interaction.update(user_ad_interaction_params)
-        redirect_to @user_ad_interaction, notice: 'UserAdInteraction was successfully updated.'
+        redirect_to @user_ad_interaction, notice: "UserAdInteraction was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class UserAdInteractionsController < ApplicationController
   # DELETE /user_ad_interactions/1
   # DELETE /user_ad_interactions/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @user_ad_interaction.destroy
-      redirect_to user_ad_interactions_url, notice: 'UserAdInteraction was successfully destroyed.'
+      redirect_to user_ad_interactions_url, notice: "UserAdInteraction was successfully destroyed."
     end
   end
 

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ScenariosController, type: :request do
   let(:user) { FactoryBot.create(:user) }
@@ -15,9 +15,10 @@ RSpec.describe ScenariosController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
 
+        # creating a scenario via the API creates 4 subtasks
         expect do
           post "/scenarios", headers: headers, params: { "data": { "type": "scenarios", "attributes": {}, "relationships": { "verb": { "data": { "id": verb.id, "type": "verbs" } }, "noun": { "data": { "id": noun.id, "type": "nouns" } }, "event": { "data": { "id": event.id, "type": "events" } } } } }.to_json
-        end.to change(Scenario, :count).by(1)
+        end.to change(Scenario, :count).by(5)
 
         expect(response).to have_http_status(:created)
       end
@@ -39,7 +40,6 @@ RSpec.describe ScenariosController, type: :request do
 
         scenario.reload
         expect(scenario.doer_id).to equal(user.id)
-
       end
     end
   end

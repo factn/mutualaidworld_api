@@ -4,7 +4,7 @@ class InteractionTypesController < ApplicationController
   # GET /interaction_types
   # GET /interaction_types.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @interaction_types = InteractionType.all
@@ -14,12 +14,12 @@ class InteractionTypesController < ApplicationController
   # GET /interaction_types/1
   # GET /interaction_types/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /interaction_types/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @interaction_type = InteractionType.new
@@ -32,13 +32,13 @@ class InteractionTypesController < ApplicationController
   # POST /interaction_types
   # POST /interaction_types.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @interaction_type = InteractionType.new(interaction_type_params)
 
       if @interaction_type.save
-        redirect_to @interaction_type, notice: 'InteractionType was successfully created.'
+        redirect_to @interaction_type, notice: "InteractionType was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class InteractionTypesController < ApplicationController
   # PATCH/PUT /interaction_types/1
   # PATCH/PUT /interaction_types/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @interaction_type.update(interaction_type_params)
-        redirect_to @interaction_type, notice: 'InteractionType was successfully updated.'
+        redirect_to @interaction_type, notice: "InteractionType was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class InteractionTypesController < ApplicationController
   # DELETE /interaction_types/1
   # DELETE /interaction_types/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @interaction_type.destroy
-      redirect_to interaction_types_url, notice: 'InteractionType was successfully destroyed.'
+      redirect_to interaction_types_url, notice: "InteractionType was successfully destroyed."
     end
   end
 

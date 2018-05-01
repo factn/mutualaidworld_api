@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "verbs/edit", type: :view do
   before(:each) do
     @verb = assign(:verb, Verb.create!(
-      :description => "MyString"
+                            description: "MyString"
     ))
   end
 
@@ -11,7 +11,6 @@ RSpec.describe "verbs/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", verb_path(@verb), "post" do
-
       assert_select "input[name=?]", "verb[description]"
     end
   end

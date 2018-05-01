@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe NounsController, type: :request do
   describe "POST #create" do

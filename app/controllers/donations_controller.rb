@@ -4,7 +4,7 @@ class DonationsController < ApplicationController
   # GET /donations
   # GET /donations.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @donations = Donation.all
@@ -14,12 +14,12 @@ class DonationsController < ApplicationController
   # GET /donations/1
   # GET /donations/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /donations/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @donation = Donation.new
@@ -32,13 +32,13 @@ class DonationsController < ApplicationController
   # POST /donations
   # POST /donations.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @donation = Donation.new(donation_params)
 
       if @donation.save
-        redirect_to @donation, notice: 'Donation was successfully created.'
+        redirect_to @donation, notice: "Donation was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class DonationsController < ApplicationController
   # PATCH/PUT /donations/1
   # PATCH/PUT /donations/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @donation.update(donation_params)
-        redirect_to @donation, notice: 'Donation was successfully updated.'
+        redirect_to @donation, notice: "Donation was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class DonationsController < ApplicationController
   # DELETE /donations/1
   # DELETE /donations/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @donation.destroy
-      redirect_to donations_url, notice: 'Donation was successfully destroyed.'
+      redirect_to donations_url, notice: "Donation was successfully destroyed."
     end
   end
 

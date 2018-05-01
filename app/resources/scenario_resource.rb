@@ -8,11 +8,11 @@ class ScenarioResource < JSONAPI::Resource
   has_one :requester
   has_one :doer
   has_one :event
-  has_one :parent_scenario, class_name: 'Scenario'
+  has_one :parent_scenario, class_name: "Scenario"
 
   has_many :proofs
   has_many :donations
-  has_many :children_scenario, class_name: 'Scenario'
+  has_many :children_scenario, class_name: "Scenario"
   has_many :user_ad_interaction
 
   filters :noun, :verb, :event, :requester, :doer, :funding_goal, :parent_scenario, :parent_scenario_id
@@ -85,5 +85,4 @@ class ScenarioResource < JSONAPI::Resource
   def is_complete
     @model.is_complete
   end
-
 end

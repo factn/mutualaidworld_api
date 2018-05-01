@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @events = Event.all
@@ -14,12 +14,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    super if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    super if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
   end
 
   # GET /events/new
   def new
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @event = Event.new
@@ -32,13 +32,13 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @event = Event.new(event_params)
 
       if @event.save
-        redirect_to @event, notice: 'Event was successfully created.'
+        redirect_to @event, notice: "Event was successfully created."
       else
         render :new
       end
@@ -48,11 +48,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       if @event.update(event_params)
-        redirect_to @event, notice: 'Event was successfully updated.'
+        redirect_to @event, notice: "Event was successfully updated."
       else
         render :edit
       end
@@ -62,11 +62,11 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    if request.headers['HTTP_ACCEPT'] == "application/vnd.api+json"
+    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
       super
     else
       @event.destroy
-      redirect_to events_url, notice: 'Event was successfully destroyed.'
+      redirect_to events_url, notice: "Event was successfully destroyed."
     end
   end
 

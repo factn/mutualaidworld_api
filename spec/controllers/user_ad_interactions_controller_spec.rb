@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UserAdInteractionsController, type: :request do
   let(:user) { FactoryBot.create(:user) }
@@ -23,7 +23,6 @@ RSpec.describe UserAdInteractionsController, type: :request do
                                                                           "interaction_type": { "data": { "id": interaction_type.id, "type": "interaction_types" } },
                                                                           "ad_type": { "data": { "id": ad_type.id, "type": "ad_types" } },
                                                                           "scenario": { "data": { "id": scenario.id, "type": "scenarios" } } } } }.to_json
-
         end.to change(UserAdInteraction, :count).by(1)
 
         expect(response).to have_http_status(:created)
