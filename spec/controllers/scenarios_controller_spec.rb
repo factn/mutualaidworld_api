@@ -62,8 +62,6 @@ RSpec.describe ScenariosController, type: :request do
         expect(JSON.parse(response.body)["data"][0]["id"]).to eq(non_dismissed_scenario.id.to_s)
 
         expect(JSON.parse(response.body)["data"].length).to eq(1)
-
-        binding.pry
       end
     end
   end
