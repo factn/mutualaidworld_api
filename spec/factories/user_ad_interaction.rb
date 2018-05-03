@@ -13,5 +13,16 @@ FactoryBot.define do
       association :ad_type, factory: [:ad_type, :doer]
     end
 
+    trait :donator do
+      association :ad_type, factory: [:ad_type, :donator]
+    end
+
+    trait :requester do
+      association :ad_type, factory: [:ad_type, :requester]
+    end
+
+    trait :verifier do
+      association :ad_type, factory: [:ad_type, :verifier]
+    end
   end
 end
