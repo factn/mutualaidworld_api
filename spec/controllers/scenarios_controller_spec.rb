@@ -43,4 +43,30 @@ RSpec.describe ScenariosController, type: :request do
       end
     end
   end
+
+  describe "GET " do
+    context "with valid params" do
+      let!(:dismissed_interaction) { FactoryBot.create(:user_ad_interaction, :dismissed, :doer) }
+      let!(:dismissed_scenario) {dismissed_interaction.scenario}
+      let!(:non_dismissed_scenario) {FactoryBot.create(:scenario)}
+      let!(:a_doer) {dismissed_interaction.user}
+
+      it "gets undismissed scenarios for a user" do
+        headers = {
+          "Accept": "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json"
+        }
+
+        get "/scenarios?filter[doer_ad_not_dismissed_by]=#{a_doer.id}", headers: headers
+
+        expect(JSON.parse(response.body)["data"][0]["id"]).to eq(non_dismissed_scenario.id.to_s)
+
+        expect(JSON.parse(response.body)["data"].length).to eq(1)
+
+        binding.pry
+      end
+    end
+  end
+
+
 end

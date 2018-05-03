@@ -38,6 +38,25 @@ class ScenarioResource < JSONAPI::Resource
     records.where(clause)
   }
 
+  filter :doer_ad_not_dismissed_by, apply: ->(records, value, _options) {
+    ads_ive_dismissed = "select
+                        	s.id
+                        from
+                        	scenarios s
+                        inner join
+                        	user_ad_interactions uai on s.id = uai.scenario_id
+                        inner join
+                        	interaction_types it on uai.interaction_type_id = it.id
+                        where
+                        	it.description like 'dismissed'
+                        and
+                        	uai.user_id = #{value.first}"
+
+    records.where("id not in (#{ads_ive_dismissed})")
+  }
+
+
+
   def noun
     @model.noun.description
   end
