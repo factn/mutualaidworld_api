@@ -43,4 +43,32 @@ RSpec.describe ScenariosController, type: :request do
       end
     end
   end
+
+  shared_examples "dismissed ads for a user" do |role|
+    context "with #{role} dismissed" do
+      let!(:dismissed_interaction) { FactoryBot.create(:user_ad_interaction, :dismissed, role.to_sym) }
+      let!(:dismissed_scenario) { dismissed_interaction.scenario }
+      let!(:a_dismisser) { dismissed_interaction.user }
+
+      let!(:non_dismissed_scenario) { FactoryBot.create(:scenario) }
+
+      it "gets undismissed #{role} scenarios for a user" do
+        headers = {
+          "Accept": "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json"
+        }
+
+        get "/scenarios?filter[#{role}_ad_not_dismissed_by]=#{a_dismisser.id}", headers: headers
+
+        expect(JSON.parse(response.body)["data"][0]["id"]).to eq(non_dismissed_scenario.id.to_s)
+
+        expect(JSON.parse(response.body)["data"].length).to eq(1)
+      end
+    end
+  end
+
+  include_examples "dismissed ads for a user", "doer"
+  include_examples "dismissed ads for a user", "donator"
+  include_examples "dismissed ads for a user", "requester"
+  include_examples "dismissed ads for a user", "verifier"
 end

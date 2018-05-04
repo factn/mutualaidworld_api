@@ -1585,6 +1585,11 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 }
 ```
 
+Getting all the sceanrios you haven't dismissed the doer ads for:
+
+`get "/scenarios?filter[doer_ad_not_dismissed_by]=A_USER_ID_GOES_HERE", headers: headers`
+
+
 ## Pagination:
 
 Offset Pagination

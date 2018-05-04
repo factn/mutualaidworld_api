@@ -4,6 +4,9 @@ RSpec.describe UserAdInteractionsController, type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:ad_type) { FactoryBot.create(:ad_type) }
   let(:interaction_type) { FactoryBot.create(:interaction_type) }
+  let(:dismissed) { FactoryBot.create(:interaction_type, :dismissed) }
+  let(:served_to) { FactoryBot.create(:interaction_type, :served_to) }
+
   let(:scenario) { FactoryBot.create(:scenario) }
 
   describe "POST #create" do
@@ -21,6 +24,26 @@ RSpec.describe UserAdInteractionsController, type: :request do
                                                                       "relationships":
                                                                         { "user": { "data": { "id": user.id, "type": "users" } },
                                                                           "interaction_type": { "data": { "id": interaction_type.id, "type": "interaction_types" } },
+                                                                          "ad_type": { "data": { "id": ad_type.id, "type": "ad_types" } },
+                                                                          "scenario": { "data": { "id": scenario.id, "type": "scenarios" } } } } }.to_json
+        end.to change(UserAdInteraction, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+      end
+
+      it "creates a new ad dismissal" do
+        headers = {
+          "Accept": "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json"
+        }
+
+        expect do
+          post "/user_ad_interactions", headers: headers, params: { "data":
+                                                                    { "type": "user_ad_interactions",
+                                                                      "attributes": {},
+                                                                      "relationships":
+                                                                        { "user": { "data": { "id": user.id, "type": "users" } },
+                                                                          "interaction_type": { "data": { "id": dismissed.id, "type": "interaction_types" } },
                                                                           "ad_type": { "data": { "id": ad_type.id, "type": "ad_types" } },
                                                                           "scenario": { "data": { "id": scenario.id, "type": "scenarios" } } } } }.to_json
         end.to change(UserAdInteraction, :count).by(1)
