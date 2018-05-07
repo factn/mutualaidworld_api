@@ -13,7 +13,7 @@
 
   <%= render 'ad_image', image: scenario.image.url(:medium) %>
 
-  <h1>Donate $2 to <%= "#{scenario.verb.description.slice(0,1).capitalize}#{scenario.verb.description.slice(1..-1)} #{scenario.requester.firstname.slice(0,1).capitalize if scenario.requester}#{scenario.requester.firstname.slice(1..-1) if scenario.requester}'s #{scenario.noun.description}" %>!</h1>
+  <h1>Donate $2 to <%= "#{scenario.verb.description} #{scenario.requester.firstname}'s #{scenario.noun.description}" %>!</h1>
 
   <h2 class="location">Pearlington, Mississippi</h2>
 
