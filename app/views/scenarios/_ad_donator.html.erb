@@ -4,16 +4,16 @@
   <%= render 'ad_profile_header' %>
 
   <p class="subheader">Can you donate to help 
-    <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) if scenario.doer %>
+    <%= scenario.doer_firstname.capitalize if scenario.doer %>
     <%= scenario.verb.description %>
     <%= scenario.noun.description %>
     for
-    <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %>?
+    <%= scenario.requester_firstname.capitalize if scenario.requester %>?
   </p>
 
   <%= render 'ad_image', image: scenario.image.url(:medium) %>
 
-  <h1>Donate $2 to <%= "#{scenario.verb.description} #{scenario.requester.firstname}'s #{scenario.noun.description}" %>!</h1>
+  <h1>Donate $2 to <%= "#{scenario.verb.description} #{scenario.requester_firstname.capitalize if scenario.requester}'s #{scenario.noun.description}" %>!</h1>
 
   <h2 class="location">Pearlington, Mississippi</h2>
 

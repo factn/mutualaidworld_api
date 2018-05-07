@@ -24,8 +24,4 @@ class User < ApplicationRecord
   def name
     firstname + " " + lastname
   end
-
-  def firstname
-    firstname.slice(0,1).capitalize + firstname.slice(1..-1) if firstname
-  end
 end
