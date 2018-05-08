@@ -236,8 +236,6 @@ RSpec.describe UsersController, type: :request do
           }]
         }
 
-        binding.pry
-
         expect(response_json).to include_json(test_json)
       end
     end
