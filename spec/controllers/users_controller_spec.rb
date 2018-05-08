@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
   describe "POST #create" do
@@ -116,6 +116,8 @@ RSpec.describe UsersController, type: :request do
               "password_confirmation": nil,
               "default_total_session_donation": user.default_total_session_donation.to_s,
               "default_swipe_donation": user.default_swipe_donation.to_s,
+              "street_address":  user.street_address.to_s,
+              "city_state":  user.city_state.to_s,
               "created_at": JSON.parse(user.created_at.to_json),
               "updated_at": JSON.parse(user.updated_at.to_json)
             },
@@ -166,14 +168,30 @@ RSpec.describe UsersController, type: :request do
 
         new_default_total_session_donation = "789.0"
         new_default_swipe_donation = "987.0"
+        new_street_address = "streetaddress"
+        new_city_state = "citystate"
+
         expect(user.default_total_session_donation.to_s).to_not equal(new_default_total_session_donation)
         expect(user.default_swipe_donation.to_s).to_not equal(new_default_swipe_donation)
-        patch "/users/#{user.id}", headers: headers, params: { "data": { "type": "users", "id": "#{user.id}", "attributes": { "default_total_session_donation": new_default_total_session_donation, "default_swipe_donation": new_default_swipe_donation } } }.to_json
+        patch "/users/#{user.id}", headers: headers, params: {
+          "data": {
+            "type": "users",
+            "id": user.id.to_s,
+            "attributes": {
+              "default_total_session_donation": new_default_total_session_donation,
+              "default_swipe_donation": new_default_swipe_donation,
+              "street_address": new_street_address,
+              "city_state": new_city_state
+            }
+          }
+        }.to_json
 
         user.reload
 
         expect(user.default_total_session_donation.to_s).to eq(new_default_total_session_donation)
         expect(user.default_swipe_donation.to_s).to eq(new_default_swipe_donation)
+        expect(user.street_address.to_s).to eq(new_street_address)
+        expect(user.city_state.to_s).to eq(new_city_state)
       end
     end
   end
