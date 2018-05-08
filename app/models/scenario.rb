@@ -12,8 +12,8 @@ class Scenario < ApplicationRecord
   has_many :children_scenario, class_name: "Scenario", dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
   has_many :user_ad_interactions, dependent: :destroy
 
-  deligate :firstname, :lastname, :latitude, :longitude, to: :doer, prefix: true, allow_nil: true
-  deligate :firstname, :lastname, :latitude, :longitude, to: :requester, prefix: true, allow_nil: true
+  delegate :firstname, :lastname, :latitude, :longitude, to: :doer, prefix: true, allow_nil: true
+  delegate :firstname, :lastname, :latitude, :longitude, to: :requester, prefix: true, allow_nil: true
 
   # has_many :ads
 
