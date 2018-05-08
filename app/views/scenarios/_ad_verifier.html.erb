@@ -1,10 +1,7 @@
 <!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
 <div id="<%= "lion_ad_content_#{scenario.id}_verify" %>">
   <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/verifier/") do %>
-    <div class="profile">
-      <img class="profile-icon" src="<%= asset_path( 'fb-profile.jpg' ) %>" />
-      <div class="profile-name">Lion</div>
-    </div>
+    <%= render 'ad_profile_header' %>
 
     <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
 
