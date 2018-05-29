@@ -99,4 +99,13 @@ Rails.application.configure do
       s3_host_name: "s3-#{ENV.fetch("AWS_REGION")}.amazonaws.com"
     }
   }
+
+  uri = URI.parse ENV["CLOUDMQTT_URL"]
+
+  config.MQTTOptions = {
+    remote_host: uri.host,
+    remote_port: uri.port,
+    username: uri.user,
+    password: uri.password
+  }.freeze
 end
