@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  after_save do |ob|
+    mqtt_me(ob)
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

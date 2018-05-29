@@ -1,10 +1,10 @@
 class ProofResource < JSONAPI::Resource
-  attributes :image, :imagethumb, :scenario, :created_at, :updated_at
+  attributes :image, :imagethumb, :scenario, :description, :created_at, :updated_at
 
   has_one :scenario
   has_one :verifier
 
-  filters :scenario
+  filters :scenario, :description, :created_at, :updated_at
 
   def imagethumb
     @model.image.url(:thumb)

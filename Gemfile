@@ -22,6 +22,7 @@ gem "verbs"
 gem "aws-sdk-s3"
 gem "paperclip"
 gem "rack-cors", require: "rack/cors"
+gem "mqtt"
 
 group :development, :test do
   gem "dotenv-rails"

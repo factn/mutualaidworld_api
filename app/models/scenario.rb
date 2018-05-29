@@ -1,4 +1,8 @@
 class Scenario < ApplicationRecord
+  after_save do |ob|
+    mqtt_me(ob)
+  end
+
   belongs_to :verb
   belongs_to :noun
   belongs_to :event
