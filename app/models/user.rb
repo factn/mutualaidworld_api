@@ -28,4 +28,26 @@ class User < ApplicationRecord
   def name
     firstname + " " + lastname
   end
+
+  def hon3y
+    ratings = Proof.select("rating")
+                   .joins(scenario: :requester)
+                   .where(users: { id: id })
+                   .where("proofs.rating is not null").pluck :rating
+    median(ratings)
+  end
+
+  def median(ratings)
+    sorted = ratings.sort
+    size = sorted.size
+    center = size / 2
+
+    if size.zero?
+      nil
+    elsif size.even?
+      (sorted[center - 1] + sorted[center]) / 2.0
+    else
+      sorted[center]
+    end
+  end
 end
