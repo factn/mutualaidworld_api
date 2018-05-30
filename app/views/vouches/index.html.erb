@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vouches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>Verb</th>
+      <th>Noun</th>
+      <th>Scenario Requester</th>
+      <th>Verifier</th>
+      <th>Image</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vouches.each do |vouch| %>
+      <tr>
+        <td><%= vouch.scenario.id %></td>
+        <td><%= vouch.scenario.verb.description %></td>
+        <td><%= vouch.scenario.noun.description %></td>
+        <td><%= vouch.scenario.requester.name %></td>
+        <td><%= vouch.verifier.name %></td>
+        <td><%= image_tag vouch.image.url(:thumb) %></td>
+
+        <td><%= link_to 'Show', vouch %></td>
+        <td><%= link_to 'Edit', edit_vouch_path(vouch) %></td>
+        <td><%= link_to 'Destroy', vouch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vouch', new_vouch_path %>

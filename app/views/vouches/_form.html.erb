@@ -1,0 +1,32 @@
+<%= form_with(model: vouch, local: true, multipart: true) do |form| %>
+  <% if vouch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vouch.errors.count, "error") %> prohibited this vouch from being saved:</h2>
+
+      <ul>
+      <% vouch.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :scenario_id %>
+    <%= select("vouch", "scenario_id", Scenario.all.collect {|s| [ s.verb.description + ' ' + s.noun.description + ' for ' + s.requester.name, s.id ] }, {}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :verifier_id %>
+    <%= select("vouch", "verifier_id", User.all.collect {|u| [ u.name, u.id ] }, { }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
