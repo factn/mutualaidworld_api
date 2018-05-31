@@ -87,9 +87,9 @@ if Rails.env.development? || Rails.env.test?
                   parent_scenario_id: 1,
                   image: nil)
 
-  puts "proofs"
+  puts "vouches"
 
-  Proof.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
+  Vouch.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
                 { scenario_id: 6, verifier_id: 2, image: File.open(Rails.root.join("vendor", "personeating.jpg")) }])
 
   puts "ad user interactions"

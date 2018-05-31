@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :done, class_name: "Scenario", dependent: :nullify, inverse_of: :doer, foreign_key: :doer_id
 
   has_many :donated, class_name: "Donation", dependent: :nullify, inverse_of: :donator, foreign_key: :donator_id
-  has_many :verified, class_name: "Proof", dependent: :nullify, inverse_of: :verifier, foreign_key: :verifier_id
+  has_many :verified, class_name: "Vouch", dependent: :nullify, inverse_of: :verifier, foreign_key: :verifier_id
 
   has_many :user_ad_interactions, dependent: :nullify
 
@@ -30,10 +30,10 @@ class User < ApplicationRecord
   end
 
   def hon3y
-    ratings = Proof.select("rating")
+    ratings = Vouch.select("rating")
                    .joins(scenario: :requester)
                    .where(users: { id: id })
-                   .where("proofs.rating is not null").pluck :rating
+                   .where("vouches.rating is not null").pluck :rating
     median(ratings)
   end
 

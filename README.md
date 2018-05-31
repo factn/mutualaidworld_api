@@ -316,10 +316,10 @@ Here is the full output:
 					"related": "http://localhost:3000/scenarios/1/parent-scenario"
 				}
 			},
-			"proofs": {
+			"vouches": {
 				"links": {
-					"self": "http://localhost:3000/scenarios/1/relationships/proofs",
-					"related": "http://localhost:3000/scenarios/1/proofs"
+					"self": "http://localhost:3000/scenarios/1/relationships/vouches",
+					"related": "http://localhost:3000/scenarios/1/vouches"
 				}
 			},
 			"donations": {
@@ -420,10 +420,10 @@ Here is the full output:
 						"related": "http://localhost:3000/scenarios/11/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/11/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/11/proofs"
+						"self": "http://localhost:3000/scenarios/11/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/11/vouches"
 					}
 				},
 				"donations": {
@@ -509,10 +509,10 @@ Here is the full output:
 						"related": "http://localhost:3000/scenarios/12/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/12/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/12/proofs"
+						"self": "http://localhost:3000/scenarios/12/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/12/vouches"
 					}
 				},
 				"donations": {
@@ -598,10 +598,10 @@ Here is the full output:
 						"related": "http://localhost:3000/scenarios/13/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/13/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/13/proofs"
+						"self": "http://localhost:3000/scenarios/13/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/13/vouches"
 					}
 				},
 				"donations": {
@@ -700,10 +700,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/1/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/1/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/1/proofs"
+						"self": "http://localhost:3000/scenarios/1/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/1/vouches"
 					}
 				},
 				"donations": {
@@ -806,10 +806,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/11/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/11/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/11/proofs"
+						"self": "http://localhost:3000/scenarios/11/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/11/vouches"
 					}
 				},
 				"donations": {
@@ -899,10 +899,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/12/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/12/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/12/proofs"
+						"self": "http://localhost:3000/scenarios/12/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/12/vouches"
 					}
 				},
 				"donations": {
@@ -992,10 +992,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/13/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/13/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/13/proofs"
+						"self": "http://localhost:3000/scenarios/13/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/13/vouches"
 					}
 				},
 				"donations": {
@@ -1085,10 +1085,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/23/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/23/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/23/proofs"
+						"self": "http://localhost:3000/scenarios/23/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/23/vouches"
 					}
 				},
 				"donations": {
@@ -1178,10 +1178,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/24/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/24/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/24/proofs"
+						"self": "http://localhost:3000/scenarios/24/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/24/vouches"
 					}
 				},
 				"donations": {
@@ -1271,10 +1271,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/25/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/25/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/25/proofs"
+						"self": "http://localhost:3000/scenarios/25/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/25/vouches"
 					}
 				},
 				"donations": {
@@ -1364,10 +1364,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/27/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/27/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/27/proofs"
+						"self": "http://localhost:3000/scenarios/27/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/27/vouches"
 					}
 				},
 				"donations": {
@@ -1457,10 +1457,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/28/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/28/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/28/proofs"
+						"self": "http://localhost:3000/scenarios/28/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/28/vouches"
 					}
 				},
 				"donations": {
@@ -1550,10 +1550,10 @@ To get a list of all parent scenarios, with their children scenarios embedded:
 						"related": "http://localhost:3000/scenarios/29/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "http://localhost:3000/scenarios/29/relationships/proofs",
-						"related": "http://localhost:3000/scenarios/29/proofs"
+						"self": "http://localhost:3000/scenarios/29/relationships/vouches",
+						"related": "http://localhost:3000/scenarios/29/vouches"
 					}
 				},
 				"donations": {
@@ -1759,10 +1759,10 @@ which gives us a scenario stanza with the boolean "is_parent": true, and an incl
 						"related": "https://lion-uat.herokuapp.com/scenarios/1/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/proofs",
-						"related": "https://lion-uat.herokuapp.com/scenarios/1/proofs"
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/vouches",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/vouches"
 					}
 				},
 				"donations": {
@@ -1947,10 +1947,10 @@ The full response is:
 					"related": "https://lion-uat.herokuapp.com/scenarios/2/parent-scenario"
 				}
 			},
-			"proofs": {
+			"vouches": {
 				"links": {
-					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/proofs",
-					"related": "https://lion-uat.herokuapp.com/scenarios/2/proofs"
+					"self": "https://lion-uat.herokuapp.com/scenarios/2/relationships/vouches",
+					"related": "https://lion-uat.herokuapp.com/scenarios/2/vouches"
 				}
 			},
 			"donations": {
@@ -2050,10 +2050,10 @@ The full response is:
 						"related": "https://lion-uat.herokuapp.com/scenarios/1/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/proofs",
-						"related": "https://lion-uat.herokuapp.com/scenarios/1/proofs"
+						"self": "https://lion-uat.herokuapp.com/scenarios/1/relationships/vouches",
+						"related": "https://lion-uat.herokuapp.com/scenarios/1/vouches"
 					}
 				},
 				"donations": {
@@ -2142,10 +2142,10 @@ The full response is:
 						"related": "https://lion-uat.herokuapp.com/scenarios/3/parent-scenario"
 					}
 				},
-				"proofs": {
+				"vouches": {
 					"links": {
-						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/proofs",
-						"related": "https://lion-uat.herokuapp.com/scenarios/3/proofs"
+						"self": "https://lion-uat.herokuapp.com/scenarios/3/relationships/vouches",
+						"related": "https://lion-uat.herokuapp.com/scenarios/3/vouches"
 					}
 				},
 				"donations": {
@@ -2223,23 +2223,23 @@ DELETE    /events/:id
 
 Any photos of the scenario being completed - a picture of a fixed roof, a picture of some bottles of delivered water, this is what a verifier produces:
 ```
-GET       /proofs
-POST      /proofs
-GET       /proofs/:id
-PUT|PATCH /proofs/:id
-DELETE    /proofs/:id
+GET       /vouches
+POST      /vouches
+GET       /vouches/:id
+PUT|PATCH /vouches/:id
+DELETE    /vouches/:id
 ```
 
-These get and change related data - /proofs/:proof_id/scenario gets the scenario this proof is for
+These get and change related data - /vouches/:vouch_id/scenario gets the scenario this vouch is for
 ```
-GET       /proofs/:proof_id/relationships/scenario
-PUT|PATCH /proofs/:proof_id/relationships/scenario
-DELETE    /proofs/:proof_id/relationships/scenario
-GET       /proofs/:proof_id/scenario
-GET       /proofs/:proof_id/relationships/verifier
-PUT|PATCH /proofs/:proof_id/relationships/verifier
-DELETE    /proofs/:proof_id/relationships/verifier
-GET       /proofs/:proof_id/verifier
+GET       /vouches/:vouch_id/relationships/scenario
+PUT|PATCH /vouches/:vouch_id/relationships/scenario
+DELETE    /vouches/:vouch_id/relationships/scenario
+GET       /vouches/:vouch_id/scenario
+GET       /vouches/:vouch_id/relationships/verifier
+PUT|PATCH /vouches/:vouch_id/relationships/verifier
+DELETE    /vouches/:vouch_id/relationships/verifier
+GET       /vouches/:vouch_id/verifier
 ```
 
 The scenarios requesters create, verb noun for requester. Subtasks are stored as other scenarios and can be gotten with `GET {{ base_url }}/scenarios/:scenario_id/children-scenario`
@@ -2273,11 +2273,11 @@ GET       /scenarios/:scenario_id/relationships/parent-scenario
 PUT|PATCH /scenarios/:scenario_id/relationships/parent-scenario
 DELETE    /scenarios/:scenario_id/relationships/parent-scenario
 GET       /scenarios/:scenario_id/parent-scenario
-GET       /scenarios/:scenario_id/relationships/proofs
-POST      /scenarios/:scenario_id/relationships/proofs
-PUT|PATCH /scenarios/:scenario_id/relationships/proofs
-DELETE    /scenarios/:scenario_id/relationships/proofs
-GET       /scenarios/:scenario_id/proofs
+GET       /scenarios/:scenario_id/relationships/vouches
+POST      /scenarios/:scenario_id/relationships/vouches
+PUT|PATCH /scenarios/:scenario_id/relationships/vouches
+DELETE    /scenarios/:scenario_id/relationships/vouches
+GET       /scenarios/:scenario_id/vouches
 GET       /scenarios/:scenario_id/relationships/donations
 POST      /scenarios/:scenario_id/relationships/donations
 PUT|PATCH /scenarios/:scenario_id/relationships/donations

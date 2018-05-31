@@ -10,8 +10,8 @@ class Scenario < ApplicationRecord
   belongs_to :doer, class_name: "User", inverse_of: :done, optional: true
   belongs_to :parent_scenario, class_name: "Scenario", inverse_of: :children_scenario, optional: true
 
-  # has_many :verifications, class_name: 'Proofs', dependent: :destroy, inverse_of: :scenario
-  has_many :proofs, dependent: :destroy
+  # has_many :verifications, class_name: 'Vouches', dependent: :destroy, inverse_of: :scenario
+  has_many :vouches, dependent: :destroy
   has_many :donations, dependent: :destroy
   has_many :children_scenario, class_name: "Scenario", dependent: :nullify, inverse_of: :parent_scenario, foreign_key: :parent_scenario_id
   has_many :user_ad_interactions, dependent: :destroy
@@ -67,7 +67,7 @@ class Scenario < ApplicationRecord
   end
 
   def verified
-    proofs.count.positive?
+    vouches.count.positive?
   end
 
   def ratio_for_user(user)
@@ -93,6 +93,6 @@ class Scenario < ApplicationRecord
   end
 
   def is_complete
-    !proofs.count.zero?
+    !vouches.count.zero?
   end
 end

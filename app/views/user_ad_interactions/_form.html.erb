@@ -14,22 +14,22 @@
 
 <div class="field">
   <%= form.label :user_id %>
-  <%= select("proof", "user_id", User.all.collect {|u| [ u.name, u.id ] }, { }) %>
+  <%= select("vouch", "user_id", User.all.collect {|u| [ u.name, u.id ] }, { }) %>
 </div>
 
 <div class="field">
   <%= form.label :interaction_type_id %>
-  <%= select("proof", "interaction_type_id", InteractionType.all.collect {|i| [ i.description, i.id ] }, { }) %>
+  <%= select("vouch", "interaction_type_id", InteractionType.all.collect {|i| [ i.description, i.id ] }, { }) %>
 </div>
 
 <div class="field">
   <%= form.label :ad_type_id %>
-  <%= select("proof", "ad_type_id", AdType.all.collect {|a| [ a.description, a.id ] }, { }) %>
+  <%= select("vouch", "ad_type_id", AdType.all.collect {|a| [ a.description, a.id ] }, { }) %>
 </div>
 
 <div class="field">
   <%= form.label :scenario_id %>
-  <%= select("proof", "scenario_id", Scenario.all.collect {|s| [ s.description, s.id ] }, { }) %>
+  <%= select("vouch", "scenario_id", Scenario.all.collect {|s| [ s.description, s.id ] }, { }) %>
 </div>
 
 

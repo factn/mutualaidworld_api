@@ -11,7 +11,7 @@ class UserResource < JSONAPI::Resource
   has_many :done, class_name: "Scenario"
 
   has_many :donated, class_name: "Donation"
-  has_many :verified, class_name: "Proof"
+  has_many :verified, class_name: "Vouch"
 
   def avatarthumb
     @model.avatar.url(:thumb)

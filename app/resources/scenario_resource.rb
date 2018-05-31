@@ -10,7 +10,7 @@ class ScenarioResource < JSONAPI::Resource
   has_one :event
   has_one :parent_scenario, class_name: "Scenario"
 
-  has_many :proofs
+  has_many :vouches
   has_many :donations
   has_many :children_scenario, class_name: "Scenario"
   has_many :user_ad_interaction
