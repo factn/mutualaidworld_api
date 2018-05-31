@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   resources :interaction_types
   resources :donations
   resources :events
-  resources :proofs
+  resources :vouches
   resources :scenarios
   # jsonapi_resources :users
   resources :nouns
   resources :verbs
 
-  jsonapi_resources :proofs
+  jsonapi_resources :vouches
   jsonapi_resources :scenarios
   jsonapi_resources :users
   jsonapi_resources :nouns
