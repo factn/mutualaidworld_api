@@ -1,4 +1,4 @@
-class Proof < ApplicationRecord
+class Vouch < ApplicationRecord
   validates :rating, numericality: { allow_nil: true,
                                      only_integer: false,
                                      greater_than_or_equal_to: 0,

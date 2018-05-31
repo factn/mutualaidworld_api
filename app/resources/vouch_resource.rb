@@ -1,4 +1,4 @@
-class ProofResource < JSONAPI::Resource
+class VouchResource < JSONAPI::Resource
   attributes :image, :imagethumb, :scenario, :description, :rating, :created_at, :updated_at
 
   has_one :scenario
