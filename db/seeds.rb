@@ -9,8 +9,8 @@
 if Rails.env.development? || Rails.env.test?
   puts "lookup data"
   # lookup data
-  verbs = %w[get deliver find throw fix patch attach borrow]
-  nouns = ["water", "food", "gold", "child", "roof", "nails", "materials", "corrugated iron", "h4 2x4 rafters", "waratah", "tarpaulin", "rope", "truck", "car", "ute", "airboat", "labourer", "volunteers", "transportation"]
+  verbs = %w[get deliver find throw fix patch attach borrow verify]
+  nouns = ["water", "food", "gold", "child", "roof", "nails", "materials", "corrugated iron", "h4 2x4 rafters", "waratah", "tarpaulin", "rope", "truck", "car", "ute", "airboat", "labourer", "volunteers", "transportation", "mission"]
   events = ["Kaikora Earthquake", "Hurricane Katrina"]
   adtypes = %w[doer requester donator verifier]
   interactiontypes = ["served to", "dismissed"]

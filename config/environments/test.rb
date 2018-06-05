@@ -60,4 +60,5 @@ Rails.application.configure do
     password: uri.password
   }.freeze
 
+  config.TRUST_THRESHOLD = 0.5
 end
