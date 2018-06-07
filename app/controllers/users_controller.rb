@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  # allow users to be created without a log in by overriding the application controllers before actions
+  before_action :attempt_login, except: [:create, :new]
+  before_action :authenticate_user!, except: [:create, :new]
+
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users
