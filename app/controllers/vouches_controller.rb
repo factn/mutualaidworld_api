@@ -39,7 +39,7 @@ class VouchesController < ApplicationController
 
         # if its a self vouch, and the voucher has low hon3y, create a mission for the requestor to verify the job
         if new_vouch.verifier.id == new_vouch.scenario.doer.id
-          if (new_vouch.scenario.doer.hon3y || 0) <mRails.configuration.TRUST_THRESHOLD
+          if (new_vouch.scenario.doer.hon3y || 0) < Rails.configuration.TRUST_THRESHOLD
             Scenario.create(doer: new_vouch.scenario.requester,
                             requester: new_vouch.scenario.doer,
                             noun: Noun.find_or_create_by(description: "mission"),
