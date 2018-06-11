@@ -30,6 +30,11 @@ class User < ApplicationRecord
   end
 
   def hon3y
+    # here, where vouches.rating is null, we need to instead find the parent scenario if it exists and use that rating
+    # Do I need to get all the ratings, and iterate across the array looking for null then for each null rating go find its parent?
+    # I don't think I can do this in sql
+    # wtf am I doing here?
+
     ratings = Vouch.select("rating")
                    .joins(scenario: :requester)
                    .where(users: { id: id })
