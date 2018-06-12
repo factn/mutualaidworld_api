@@ -63,7 +63,7 @@ if Rails.env.development? || Rails.env.test?
   Scenario.create(verb_id: Verb.find_by(description: "get").id,
                   noun_id: Noun.find_by(description: "materials").id,
                   requester_id: User.find_by(email: "test@example.com").id,
-                  doer_id: nil,
+                  doer_id: 7,
                   event_id: Event.find_by(description: "Hurricane Katrina").id,
                   funding_goal: nil,
                   parent_scenario_id: 1,
@@ -72,7 +72,7 @@ if Rails.env.development? || Rails.env.test?
   Scenario.create(verb_id: Verb.find_by(description: "get").id,
                   noun_id: Noun.find_by(description: "transportation").id,
                   requester_id: User.find_by(email: "test@example.com").id,
-                  doer_id: nil,
+                  doer_id: 7,
                   event_id: Event.find_by(description: "Hurricane Katrina").id,
                   funding_goal: nil,
                   parent_scenario_id: 1,
@@ -81,7 +81,7 @@ if Rails.env.development? || Rails.env.test?
   Scenario.create(verb_id: Verb.find_by(description: "get").id,
                   noun_id: Noun.find_by(description: "volunteers").id,
                   requester_id: User.find_by(email: "test@example.com").id,
-                  doer_id: nil,
+                  doer_id: 8,
                   event_id: Event.find_by(description: "Hurricane Katrina").id,
                   funding_goal: nil,
                   parent_scenario_id: 1,
@@ -89,8 +89,16 @@ if Rails.env.development? || Rails.env.test?
 
   puts "vouches"
 
-  Vouch.create([{ scenario_id: 4, verifier_id: 1, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
-                { scenario_id: 6, verifier_id: 2, image: File.open(Rails.root.join("vendor", "personeating.jpg")) }])
+  Vouch.create([{ scenario_id: 1, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
+                { scenario_id: 6, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 2, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 5, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 8, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 9, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 11, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+                { scenario_id: 12, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) } ])
+
+# scenarios id 11 and 12 are subtasks of scenario id 1, they have no rating but are "done" so they should get scenario 1's rating
 
   puts "ad user interactions"
   UserAdInteraction.create([{ user_id: 1, interaction_type_id: 1, ad_type_id: 1, scenario_id: 4 },

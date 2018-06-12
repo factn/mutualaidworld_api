@@ -70,6 +70,15 @@ class Scenario < ApplicationRecord
     vouches.count.positive?
   end
 
+  def ratings
+    # get a list of ratings from all vouches for this scenario, and its parent scenario if its a child
+    ratings = vouches.where("rating is not null").pluck :rating
+
+    ratings += parent_scenario.ratings if is_child
+
+    ratings
+  end
+
   def ratio_for_user(user)
     # need to implement https://github.com/togglepro/pundit-resources or something for user
     # but lkets fake it for now
