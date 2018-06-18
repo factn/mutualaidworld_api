@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe EventsController, type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new event" do
@@ -10,7 +12,7 @@ RSpec.describe EventsController, type: :request do
         }
 
         expect do
-          post "/events", headers: headers, params: { "data": { "type": "events", "attributes": { "description": "blaa" } } }.to_json
+          post "/events?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "events", "attributes": { "description": "blaa" } } }.to_json
         end.to change(Event, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -28,7 +30,7 @@ RSpec.describe EventsController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/events", headers: headers
+        get "/events?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {

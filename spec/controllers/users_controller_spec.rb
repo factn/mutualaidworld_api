@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
+  let!(:logged_in_user) { FactoryBot.create(:user) }
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new user" do
@@ -10,7 +12,7 @@ RSpec.describe UsersController, type: :request do
         }
 
         expect do
-          post "/users", headers: headers, params: { "data": { "type": "users", "attributes": { "email": "user@example.com", "password": "password", "password_confirmation": "password" } } }.to_json
+          post "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: { "data": { "type": "users", "attributes": { "email": "user@example.com", "password": "password", "password_confirmation": "password" } } }.to_json
         end.to change(User, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -29,65 +31,60 @@ RSpec.describe UsersController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
 
-        get "/users", headers: headers
+        get "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
 
         test_json = {
-          "data": [{
-            "id": user.id.to_s,
-            "type": "users",
-            "links": {
-              "self": "http://www.example.com/users/#{user.id}"
+          "id": user.id.to_s,
+          "type": "users",
+          "links": {
+            "self": "http://www.example.com/users/#{user.id}"
+          },
+          "attributes": {
+            "avatar": user.avatar.to_s,
+            "latitude": user.latitude,
+            "longitude": user.longitude,
+            "email": user.email.to_s,
+            "firstname": user.firstname.to_s,
+            "lastname": user.lastname.to_s,
+            "password": nil,
+            "password_confirmation": nil,
+            "default_total_session_donation": user.default_total_session_donation.to_s,
+            "default_swipe_donation": user.default_swipe_donation.to_s,
+            "created_at": JSON.parse(user.created_at.to_json),
+            "updated_at": JSON.parse(user.updated_at.to_json)
+          },
+          "relationships": {
+            "scenarios": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/scenarios", "related": "http://www.example.com/users/#{user.id}/scenarios"
+              }
             },
-            "attributes": {
-              "avatar": user.avatar.to_s,
-              "latitude": user.latitude,
-              "longitude": user.longitude,
-              "email": user.email.to_s,
-              "firstname": user.firstname.to_s,
-              "lastname": user.lastname.to_s,
-              "password": nil,
-              "password_confirmation": nil,
-              "default_total_session_donation": user.default_total_session_donation.to_s,
-              "default_swipe_donation": user.default_swipe_donation.to_s,
-              "created_at": JSON.parse(user.created_at.to_json),
-              "updated_at": JSON.parse(user.updated_at.to_json)
+            "requested": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/requested", "related": "http://www.example.com/users/#{user.id}/requested"
+              }
             },
-            "relationships": {
-              "scenarios": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/scenarios", "related": "http://www.example.com/users/#{user.id}/scenarios"
-                }
-              },
-              "requested": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/requested", "related": "http://www.example.com/users/#{user.id}/requested"
-                }
-              },
-              "done": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/done", "related": "http://www.example.com/users/#{user.id}/done"
-                }
-              },
-              "donated": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/donated", "related": "http://www.example.com/users/#{user.id}/donated"
-                }
-              },
-              "verified": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/verified", "related": "http://www.example.com/users/#{user.id}/verified"
-                }
+            "done": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/done", "related": "http://www.example.com/users/#{user.id}/done"
+              }
+            },
+            "donated": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/donated", "related": "http://www.example.com/users/#{user.id}/donated"
+              }
+            },
+            "verified": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/verified", "related": "http://www.example.com/users/#{user.id}/verified"
               }
             }
-          }],
-          "links": {
-            "first": "http://www.example.com/users?page%5Blimit%5D=100&page%5Boffset%5D=0", "last": "http://www.example.com/users?page%5Blimit%5D=100&page%5Boffset%5D=0"
           }
         }
 
-        expect(response_json).to include_json(test_json)
+        expect(response_json).to include_json(data: UnorderedArray(test_json))
       end
 
       it "gets one of them" do
@@ -96,7 +93,7 @@ RSpec.describe UsersController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
 
-        get "/users/#{user.id}", headers: headers
+        get "/users/#{user.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
@@ -164,7 +161,7 @@ RSpec.describe UsersController, type: :request do
         expect(user.city_state.to_s).to_not eq("New Donk City")
         expect(user2.city_state.to_s).to_not eq("New Donk City")
 
-        patch "/users/#{user2.id}", headers: headers, params: {
+        patch "/users/#{user2.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: {
           "data": {
             "type": "users",
             "id": user2.id.to_s,
@@ -175,7 +172,7 @@ RSpec.describe UsersController, type: :request do
         }.to_json
 
         user2.reload
-        get "/users?filter[city_state]=New Donk City", headers: headers
+        get "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}&filter[city_state]=New Donk City", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
@@ -261,7 +258,7 @@ RSpec.describe UsersController, type: :request do
         expect(user.street_address.to_s).to_not eq(new_street_address)
         expect(user.city_state.to_s).to_not eq(new_city_state)
 
-        patch "/users/#{user.id}", headers: headers, params: {
+        patch "/users/#{user.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: {
           "data": {
             "type": "users",
             "id": user.id.to_s,

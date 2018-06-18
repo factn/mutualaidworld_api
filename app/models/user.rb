@@ -30,11 +30,11 @@ class User < ApplicationRecord
   end
 
   def hon3y
-    ratings = Vouch.select("rating")
-                   .joins(scenario: :requester)
-                   .where(users: { id: id })
-                   .where("vouches.rating is not null").pluck :rating
     median(ratings)
+  end
+
+  def ratings
+    done.map(&:ratings).reduce([], :+)
   end
 
   def median(ratings)

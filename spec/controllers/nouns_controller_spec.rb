@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe NounsController, type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new noun" do
@@ -10,7 +12,7 @@ RSpec.describe NounsController, type: :request do
         }
 
         expect do
-          post "/nouns", headers: headers, params: { "data": { "type": "nouns", "attributes": { "description": "blaa" } } }.to_json
+          post "/nouns?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "nouns", "attributes": { "description": "blaa" } } }.to_json
         end.to change(Noun, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -28,7 +30,7 @@ RSpec.describe NounsController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/nouns", headers: headers
+        get "/nouns?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {

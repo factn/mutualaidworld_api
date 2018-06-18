@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe VouchesController, type: :request do
   let(:user) { FactoryBot.create(:user) }
-  let(:scenario) { FactoryBot.create(:scenario) }
+  let(:scenario) { FactoryBot.create(:scenario, :has_doer) }
 
   describe "POST #create" do
     context "with valid params" do
@@ -13,7 +13,7 @@ RSpec.describe VouchesController, type: :request do
         }
 
         expect do
-          post "/vouches", headers: headers, params: { "data":
+          post "/vouches?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data":
                                                       { "type": "vouches",
                                                         "attributes": {},
                                                         "relationships":
@@ -36,7 +36,7 @@ RSpec.describe VouchesController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/vouches", headers: headers
+        get "/vouches?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {

@@ -6,5 +6,9 @@ FactoryBot.define do
     association(:noun, factory: :noun)
 
     funding_goal "50"
+
+    trait :has_doer do
+      association(:doer, factory: :user)
+    end
   end
 end

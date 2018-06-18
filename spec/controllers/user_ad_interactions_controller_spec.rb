@@ -18,7 +18,7 @@ RSpec.describe UserAdInteractionsController, type: :request do
         }
 
         expect do
-          post "/user_ad_interactions", headers: headers, params: { "data":
+          post "/user_ad_interactions?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data":
                                                                     { "type": "user_ad_interactions",
                                                                       "attributes": {},
                                                                       "relationships":
@@ -38,7 +38,7 @@ RSpec.describe UserAdInteractionsController, type: :request do
         }
 
         expect do
-          post "/user_ad_interactions", headers: headers, params: { "data":
+          post "/user_ad_interactions?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data":
                                                                     { "type": "user_ad_interactions",
                                                                       "attributes": {},
                                                                       "relationships":
@@ -63,7 +63,7 @@ RSpec.describe UserAdInteractionsController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/user_ad_interactions", headers: headers
+        get "/user_ad_interactions?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
