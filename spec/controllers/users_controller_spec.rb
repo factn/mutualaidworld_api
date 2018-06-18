@@ -26,8 +26,6 @@ RSpec.describe UsersController, type: :request do
 
     context "with valid params" do
       it "gets them all" do
-        binding.pry
-
         headers = {
           "Accept": "application/vnd.api+json",
           "Content-Type": "application/vnd.api+json"
@@ -85,6 +83,8 @@ RSpec.describe UsersController, type: :request do
               }
             }
           }
+
+        binding.pry
 
         expect(response_json).to include_json(test_json)
       end
