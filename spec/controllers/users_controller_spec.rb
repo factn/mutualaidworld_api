@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
+  let!(:logged_in_user) { FactoryBot.create(:user) }
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new user" do
@@ -10,7 +12,7 @@ RSpec.describe UsersController, type: :request do
         }
 
         expect do
-          post "/users", headers: headers, params: { "data": { "type": "users", "attributes": { "email": "user@example.com", "password": "password", "password_confirmation": "password" } } }.to_json
+          post "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: { "data": { "type": "users", "attributes": { "email": "user@example.com", "password": "password", "password_confirmation": "password" } } }.to_json
         end.to change(User, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -24,17 +26,18 @@ RSpec.describe UsersController, type: :request do
 
     context "with valid params" do
       it "gets them all" do
+        binding.pry
+
         headers = {
           "Accept": "application/vnd.api+json",
           "Content-Type": "application/vnd.api+json"
         }
 
-        get "/users", headers: headers
+        get "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
 
         test_json = {
-          "data": [{
             "id": user.id.to_s,
             "type": "users",
             "links": {
@@ -81,11 +84,7 @@ RSpec.describe UsersController, type: :request do
                 }
               }
             }
-          }],
-          "links": {
-            "first": "http://www.example.com/users?page%5Blimit%5D=100&page%5Boffset%5D=0", "last": "http://www.example.com/users?page%5Blimit%5D=100&page%5Boffset%5D=0"
           }
-        }
 
         expect(response_json).to include_json(test_json)
       end
@@ -96,7 +95,7 @@ RSpec.describe UsersController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
 
-        get "/users/#{user.id}", headers: headers
+        get "/users/#{user.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
@@ -164,7 +163,7 @@ RSpec.describe UsersController, type: :request do
         expect(user.city_state.to_s).to_not eq("New Donk City")
         expect(user2.city_state.to_s).to_not eq("New Donk City")
 
-        patch "/users/#{user2.id}", headers: headers, params: {
+        patch "/users/#{user2.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: {
           "data": {
             "type": "users",
             "id": user2.id.to_s,
@@ -261,7 +260,7 @@ RSpec.describe UsersController, type: :request do
         expect(user.street_address.to_s).to_not eq(new_street_address)
         expect(user.city_state.to_s).to_not eq(new_city_state)
 
-        patch "/users/#{user.id}", headers: headers, params: {
+        patch "/users/#{user.id}?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: {
           "data": {
             "type": "users",
             "id": user.id.to_s,

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe AdTypesController, type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new ad_type" do
@@ -10,7 +12,7 @@ RSpec.describe AdTypesController, type: :request do
         }
 
         expect do
-          post "/ad_types", headers: headers, params: { "data": { "type": "ad_types", "attributes": { "description": "blaa" } } }.to_json
+          post "/ad_types?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "ad_types", "attributes": { "description": "blaa" } } }.to_json
         end.to change(AdType, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -28,7 +30,7 @@ RSpec.describe AdTypesController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/ad_types", headers: headers
+        get "/ad_types?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {

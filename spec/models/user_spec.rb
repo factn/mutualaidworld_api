@@ -1,5 +1,10 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:vouch) { FactoryBot.create(:vouch) }
+  let!(:doer) { vouch.scenario.doer }
+
+  it "foo" do
+    binding.pry
+  end
 end

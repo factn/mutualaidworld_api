@@ -17,7 +17,7 @@ RSpec.describe ScenariosController, type: :request do
 
         # creating a scenario via the API creates 4 subtasks
         expect do
-          post "/scenarios", headers: headers, params: { "data": { "type": "scenarios", "attributes": {}, "relationships": { "verb": { "data": { "id": verb.id, "type": "verbs" } }, "noun": { "data": { "id": noun.id, "type": "nouns" } }, "event": { "data": { "id": event.id, "type": "events" } } } } }.to_json
+          post "/scenarios?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "scenarios", "attributes": {}, "relationships": { "verb": { "data": { "id": verb.id, "type": "verbs" } }, "noun": { "data": { "id": noun.id, "type": "nouns" } }, "event": { "data": { "id": event.id, "type": "events" } } } } }.to_json
         end.to change(Scenario, :count).by(5)
 
         expect(response).to have_http_status(:created)
@@ -35,7 +35,7 @@ RSpec.describe ScenariosController, type: :request do
 
         expect(scenario.doer_id).not_to equal(user.id)
 
-        patch "/scenarios/#{scenario.id}", headers: headers, params: { "data": { "type": "scenarios", "id": scenario.id, "attributes": {}, "relationships": { "doer": { "data": { "id": user.id, "type": "users" } } } } }.to_json
+        patch "/scenarios/#{scenario.id}?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "scenarios", "id": scenario.id, "attributes": {}, "relationships": { "doer": { "data": { "id": user.id, "type": "users" } } } } }.to_json
         expect(response).to have_http_status(200)
 
         scenario.reload
@@ -58,7 +58,7 @@ RSpec.describe ScenariosController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
 
-        get "/scenarios?filter[#{role}_ad_not_dismissed_by]=#{a_dismisser.id}", headers: headers
+        get "/scenarios?email=#{user.email}&password=#{user.password}&filter[#{role}_ad_not_dismissed_by]=#{a_dismisser.id}", headers: headers
 
         expect(JSON.parse(response.body)["data"][0]["id"]).to eq(non_dismissed_scenario.id.to_s)
 

@@ -13,7 +13,7 @@ RSpec.describe DonationsController, type: :request do
         }
 
         expect do
-          post "/donations", headers: headers, params: { "data": { "type": "donations", "attributes": { "amount": "17" }, "relationships": { "donator": { "data": { "type": "users", "id": user.id } }, "scenario": { "data": { "id": scenario.id, "type": "scenarios" } } } } }.to_json
+          post "/donations?email=#{user.email}&password=#{user.password}", headers: headers, params: { "data": { "type": "donations", "attributes": { "amount": "17" }, "relationships": { "donator": { "data": { "type": "users", "id": user.id } }, "scenario": { "data": { "id": scenario.id, "type": "scenarios" } } } } }.to_json
         end.to change(Donation, :count).by(1)
 
         expect(response).to have_http_status(:created)
@@ -31,7 +31,7 @@ RSpec.describe DonationsController, type: :request do
           "Content-Type": "application/vnd.api+json"
         }
         # binding.pry
-        get "/donations", headers: headers
+        get "/donations?email=#{user.email}&password=#{user.password}", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
