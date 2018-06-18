@@ -5,6 +5,6 @@ RSpec.describe User, type: :model do
   let!(:doer) { vouch.scenario.doer }
 
   it "foo" do
-    binding.pry
+    #binding.pry
   end
 end
