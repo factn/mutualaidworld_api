@@ -2,10 +2,12 @@ class ScenariosController < ApplicationController
   before_action :set_scenario, only: %i[show edit update destroy]
   # get/materials", "get/transportation", "patch/roof", and "fix/roof"
 
-  @@subtask_goals = [{ verb: "get", noun: "materials" },
-                     { verb: "get", noun: "transportation" },
-                     { verb: "patch", noun: "roof" },
-                     { verb: "fix", noun: "roof" }]
+  @@subtask_goals = [{ verb: "organise", noun: "materials", custom_message: "Organise materials" },
+                     { verb: "collect", noun: "donations", custom_message: "Collect donations for materials" },
+                     { verb: "pick up", noun: "volunteer labour", custom_message: "Pick up volunteer labour" },
+                     { verb: "pick up", noun: "materials", custom_message: "Pick up materials" },
+                     { verb: "patch", noun: "roof", custom_message: "Patch Roof" },
+                     { verb: "paint and seal", noun: "roof", custom_message: "Paint & Seal Roof" }]
 
   # GET /scenarios
   # GET /scenarios.json
