@@ -36,57 +36,55 @@ RSpec.describe UsersController, type: :request do
         response_json = JSON.parse(response.body)
 
         test_json = {
-            "id": user.id.to_s,
-            "type": "users",
-            "links": {
-              "self": "http://www.example.com/users/#{user.id}"
+          "id": user.id.to_s,
+          "type": "users",
+          "links": {
+            "self": "http://www.example.com/users/#{user.id}"
+          },
+          "attributes": {
+            "avatar": user.avatar.to_s,
+            "latitude": user.latitude,
+            "longitude": user.longitude,
+            "email": user.email.to_s,
+            "firstname": user.firstname.to_s,
+            "lastname": user.lastname.to_s,
+            "password": nil,
+            "password_confirmation": nil,
+            "default_total_session_donation": user.default_total_session_donation.to_s,
+            "default_swipe_donation": user.default_swipe_donation.to_s,
+            "created_at": JSON.parse(user.created_at.to_json),
+            "updated_at": JSON.parse(user.updated_at.to_json)
+          },
+          "relationships": {
+            "scenarios": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/scenarios", "related": "http://www.example.com/users/#{user.id}/scenarios"
+              }
             },
-            "attributes": {
-              "avatar": user.avatar.to_s,
-              "latitude": user.latitude,
-              "longitude": user.longitude,
-              "email": user.email.to_s,
-              "firstname": user.firstname.to_s,
-              "lastname": user.lastname.to_s,
-              "password": nil,
-              "password_confirmation": nil,
-              "default_total_session_donation": user.default_total_session_donation.to_s,
-              "default_swipe_donation": user.default_swipe_donation.to_s,
-              "created_at": JSON.parse(user.created_at.to_json),
-              "updated_at": JSON.parse(user.updated_at.to_json)
+            "requested": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/requested", "related": "http://www.example.com/users/#{user.id}/requested"
+              }
             },
-            "relationships": {
-              "scenarios": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/scenarios", "related": "http://www.example.com/users/#{user.id}/scenarios"
-                }
-              },
-              "requested": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/requested", "related": "http://www.example.com/users/#{user.id}/requested"
-                }
-              },
-              "done": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/done", "related": "http://www.example.com/users/#{user.id}/done"
-                }
-              },
-              "donated": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/donated", "related": "http://www.example.com/users/#{user.id}/donated"
-                }
-              },
-              "verified": {
-                "links": {
-                  "self": "http://www.example.com/users/#{user.id}/relationships/verified", "related": "http://www.example.com/users/#{user.id}/verified"
-                }
+            "done": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/done", "related": "http://www.example.com/users/#{user.id}/done"
+              }
+            },
+            "donated": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/donated", "related": "http://www.example.com/users/#{user.id}/donated"
+              }
+            },
+            "verified": {
+              "links": {
+                "self": "http://www.example.com/users/#{user.id}/relationships/verified", "related": "http://www.example.com/users/#{user.id}/verified"
               }
             }
           }
+        }
 
-        binding.pry
-
-        expect(response_json).to include_json(test_json)
+        expect(response_json).to include_json(data: UnorderedArray(test_json))
       end
 
       it "gets one of them" do
@@ -174,7 +172,7 @@ RSpec.describe UsersController, type: :request do
         }.to_json
 
         user2.reload
-        get "/users?filter[city_state]=New Donk City", headers: headers
+        get "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}&filter[city_state]=New Donk City", headers: headers
 
         response_json = JSON.parse(response.body)
         test_json = {
