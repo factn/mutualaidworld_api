@@ -35,6 +35,7 @@ class Scenario < ApplicationRecord
   def self.create_subtask(new_scenario, goal)
     Scenario.create(parent_scenario: new_scenario,
                     event: new_scenario.event,
+                    requester: new_scenario.requester,
                     verb: Verb.find_or_create_by(description: goal[:verb]),
                     noun: Noun.find_or_create_by(description: goal[:noun]),
                     custom_message: goal[:custom_message])
