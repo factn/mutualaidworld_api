@@ -1,0 +1,46 @@
+<!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
+<div id="<%= "lion_ad_content_#{scenario.id}_verify" %>">
+  <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/verifier/") do %>
+    <%= render 'ad_profile_header' %>
+
+    <%= image_tag scenario.image.url(:medium), :class => "main-image" %>
+
+    <h1>Help us verify <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %></h1>
+
+    <h2><%= scenario.event.description  if scenario.event %></h2>
+
+    <p>Are you able to verify that
+      <%= scenario.doer.firstname.slice(0,1).capitalize + scenario.doer.firstname.slice(1..-1) if scenario.doer %>
+      <%= scenario.verb.description %>
+      <%= scenario.noun.description %>
+      for
+      <%= scenario.requester.firstname.slice(0,1).capitalize + scenario.requester.firstname.slice(1..-1) if scenario.requester %>?
+    </p>
+
+    <div class="location">
+      <img class="location-icon" src="<%= asset_path( 'map-pin.png' ) %>" />
+      <% if scenario.event.location_name then %>
+        <span> <%= scenario.event.location_name %></span>
+      <% else %>
+        <span> <%= scenario.requesterlat %>, <%= scenario.requesterlon %></span>
+      <% end %>
+    </div>
+    <div class="progress-bar">
+      <input class="progress-bar-slider" type="range" min="0" max="<%= scenario.funding_goal %>" value="<%= scenario.donated %>" disabled>
+    </div>
+    <div class="progress-data">
+      <div><b>$<%= scenario.donated.to_i %></b> funded</div>
+    </div>
+    <div class="share-bar">
+      <div class="share-bar-left">
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction1.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction2.png' ) %>" />
+        <img class="share-bar-icon" src="<%= asset_path( 'reaction3.png' ) %>" />
+      </div>
+      <div class="share-bar-right">
+        <span>200 Comments  </span>
+        <span>35 Shares</span>
+      </div>
+    </div>
+  <% end %>
+</div>

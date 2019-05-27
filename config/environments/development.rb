@@ -13,12 +13,12 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -30,6 +30,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -51,4 +52,26 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV.fetch("S3_BUCKET_NAME"),
+      access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+      secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"),
+      s3_region: ENV.fetch("AWS_REGION"),
+      s3_host_name: "s3-#{ENV.fetch("AWS_REGION")}.amazonaws.com"
+    }
+  }
+
+  uri = URI.parse "mqtt://flcdwssy:c_EJH1DfnFis@m11.cloudmqtt.com:10464"
+
+  config.MQTTOptions = {
+    remote_host: uri.host,
+    remote_port: uri.port,
+    username: uri.user,
+    password: uri.password
+  }.freeze
+
+  config.TRUST_THRESHOLD = 0.5
 end

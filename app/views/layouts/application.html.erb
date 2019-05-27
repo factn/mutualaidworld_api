@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Wagl</title>
+    <title>Lion</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to('Login', new_user_session_path) %>
+      </li>
+    <% end %>
+
+    <p>
+      <%= link_to 'Scenarios', scenarios_path %>
+      <%= link_to 'Vouches', vouches_path %>
+      <%= link_to 'Verbs', verbs_path %>
+      <%= link_to 'Nouns', nouns_path %>
+      <%= link_to 'Ads', ad_path %>
+      <%= link_to 'Events', events_path %>
+      <%= link_to 'Donations', donations_path %>
+      <%= link_to 'Ad Types', ad_types_path %>
+      <%= link_to 'Interaction Types', interaction_types_path %>
+      <%= link_to 'User Ad Interactions', user_ad_interactions_path %>
+
+    </p>
     <%= yield %>
   </body>
 </html>

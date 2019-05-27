@@ -1,0 +1,36 @@
+<!-- shows the data from a scenario as an ad targeted as a doer, someone who can perform the task in the scenario -->
+
+<div id="<%= "lion_ad_content_#{scenario.id}_do" %>">
+  <%= render 'ad_profile_header' %>
+
+  <p class="subheader">Help
+    <%= scenario.doer_firstname.capitalize if scenario.doer %>
+    <%= scenario.verb.description %>
+    <%= scenario.noun.description %>
+    for
+    <%= scenario.requester_firstname.capitalize if scenario.requester %>
+  </p>
+
+  <%= render 'ad_image', image: scenario.image.url(:medium) %>
+
+  <h1>Can you <%= "#{scenario.verb.description} #{scenario.requester_firstname.capitalize if scenario.requester}'s #{scenario.noun.description}" %>?</h1>
+
+  <h2 class="location">Pearlington, Mississippi</h2>
+
+  <p class="custom-message">Audrey's roof blew off in Hurricane Katrina and it needs patching. Can you please help her fix it?</p>
+
+  <%= link_to("https://lion-frontend-uat.herokuapp.com/#{scenario.id}/doer/") do %>See on LION<% end %>
+
+
+  <div class="share-bar">
+    <div class="share-bar-left">
+      <img class="share-bar-icon" src="<%= asset_path( 'reaction1.png' ) %>" />
+      <img class="share-bar-icon" src="<%= asset_path( 'reaction2.png' ) %>" />
+      <img class="share-bar-icon" src="<%= asset_path( 'reaction3.png' ) %>" />
+    </div>
+    <div class="share-bar-right">
+      <span>200 Comments  </span>
+      <span>35 Shares</span>
+    </div>
+  </div>
+</div>
