@@ -277,7 +277,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry
   pry-remote
-  puma (~> 3.7)
+  puma (~> 3.11)
   pundit
   rack-cors
   rails (~> 5.2.3)
