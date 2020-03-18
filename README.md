@@ -1,4 +1,4 @@
-# LION project
+# Corona Donor project (Rails Back end)
 
 ## Development deployment instructions
 
