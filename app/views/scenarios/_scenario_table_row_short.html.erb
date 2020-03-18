@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Description</th>
+      <th>Verified as complete</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% scenarios.each do |scenario| %>
+      <tr>
+        <td><%= scenario.id %></td>
+        <td><%= image_tag scenario.image.url(:thumb) %></td>
+        <td><%= scenario.description %></td>
+        <td><%= scenario.verified %></td>
+
+        <td><%= link_to 'Show', scenario %></td>
+        <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
+        <td><%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

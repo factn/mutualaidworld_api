@@ -1,0 +1,2 @@
+module UserAdInteractionsHelper
+end

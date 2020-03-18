@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Scenario:</strong>
+  <%= @vouch.scenario.id %>
+  <%= @vouch.scenario.verb.description %>
+  <%= @vouch.scenario.noun.description %>
+  for
+  <%= @vouch.scenario.requester.name %>
+  verified by:
+  <%= @vouch.verifier.name %>
+</p>
+
+<p>
+  <%= image_tag @vouch.image.url %>
+</p>
+
+<%= link_to 'Edit', edit_vouch_path(@vouch) %> |
+<%= link_to 'Back', vouches_path %>

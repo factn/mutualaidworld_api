@@ -1,0 +1,63 @@
+<%= form_with(model: scenario, local: true) do |form| %>
+<% if scenario.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(scenario.errors.count, "error") %>
+      prohibited this scenario from being saved:</h2>
+
+    <ul>
+      <% scenario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= form.label :verb_id %>
+  <%= select("scenario", "verb_id", Verb.all.collect {|v| [ v.description, v.id ] }, {}) %>
+</div>
+
+<div class="field">
+  <%= form.label :noun_id %>
+  <%= select("scenario", "noun_id", Noun.all.collect {|n| [ n.description, n.id ] }, {}) %>
+</div>
+
+<div class="field">
+  <%= form.label :requester_id %>
+  <%= select("scenario", "requester_id", User.all.collect {|u| [ u.name, u.id ] }, { include_blank: true }) %>
+</div>
+
+<div class="field">
+  <%= form.label :doer_id %>
+  <%= select("scenario", "doer_id", User.all.collect {|u| [ u.name, u.id ] }, { include_blank: true }) %>
+</div>
+
+<div class="field">
+  <%= form.label :event_id %>
+  <%= select("scenario", "event_id", Event.all.collect {|e| [ e.description, e.id ] }, {}) %>
+</div>
+
+<div class="field">
+  <%= form.label :funding_goal %>
+  <%= form.text_field :funding_goal, id: :scenario_funding_goal %>
+</div>
+
+<div class="field">
+  <%= form.label :custom_message %>
+  <%= form.text_field :custom_message, id: :scenario_custom_message %>
+</div>
+
+<div class="field">
+  <%= form.label :parent_scenario_id %>
+  <%= select("scenario", "parent_scenario_id", Scenario.all.collect {|s| [ s.description, s.id ] }, { include_blank: true }) %>
+</div>
+
+<div class="field">
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+<% end %>
