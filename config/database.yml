@@ -20,6 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  password: <%= ENV['LION_DATABASE_PASSWORD'] %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  username: <%= ENV.fetch('LION_DATABASE_USERNAME', 'lion') %>
 
 development:
   <<: *default
@@ -32,7 +35,6 @@ development:
   #username: lion
 
   # The password associated with the postgres role (username).
-  password: <%= ENV['LION_DATABASE_PASSWORD'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -58,7 +60,6 @@ development:
 test:
   <<: *default
   database: lion_test
-  password: <%= ENV['LION_DATABASE_PASSWORD'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,4 +84,3 @@ production:
   <<: *default
   database: lion_production
   username: lion
-  password: <%= ENV['LION_DATABASE_PASSWORD'] %>
