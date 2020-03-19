@@ -10,9 +10,21 @@
 1. Run `rails s`
 1. Connect to [http://localhost:3000]
 
-## Seed data
+### Seed data
 
 This is stored in db/seed.rb
+
+## Run via docker/docker-compose
+
+```shell
+# install gems (first time only)
+$ cp .env.example .env # make necessary changes in .env (if required)
+$ docker-compose run --rm --no-deps api bundle install
+$ docker-compose run --rm api bundle exec rake db:setup
+$ docker-compose up
+```
+
+App should be running at [localhost:3000](http://localhost:3000)
 
 ## Heroku deployment instructions
 
