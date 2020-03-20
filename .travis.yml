@@ -1,7 +1,10 @@
 language: ruby
-script: bundle exec rake spec
+script: docker-compose run --rm api bundle exec rspec
 install:
-  - gem install bundler:2.1.4
-  - bundle install --jobs=3 --retry=3
+  - cp .env.example .env
+  - docker-compose run --rm --no-deps api bundle install
+  - docker-compose run --rm api bundle exec rake db:setup
+sevices:
+  - docker
 rvm:
   - 2.6.5
