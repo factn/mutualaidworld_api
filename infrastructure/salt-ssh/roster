@@ -1,0 +1,6 @@
+vagrant:
+    host: 127.0.0.1
+    port: 10022
+    user: vagrant
+    sudo: true
+example.com: 4.4.4.4

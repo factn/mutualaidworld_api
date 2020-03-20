@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# This is just a basic Debian VM to test the Salt formulas
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/contrib-buster64"
+
+  config.vm.network "forwarded_port", guest: 22, host: 10022, host_ip: "127.0.0.1"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+  end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  # SHELL
+end

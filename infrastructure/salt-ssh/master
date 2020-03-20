@@ -1,0 +1,9 @@
+root_dir: ./salt-ssh
+pki_dir: pki
+cachedir: cache
+file_roots:
+  base:
+    - ./states
+pillar_roots:
+  base:
+    - ./pillar
