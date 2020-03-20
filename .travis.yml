@@ -2,7 +2,6 @@ language: ruby
 script: docker-compose run --rm api bundle exec rake spec
 install:
   - cp .env.example .env
-  - docker-compose run --rm --no-deps api bundle install
   - docker-compose run --rm api bundle exec rake db:setup
 sevices:
   - docker
