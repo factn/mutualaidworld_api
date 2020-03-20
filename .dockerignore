@@ -2,7 +2,6 @@
 .git
 .gitignore
 test
-spec
 log
 .env*
 .rspec
