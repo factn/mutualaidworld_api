@@ -19,8 +19,6 @@ This is stored in db/seed.rb
 ```shell
 # install gems (first time only)
 $ cp .env.example .env # make necessary changes in .env (if required)
-$ docker-compose run --rm --no-deps api bundle install
-$ docker-compose run --rm api bundle exec rake db:setup
 $ docker-compose up
 ```
 
