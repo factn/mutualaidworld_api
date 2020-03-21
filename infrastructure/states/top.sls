@@ -1,3 +1,4 @@
 base:
   '*':
     - postgres
+    - mosquitto
