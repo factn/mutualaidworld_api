@@ -1,4 +1,4 @@
-# Corona Donor project (Rails Back end)
+# MutualAid.World project (Rails Back end)
 
 ## Development deployment instructions
 
