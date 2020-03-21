@@ -1,5 +1,5 @@
 base:
-  '*':
+  'salt-test.local':
     - postgres
     - mosquitto
     - nginx
