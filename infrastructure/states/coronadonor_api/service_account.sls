@@ -1,4 +1,4 @@
-{% set username = salt['pillar.get']('coronadonor_api:service_account', 'coronadonor_api_development') %}
+{% set username = salt['pillar.get']('coronadonor_api:service_account', 'coronadonor-api_development') %}
 service account {{ username }}:
   user.present:
     - name: {{ username }}
