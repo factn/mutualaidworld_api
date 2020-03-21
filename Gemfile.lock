@@ -70,8 +70,6 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (1.6.0)
       capistrano (~> 3.1)
-    capistrano-puma (0.2.3)
-      capistrano (>= 3.0)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -291,7 +289,6 @@ DEPENDENCIES
   awesome_print
   aws-sdk-s3
   capistrano (~> 3.12)
-  capistrano-puma (~> 0.2.3)
   capistrano-rails (~> 1.4)
   capistrano3-puma (~> 3.1)
   coffee-rails (~> 4.2)
