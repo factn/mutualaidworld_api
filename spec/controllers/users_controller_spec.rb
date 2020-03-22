@@ -1,7 +1,45 @@
 require "rails_helper"
 
+def get_with_authorization(path, options)
+  options[:headers] ||= {
+    "Accept": "application/vnd.api+json",
+    "Content-Type": "application/vnd.api+json",
+    "HTTP-AUTHORIZATION': 'Token token=\"#{user.token}\"" }
+  }
+  super
+end
+
+
 RSpec.describe UsersController, type: :request do
   let!(:logged_in_user) { FactoryBot.create(:user) }
+
+  describe "POST #verify" do
+    before do
+      logged_in_user.generate_pin
+    end
+
+    subject { post "/users/verify", headers: headers, params: { user_id: logged_in_user.id, pin: pin }.to_json }
+
+    context "with matching pin" do
+      let(:pin) { logged_in_user.pin }
+
+      it "verifies the user" do
+        expect { subject }.to change { logged_in_user.reload.confirmed_at }
+
+        expect(JSON.parse(response.body)).to eq({ "token" => logged_in_user.token })
+      end
+    end
+
+    context "with non-matching pin" do
+      let(:pin) { 'fucking_garbage' }
+
+      it "does not verify the user" do
+        subject
+
+        expect(logged_in_user.confirmed_at).to eq nil
+      end
+    end
+  end
 
   describe "POST #create" do
     context "with valid params" do
@@ -12,10 +50,11 @@ RSpec.describe UsersController, type: :request do
         }
 
         expect do
-          post "/users?email=#{logged_in_user.email}&password=#{logged_in_user.password}", headers: headers, params: { "data": { "type": "users", "attributes": { "email": "user@example.com", "password": "password", "password_confirmation": "password" } } }.to_json
+          post "/users", headers: headers, params: { "data": { "type": "users", "attributes": { "phone": "7326106948" } } }.to_json
         end.to change(User, :count).by(1)
 
         expect(response).to have_http_status(:created)
+        binding.pry
       end
     end
   end

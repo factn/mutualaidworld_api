@@ -36,14 +36,14 @@ if Rails.env.development? || Rails.env.test?
   end
 
   puts "users"
-  User.create([{ email: "admin@example.com",  firstname: "john",   lastname: "johnson",   latitude: -41.2855188, longitude: 174.7952354, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face1.jpg")), admin: true },
-               { email: "test@example.com",   firstname: "jack",   lastname: "jackson",   latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face2.jpg")) },
-               { email: "test2@example.com",  firstname: "jean",   lastname: "jeanson",   latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face3.jpg")) },
-               { email: "Audrey@example.com", firstname: "Audrey", lastname: "Audreyson", latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face4.jpg")) },
-               { email: "tracey@example.com", firstname: "Tracey", lastname: "Traceyson", latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face5.jpg")) },
-               { email: "terry@example.com",  firstname: "Terry",  lastname: "Terryson",  latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face6.jpg")) },
-               { email: "simon@example.com",  firstname: "Simon",  lastname: "Simonson",  latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face7.jpg")) },
-               { email: "sally@example.com",  firstname: "Sally",  lastname: "Sallyson",  latitude: -41.2718598, longitude: 174.7818482, password: "password", password_confirmation: "password", avatar: File.open(Rails.root.join("vendor", "avatars", "face8.jpg"))
+  User.create!([{ phone: '+17325556948', email: "admin@example.com",  firstname: "john",   lastname: "johnson",   latitude: -41.2855188, longitude: 174.7952354, avatar: File.open(Rails.root.join("vendor", "avatars", "face1.jpg")), admin: true },
+               { phone: '+17325556948', email: "test@example.com",   firstname: "jack",   lastname: "jackson",   latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face2.jpg")) },
+               { phone: '+17325556948', email: "test2@example.com",  firstname: "jean",   lastname: "jeanson",   latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face3.jpg")) },
+               { phone: '+17325556948', email: "Audrey@example.com", firstname: "Audrey", lastname: "Audreyson", latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face4.jpg")) },
+               { phone: '+17325556948', email: "tracey@example.com", firstname: "Tracey", lastname: "Traceyson", latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face5.jpg")) },
+               { phone: '+17325556948', email: "terry@example.com",  firstname: "Terry",  lastname: "Terryson",  latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face6.jpg")) },
+               { phone: '+17325556948', email: "simon@example.com",  firstname: "Simon",  lastname: "Simonson",  latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face7.jpg")) },
+               { phone: '+17325556948', email: "sally@example.com",  firstname: "Sally",  lastname: "Sallyson",  latitude: -41.2718598, longitude: 174.7818482, avatar: File.open(Rails.root.join("vendor", "avatars", "face8.jpg"))
               }])
 
   #    User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample); user.save! }
@@ -89,14 +89,14 @@ if Rails.env.development? || Rails.env.test?
 
   puts "vouches"
 
-  Vouch.create([{ scenario_id: 1, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
-                { scenario_id: 6, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 2, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 5, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 8, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 9, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 11, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
-                { scenario_id: 12, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) } ])
+  # Vouch.create([{ scenario_id: 1, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "wetperson.jpg")) },
+  #               { scenario_id: 6, verifier_id: 2, rating: 0.8, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 2, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 5, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 8, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 9, verifier_id: 2, rating: 0.4, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 11, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) },
+  #               { scenario_id: 12, verifier_id: 2, rating: nil, image: File.open(Rails.root.join("vendor", "personeating.jpg")) } ])
 
 # scenarios id 11 and 12 are subtasks of scenario id 1, they have no rating but are "done" so they should get scenario 1's rating
 

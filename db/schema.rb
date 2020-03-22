@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180530233358) do
+ActiveRecord::Schema.define(version: 2020_03_21_150107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,9 +88,6 @@ ActiveRecord::Schema.define(version: 20180530233358) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
@@ -108,13 +105,15 @@ ActiveRecord::Schema.define(version: 20180530233358) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.decimal "default_total_session_donation", precision: 16, scale: 3
-    t.decimal "default_swipe_donation", precision: 16, scale: 3
     t.string "street_address"
     t.string "city_state"
-    t.float "hon3y"
+    t.string "phone"
+    t.string "pin"
+    t.datetime "confirmed_at"
+    t.string "token"
+    t.datetime "token_generated_at"
+    t.datetime "confirmation_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "verbs", force: :cascade do |t|

@@ -26,8 +26,12 @@ gem "aws-sdk-s3"
 gem "paperclip"
 gem "rack-cors", require: "rack/cors"
 gem "mqtt"
+gem 'devise_token_auth'
+gem 'twilio-ruby'
+gem 'jwt'
 
 group :development, :test do
+  gem 'faker'
   gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "jsonapi-rspec"
@@ -41,6 +45,7 @@ group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
   gem "spring"
+  gem 'annotate'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

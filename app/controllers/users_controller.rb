@@ -1,9 +1,19 @@
 class UsersController < ApplicationController
   # allow users to be created without a log in by overriding the application controllers before actions
-  before_action :attempt_login, except: [:create, :new]
-  before_action :authenticate_user!, except: [:create, :new]
+  # before_action :authenticate_user!, except: [:create, :new]
 
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy verify]
+
+  before_action :authenticate_user, only: [:test]
+
+
+  def test
+    if current_user
+      render json: { current_user_id: current_user.id }
+    else
+      render 'failed'
+    end
+  end
 
   # GET /users
   # GET /users.json
@@ -23,11 +33,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
-      super
-    else
-      @user = User.new
-    end
+    @user = User.new
   end
 
   # GET /users/1/edit
@@ -36,16 +42,23 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if request.headers["HTTP_ACCEPT"] == "application/vnd.api+json"
-      super
-    else
-      @user = User.new(user_params)
+    @user = User.find_or_create_by(phone: user_params[:phone])
+    @user.generate_pin
+    @user.send_pin
 
-      if @user.save
-        redirect_to @user, notice: "User was successfully created."
-      else
-        render :new
-      end
+    @user.update confirmation_sent_at: Time.zone.now
+
+    render json: { user_id: @user.id }
+  end
+
+  def verify
+    if params[:pin] == @user.pin
+      @user.update confirmed_at: Time.zone.now
+      @user.generate_token!
+
+      render json: { token: @user.token }
+    else
+      render json: 'Invalid pin supplied.'
     end
   end
 
@@ -78,11 +91,11 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:description, :default_total_session_donation, :default_swipe_donation)
+    params.require(:user).permit(:phone)
   end
 end

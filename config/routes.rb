@@ -12,11 +12,13 @@ Rails.application.routes.draw do
 
   jsonapi_resources :vouches
   jsonapi_resources :scenarios
-  jsonapi_resources :users
   jsonapi_resources :nouns
   jsonapi_resources :verbs
 
-  devise_for :users
+  jsonapi_resources :users
+  post 'users/verify' => "users#verify"
+
+  get 'test' => "users#test"
 
   root to: "scenarios#index"
 
