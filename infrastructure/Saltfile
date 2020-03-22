@@ -1,0 +1,4 @@
+salt-ssh:
+  root_dir: ./
+  config_dir: ./salt-ssh
+  state_output: changes

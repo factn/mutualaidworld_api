@@ -20,3 +20,8 @@
 .env
 vendor/bundle
 public/system
+
+infrastructure/salt-ssh/pki
+infrastructure/salt-ssh/var
+infrastructure/salt-ssh/cache
+infrastructure/.vagrant
