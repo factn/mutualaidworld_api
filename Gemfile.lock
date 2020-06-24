@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
+    awesome_print (1.8.0)
     aws-partitions (1.70.0)
     aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
@@ -144,7 +145,7 @@ GEM
     puma (3.12.4)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-cors (1.0.6)
       rack (>= 1.6.0)
     rack-test (1.1.0)
@@ -263,6 +264,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   aws-sdk-s3
   coffee-rails (~> 4.2)
   devise
