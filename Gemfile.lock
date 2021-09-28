@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
+    awesome_print (1.9.2)
     aws-partitions (1.70.0)
     aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
@@ -117,12 +118,13 @@ GEM
     mime-types-data (3.2016.0521)
     mimemagic (0.3.4)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.6.1)
     minitest (5.14.0)
     mqtt (0.5.0)
     nio4r (2.5.2)
-    nokogiri (1.10.9)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
@@ -144,6 +146,7 @@ GEM
     puma (3.12.4)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    racc (1.5.2)
     rack (2.2.2)
     rack-cors (1.0.6)
       rack (>= 1.6.0)
@@ -263,6 +266,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   aws-sdk-s3
   coffee-rails (~> 4.2)
   devise
